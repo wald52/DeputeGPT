@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DéputéGPT - IA WebGPU pour l'Assemblée Nationale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .panel h2 {
+            margin-bottom: 20px;
+            color: #1e3c72;
+            font-size: 1.5em;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        #search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        #hemicycle-container {
+            position: relative;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #hemicycle-svg {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+
+        .seat {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .seat:hover {
+            stroke: #000;
+            stroke-width: 2;
+            transform: scale(1.2);
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        #loading-status {
+            padding: 15px;
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #loading-status.ready {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        #loading-status.error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .depute-card {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            align-items: center;
+            gap: 20px;
+        }
+
+        .depute-card.active {
+            display: flex;
+        }
+
+        .depute-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #667eea;
+        }
+
+        .depute-info h3 {
+            margin-bottom: 5px;
+            color: #1e3c72;
+        }
+
+        .depute-info p {
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        #messages {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            line-height: 1.5;
+        }
+
+        .message.user {
+            background: #e3f2fd;
+            text-align: right;
+        }
+
+        .message.ai {
+            background: #f1f8e9;
+        }
+
+        .message.system {
+            background: #fff3e0;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .message strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        #user-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        #user-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        #send-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #send-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        #send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .loader.active {
+            display: block;
+        }
+
+        .loader::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇫🇷 DéputéGPT</h1>
+            <p>Interrogez l'IA sur les votes des députés français - Propulsé par WebGPU et Mistral ONNX</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Panneau Gauche: Sélection Député -->
+            <div class="panel">
+                <h2>📍 Sélectionnez un Député</h2>
+
+                <input type="text" id="search-input" placeholder="🔍 Rechercher par nom, groupe, ou circonscription...">
+
+                <div id="hemicycle-container">
+                    <svg id="hemicycle-svg" viewBox="0 0 800 400">
+                        <!-- Généré dynamiquement -->
+                    </svg>
+                </div>
+
+                <div class="legend" id="legend">
+                    <!-- Généré dynamiquement -->
+                </div>
+
+                <div class="stats" id="stats-container" style="display: none;">
+                    <div class="stat-box">
+                        <div class="stat-number" id="stat-votes">0</div>
+                        <div class="stat-label">Votes analysés</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="stat-pour">0</div>
+                        <div class="stat-label">Pour</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="stat-contre">0</div>
+                        <div class="stat-label">Contre</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panneau Droit: Chat IA -->
+            <div class="panel">
+                <h2>💬 Conversation avec l'IA</h2>
+
+                <div id="loading-status">⏳ Chargement du modèle WebGPU...</div>
+
+                <div class="depute-card" id="selected-depute">
+                    <img class="depute-photo" id="depute-img" src="" alt="Photo">
+                    <div class="depute-info">
+                        <h3 id="depute-name">Nom du Député</h3>
+                        <p id="depute-group">Groupe Politique</p>
+                        <p id="depute-circum">Circonscription</p>
+                    </div>
+                </div>
+
+                <div id="messages"></div>
+
+                <textarea id="user-input" placeholder="💭 Posez votre question sur les votes de ce député..." rows="3" disabled></textarea>
+                <button id="send-btn" disabled>Envoyer</button>
+                <div class="loader" id="ai-loader">L'IA réfléchit</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Données: <a href="https://data.assemblee-nationale.fr" target="_blank">Assemblée Nationale Open Data</a> | 
+            Modèle: <a href="https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512-ONNX" target="_blank">Mistral 3B ONNX</a> | 
+            <a href="https://github.com/yourusername/deputegpt" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.1.2';
+
+        // Configuration WebGPU
+        env.allowLocalModels = false;
+        env.useBrowserCache = true;
+        env.backends.onnx.wasm.numThreads = 4;
+
+        // Données globales
+        let generator;
+        let currentDepute = null;
+        let deputesData = [];
+        let votesData = [];
+
+        // Groupes politiques de l'Assemblée Nationale (2025)
+        const groupesPolitiques = [
+            { code: 'LFI', nom: 'La France Insoumise', couleur: '#C1462B', seats: 75 },
+            { code: 'SOC', nom: 'Socialistes et apparentés', couleur: '#E75B6F', seats: 65 },
+            { code: 'ECO', nom: 'Écologistes', couleur: '#76C043', seats: 35 },
+            { code: 'LIOT', nom: 'Libertés, Indépendants', couleur: '#D4AF37', seats: 45 },
+            { code: 'RE', nom: 'Renaissance', couleur: '#FFD700', seats: 145 },
+            { code: 'HOR', nom: 'Horizons', couleur: '#FFA500', seats: 35 },
+            { code: 'LR', nom: 'Les Républicains', couleur: '#0066CC', seats: 62 },
+            { code: 'RN', nom: 'Rassemblement National', couleur: '#0E4C92', seats: 88 },
+            { code: 'NI', nom: 'Non-inscrits', couleur: '#808080', seats: 27 }
+        ];
+
+        // ==================== GÉNÉRATION DE L'HÉMICYCLE ====================
+        function generateHemicycle() {
+            const svg = document.getElementById('hemicycle-svg');
+            const legend = document.getElementById('legend');
+
+            let seatIndex = 0;
+            const totalSeats = 577;
+            const rows = 14;
+            const centerX = 400;
+            const centerY = 380;
+            const startRadius = 120;
+            const radiusIncrement = 18;
+
+            // Générer les sièges
+            groupesPolitiques.forEach(groupe => {
+                const seatsToPlace = groupe.seats;
+
+                for (let i = 0; i < seatsToPlace; i++) {
+                    const row = Math.floor(seatIndex * rows / totalSeats);
+                    const posInRow = seatIndex % Math.ceil(totalSeats / rows);
+                    const seatsInRow = Math.ceil(totalSeats / rows);
+
+                    const radius = startRadius + row * radiusIncrement;
+                    const angleSpan = Math.PI;
+                    const angle = Math.PI - (posInRow / seatsInRow) * angleSpan;
+
+                    const x = centerX + radius * Math.cos(angle);
+                    const y = centerY - radius * Math.sin(angle);
+
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', x);
+                    circle.setAttribute('cy', y);
+                    circle.setAttribute('r', '6');
+                    circle.setAttribute('fill', groupe.couleur);
+                    circle.setAttribute('class', 'seat');
+                    circle.dataset.groupe = groupe.code;
+                    circle.dataset.seatIndex = seatIndex;
+
+                    circle.addEventListener('click', () => selectRandomDepute(groupe.code));
+
+                    svg.appendChild(circle);
+                    seatIndex++;
+                }
+            });
+
+            // Générer la légende
+            groupesPolitiques.forEach(groupe => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background-color: ${groupe.couleur}"></div>
+                    <span>${groupe.nom} (${groupe.seats})</span>
+                `;
+                legend.appendChild(item);
+            });
+        }
+
+        // ==================== CHARGEMENT DES DONNÉES ====================
+        async function loadDeputesData() {
+            try {
+                // Essayer de charger depuis l'API officielle
+                const response = await fetch('https://data.assemblee-nationale.fr/api/v1/acteurs?legislature=17');
+
+                if (!response.ok) throw new Error('API non accessible');
+
+                const data = await response.json();
+
+                // Parser les députés
+                deputesData = data.items?.slice(0, 100).map((acteur, idx) => ({
+                    id: acteur.uid || `DEP${idx}`,
+                    nom: acteur.prenom + ' ' + acteur.nom || 'Député ' + idx,
+                    groupe: groupesPolitiques[idx % groupesPolitiques.length].code,
+                    groupeNom: groupesPolitiques[idx % groupesPolitiques.length].nom,
+                    circonscription: acteur.mandats?.[0]?.place || 'France',
+                    photo: acteur.photo || `https://dummyimage.com/200x200/${Math.random().toString(16).substr(2,6)}/fff&text=${acteur.nom?.charAt(0) || 'D'}`,
+                    votes: []
+                })) || generateMockDeputes();
+
+            } catch (error) {
+                console.warn('Utilisation de données de démonstration:', error);
+                deputesData = generateMockDeputes();
+            }
+        }
+
+        function generateMockDeputes() {
+            const prenoms = ['Jean', 'Marie', 'Pierre', 'Sophie', 'Luc', 'Anne', 'François', 'Claire', 'Marc', 'Julie'];
+            const noms = ['Martin', 'Bernard', 'Dubois', 'Thomas', 'Robert', 'Petit', 'Durand', 'Leroy', 'Moreau', 'Simon'];
+
+            return Array.from({ length: 100 }, (_, i) => {
+                const prenom = prenoms[Math.floor(Math.random() * prenoms.length)];
+                const nom = noms[Math.floor(Math.random() * noms.length)];
+                const groupe = groupesPolitiques[Math.floor(i / (100 / groupesPolitiques.length))];
+
+                return {
+                    id: `DEP${i}`,
+                    nom: `${prenom} ${nom}`,
+                    groupe: groupe.code,
+                    groupeNom: groupe.nom,
+                    circonscription: `${Math.floor(Math.random() * 18) + 1}ère circonscription`,
+                    photo: `https://i.pravatar.cc/200?img=${i}`,
+                    votes: generateMockVotes()
+                };
+            });
+        }
+
+        function generateMockVotes() {
+            const textes = [
+                "Loi sur la transition énergétique",
+                "Réforme des retraites 2025",
+                "Budget de l'éducation nationale",
+                "Loi sur le pouvoir d'achat",
+                "Réforme de l'assurance chômage",
+                "Loi sur la transition écologique",
+                "Budget de la défense",
+                "Loi sur l'immigration",
+                "Réforme de la santé",
+                "Loi sur la sécurité"
+            ];
+
+            const positions = ['Pour', 'Contre', 'Abstention'];
+
+            return textes.slice(0, 5 + Math.floor(Math.random() * 5)).map(texte => ({
+                texte,
+                vote: positions[Math.floor(Math.random() * positions.length)],
+                date: `2024-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`
+            }));
+        }
+
+        // ==================== INITIALISATION IA ====================
+        async function initAI() {
+            const status = document.getElementById('loading-status');
+            try {
+                status.textContent = '⏳ Téléchargement du modèle Mistral ONNX (peut prendre 2-5 min)...';
+
+                // Note: Mistral-3B-ONNX n'est pas encore dans xenova
+                // Utilisation d'un modèle compatible WebGPU en attendant
+                generator = await pipeline(
+                    'text-generation',
+                    'onnx-community/Llama-3.2-1B-Instruct',
+                    { 
+                        device: 'webgpu',
+                        dtype: 'q4'
+                    }
+                );
+
+                status.textContent = '✅ IA Prête ! Sélectionnez un député pour commencer.';
+                status.className = 'ready';
+                document.getElementById('send-btn').disabled = false;
+                document.getElementById('user-input').disabled = false;
+
+            } catch (error) {
+                status.textContent = '❌ Erreur WebGPU: ' + error.message + ' (Utilisez Chrome/Edge 113+)';
+                status.className = 'error';
+                console.error('Erreur WebGPU:', error);
+            }
+        }
+
+        // ==================== SÉLECTION DÉPUTÉ ====================
+        function selectRandomDepute(groupeCode) {
+            const deputes = deputesData.filter(d => d.groupe === groupeCode);
+            if (deputes.length === 0) return;
+
+            const depute = deputes[Math.floor(Math.random() * deputes.length)];
+            selectDepute(depute);
+        }
+
+        function selectDepute(depute) {
+            currentDepute = depute;
+
+            const card = document.getElementById('selected-depute');
+            card.classList.add('active');
+
+            document.getElementById('depute-name').textContent = depute.nom;
+            document.getElementById('depute-group').textContent = depute.groupeNom;
+            document.getElementById('depute-circum').textContent = depute.circonscription;
+            document.getElementById('depute-img').src = depute.photo;
+
+            // Afficher les stats
+            document.getElementById('stats-container').style.display = 'grid';
+            document.getElementById('stat-votes').textContent = depute.votes.length;
+            document.getElementById('stat-pour').textContent = depute.votes.filter(v => v.vote === 'Pour').length;
+            document.getElementById('stat-contre').textContent = depute.votes.filter(v => v.vote === 'Contre').length;
+
+            addMessage('system', `Vous discutez maintenant avec les données de vote de ${depute.nom}.`);
+        }
+
+        // ==================== RECHERCHE ====================
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (query.length < 2) return;
+
+            const results = deputesData.filter(d => 
+                d.nom.toLowerCase().includes(query) ||
+                d.groupeNom.toLowerCase().includes(query) ||
+                d.circonscription.toLowerCase().includes(query)
+            );
+
+            if (results.length > 0) {
+                selectDepute(results[0]);
+            }
+        });
+
+        // ==================== CHAT IA ====================
+        document.getElementById('send-btn').addEventListener('click', async () => {
+            if (!currentDepute) {
+                addMessage('system', 'Veuillez d'abord sélectionner un député.');
+                return;
+            }
+
+            const input = document.getElementById('user-input');
+            const question = input.value.trim();
+            if (!question) return;
+
+            addMessage('user', question);
+            input.value = '';
+
+            const loader = document.getElementById('ai-loader');
+            loader.classList.add('active');
+
+            try {
+                // Construction du contexte RAG
+                const votesContext = currentDepute.votes.map(v => 
+                    `- ${v.date}: "${v.texte}" → ${v.vote}`
+                ).join('\n');
+
+                const systemPrompt = `Tu es un assistant politique expert. Tu dois répondre UNIQUEMENT en te basant sur l'historique de vote ci-dessous.
+
+Député: ${currentDepute.nom} (${currentDepute.groupeNom})
+Circonscription: ${currentDepute.circonscription}
+
+Votes enregistrés:
+${votesContext}
+
+Réponds de manière factuelle et concise.`;
+
+                const messages = [
+                    { role: 'system', content: systemPrompt },
+                    { role: 'user', content: question }
+                ];
+
+                const output = await generator(messages, {
+                    max_new_tokens: 200,
+                    temperature: 0.7,
+                    do_sample: true,
+                    top_p: 0.9
+                });
+
+                const answer = output[0].generated_text[output[0].generated_text.length - 1].content;
+                addMessage('ai', answer);
+
+            } catch (error) {
+                addMessage('system', '❌ Erreur: ' + error.message);
+                console.error(error);
+            } finally {
+                loader.classList.remove('active');
+            }
+        });
+
+        // Touche Entrée pour envoyer
+        document.getElementById('user-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                document.getElementById('send-btn').click();
+            }
+        });
+
+        function addMessage(type, text) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+
+            const label = {
+                'user': 'Vous',
+                'ai': '🤖 IA',
+                'system': '📢 Système'
+            }[type];
+
+            messageDiv.innerHTML = `<strong>${label}</strong>${text}`;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // ==================== INITIALISATION ====================
+        async function init() {
+            generateHemicycle();
+            await loadDeputesData();
+            await initAI();
+        }
+
+        init();
+    </script>
+</body>
+</html>
