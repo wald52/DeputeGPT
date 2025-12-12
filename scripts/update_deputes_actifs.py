@@ -47,9 +47,12 @@ def main():
     url = BASE  # pas de page_size forcé
     all_rows = []
     while url:
+        print("GET:", url)
         payload = fetch_json(url)
         all_rows.extend(payload.get("data", []))
-        url = (payload.get("links") or {}).get("next")
+        
+        links = payload.get("links") or payload.get("link") or {}
+        url = links.get("next")
 
     # 2) Hash + comparaison avec latest
     blob = canonical_bytes(all_rows)
