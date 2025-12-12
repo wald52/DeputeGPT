@@ -471,8 +471,8 @@
     }
 
     async function loadDeputesData() {
-      const latest = await fetchJsonDebug("data/deputes_actifs/latest.json", { cache: "no-store" });
-      const url = `data/deputes_actifs/${latest.version}.json`;
+      const latest = await fetchJsonDebug("public/data/deputes_actifs/latest.json", { cache: "no-store" });
+      const url = `public/data/deputes_actifs/${latest.version}.json`;
       deputesData = await fetchJsonDebug(url, { cache: "force-cache" });
     }
 
