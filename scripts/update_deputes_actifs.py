@@ -28,17 +28,13 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     latest_path = os.path.join(OUT_DIR, "latest.json")
 
-    # 1) Récupération paginée
-    page, page_size = 1, 1000
+    # 1) Récupération paginée (suivre links.next)
+    url = BASE  # pas de page_size forcé
     all_rows = []
-    while True:
-        url = BASE + "?" + urlencode({"page": page, "page_size": page_size})
+    while url:
         payload = fetch_json(url)
         all_rows.extend(payload.get("data", []))
-        nxt = (payload.get("links") or {}).get("next")
-        if not nxt:
-            break
-        page += 1
+        url = (payload.get("links") or {}).get("next")
 
     # 2) Hash + comparaison avec latest
     blob = canonical_bytes(all_rows)
