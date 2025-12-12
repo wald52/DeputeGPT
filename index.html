@@ -430,9 +430,10 @@
       });
     }
 
-    async function loadDeputesData(){
-      // Version simple : on garde tes données de démo (tu peux remettre ton fetch API si tu veux)
-      deputesData = generateMockDeputes();
+    async function loadDeputesData() {
+      const latest = await fetch("/data/deputes_actifs/latest.json", { cache: "no-store" }).then(r => r.json());
+      const url = `/data/deputes_actifs/${latest.version}.json`;
+      deputesData = await fetch(url, { cache: "force-cache" }).then(r => r.json());
     }
 
     function generateMockDeputes(){
