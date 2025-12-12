@@ -493,7 +493,7 @@
       const card = document.getElementById('selected-depute');
       card.classList.add('active');
 
-      document.getElementById('depute-name').textContent = depute.nom;
+      document.getElementById('depute-name').textContent = `${depute.prenom} ${depute.nom}`;
       document.getElementById('depute-group').textContent = depute.groupeNom;
       document.getElementById('depute-circum').textContent = depute.circonscription;
       document.getElementById('depute-img').src = depute.photo;
@@ -632,6 +632,8 @@ async function initAI() {
 
         const results = deputesData.filter(d =>
           d.nom.toLowerCase().includes(q) ||
+          d.prenom.toLowerCase().includes(q) ||
+          `${d.prenom} ${d.nom}`.toLowerCase().includes(q) ||
           d.groupeNom.toLowerCase().includes(q) ||
           d.circonscription.toLowerCase().includes(q)
         );
