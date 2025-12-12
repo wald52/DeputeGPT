@@ -436,50 +436,6 @@
       deputesData = await fetch(url, { cache: "force-cache" }).then(r => r.json());
     }
 
-    function generateMockDeputes(){
-      const prenoms = ['Jean','Marie','Pierre','Sophie','Luc','Anne','François','Claire','Marc','Julie'];
-      const noms = ['Martin','Bernard','Dubois','Thomas','Robert','Petit','Durand','Leroy','Moreau','Simon'];
-
-      // Répartir arbitrairement 120 députés de démo
-      const groupes = groupesPolitiques.map(g => g.code);
-
-      return Array.from({ length: 120 }, (_, i) => {
-        const prenom = prenoms[Math.floor(Math.random() * prenoms.length)];
-        const nom = noms[Math.floor(Math.random() * noms.length)];
-        const groupe = groupes[i % groupes.length];
-
-        return {
-          id: `DEP${i}`,
-          nom: `${prenom} ${nom}`,
-          groupe,
-          groupeNom: (groupesPolitiques.find(g => g.code === groupe)?.nom) || groupe,
-          circonscription: `${Math.floor(Math.random() * 18) + 1}e circonscription`,
-          photo: `https://i.pravatar.cc/200?img=${(i % 70) + 1}`,
-          votes: generateMockVotes()
-        };
-      });
-    }
-
-    function generateMockVotes(){
-      const textes = [
-        'Loi sur la transition énergétique',
-        'Réforme des retraites 2025',
-        "Budget de l'éducation nationale",
-        "Loi sur le pouvoir d'achat",
-        "Réforme de l'assurance chômage",
-        "Budget de la défense",
-        "Loi sur l'immigration"
-      ];
-      const positions = ['Pour', 'Contre', 'Abstention'];
-
-      const n = 4 + Math.floor(Math.random() * 4);
-      return Array.from({ length: n }, () => ({
-        texte: textes[Math.floor(Math.random() * textes.length)],
-        vote: positions[Math.floor(Math.random() * positions.length)],
-        date: `2024-${String(Math.floor(Math.random()*12)+1).padStart(2,'0')}-${String(Math.floor(Math.random()*28)+1).padStart(2,'0')}`
-      }));
-    }
-
     function selectRandomDepute(groupeCode){
       const deputes = deputesData.filter(d => d.groupe === groupeCode);
       if (!deputes.length) return;
@@ -489,6 +445,10 @@
 
     function selectDepute(depute){
       currentDepute = depute;
+
+      // Garde-fou : si tes députés viennent d'un JSON "sans votes"
+      // on initialise votes à [] pour éviter les erreurs sur .length/.filter
+      currentDepute.votes ??= [];
 
       const card = document.getElementById('selected-depute');
       card.classList.add('active');
