@@ -1,15 +1,30 @@
 import json, hashlib, os, sys, urllib.request
 from datetime import datetime, timezone
 from urllib.parse import urlencode
+import urllib.error
 
 RESOURCE_ID = "092bd7bb-1543-405b-b53c-932ebb49bb8e"
 BASE = f"https://tabular-api.data.gouv.fr/api/resources/{RESOURCE_ID}/data/"
 OUT_DIR = "public/data/deputes_actifs"
 
 def fetch_json(url: str) -> dict:
-    req = urllib.request.Request(url, headers={"Accept": "application/json"})
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": "deputeGPT-bot/1.0 (+https://github.com/wald52/deputeGPT)",
+        },
+    )  # Ajout d'en-têtes via Request(headers=...) [web:567]
+
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        # HTTPError fournit un flux lisible via e.read() (utile pour comprendre un 400) [web:573]
+        body = e.read().decode("utf-8", errors="replace")
+        print(f"HTTPError {e.code} {e.reason} on URL: {url}")
+        print("Body (first 1000 chars):", body[:1000])
+        raise
 
 def canonical_bytes(rows) -> bytes:
     # JSON canonique (stable) pour un hash stable
