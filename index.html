@@ -556,26 +556,60 @@
 
       addMessage('system', `Données chargées pour ${depute.prenom} ${depute.nom}. (${currentDepute.votes.length} votes)`);
 
-      // 5. RAG (Indexation)
+      // 5. INDEXATION INTELLIGENTE (RAG) - VERSION NON-BLOQUANTE
       if (featureExtractor && currentDepute.votes.length > 0) {
-        console.log("Lancement indexation RAG...");
-        userInput.placeholder = "Analyse intelligente des votes...";
-        addMessage('system', "L'IA analyse l'historique des votes...");
+        userInput.placeholder = "Analyse complète en cours...";
         
-        try {
-            const textes = currentDepute.votes.map(v => 
+        // On affiche un message initial
+        addMessage('system', `Début de l'analyse de ${currentDepute.votes.length} votes...`);
+        
+        deputeVectors = []; // On vide les anciens vecteurs
+        const BATCH_SIZE = 50; // On traite 50 votes à la fois
+        const totalVotes = currentDepute.votes.length;
+        
+        // Fonction qui traite un paquet et rappelle le suivant
+        async function processBatch(startIndex) {
+            // Mise à jour visuelle (pour faire patienter)
+            const percent = Math.round((startIndex / totalVotes) * 100);
+            userInput.placeholder = `Analyse : ${percent}%...`;
+            
+            // On prépare le paquet actuel
+            const endIndex = Math.min(startIndex + BATCH_SIZE, totalVotes);
+            const batchVotes = currentDepute.votes.slice(startIndex, endIndex);
+            
+            const textes = batchVotes.map(v => 
                 `Sujet: ${v.titre}. Contexte: ${v.objet || ''}. Vote: ${v.vote}`
             );
+
+            // Calcul lourd (mais court car seulement 50 items)
             const output = await featureExtractor(textes, { pooling: 'mean', normalize: true });
-            deputeVectors = output.tolist();
-            console.log("Indexation RAG terminée avec succès.");
-            addMessage('system', "Analyse terminée.");
-        } catch(e) {
-            console.error("Erreur RAG :", e);
+            
+            // On ajoute les résultats à la liste globale
+            deputeVectors.push(...output.tolist());
+
+            // Est-ce qu'il en reste ?
+            if (endIndex < totalVotes) {
+                // OUI : On fait une pause de 10ms pour rendre la main au navigateur, puis on continue
+                setTimeout(() => processBatch(endIndex), 10);
+            } else {
+                // NON : C'est fini !
+                userInput.placeholder = "Posez votre question...";
+                addMessage('system', "Analyse complète terminée (100%).");
+                
+                // On débloque tout
+                sendBtn.disabled = false;
+                userInput.disabled = false;
+            }
         }
+
+        // Démarrage du premier paquet
+        processBatch(0);
+
       } else {
-        console.log("Pas d'indexation RAG (Pas de votes ou modèle non chargé).");
-        deputeVectors = [];
+        // Pas de modèle ou pas de votes
+        deputeVectors = []; 
+        sendBtn.disabled = false;
+        userInput.disabled = false;
       }
 
       sendBtn.disabled = false;
