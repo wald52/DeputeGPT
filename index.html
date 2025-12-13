@@ -690,96 +690,91 @@ async function initAI() {
       const loader = document.getElementById('ai-loader');
 
       sendBtn.addEventListener('click', async () => {
-        // 1. Vérifications de base
         if (!currentDepute){
           addMessage('system', "Veuillez d'abord sélectionner un député.");
           return;
         }
+        
         const question = input.value.trim();
         if (!question) return;
-        
-        // 2. Vérification RAG
-        if (!featureExtractor || deputeVectors.length === 0) {
-           // Si le RAG n'est pas prêt, on prévient mais on essaie quand même
-           if(currentDepute.votes.length > 0) {
-             addMessage('system', "Attention : Le moteur de recherche sémantique n'est pas encore prêt ou ce député n'a pas de votes.");
-           }
-        }
 
-        // 3. Affichage message utilisateur
+        // On bloque l'interface
         addMessage('user', question);
         input.value = '';
         loader.classList.add('active');
+        sendBtn.disabled = true;
 
         try{
-          // --- DEBUT DU RAG SEMANTIQUE ---
-          
-          let contextStr = "";
-          
-          // Si on a bien les vecteurs (l'indexation a marché)
-          if (featureExtractor && deputeVectors.length > 0) {
-            
-            // A. On transforme la question en mathématiques (vecteur)
-            const questionOutput = await featureExtractor(question, { pooling: 'mean', normalize: true });
-            const qVector = questionOutput.tolist()[0];
+          let contextVotes = [];
 
-            // B. On compare avec tous les votes du député
+          // STRATEGIE HYBRIDE (La meilleure pour simuler ChatGPT)
+          // ----------------------------------------------------
+          
+          // 1. Récupération des votes "Sémantiques" (par le sens)
+          if (featureExtractor && deputeVectors.length > 0) {
+            const qOutput = await featureExtractor(question, { pooling: 'mean', normalize: true });
+            const qVector = qOutput.tolist()[0];
+
             const scores = deputeVectors.map((vector, index) => {
                 let dot = 0;
                 for(let i=0; i < vector.length; i++) dot += vector[i] * qVector[i];
                 return { index: index, score: dot };
             });
-
-            // C. On garde les 10 meilleurs votes
+            
+            // On prend les 5 meilleurs votes liés au sujet
             scores.sort((a, b) => b.score - a.score);
-            const topVotes = scores.slice(0, 10).map(s => currentDepute.votes[s.index]);
-
-            // D. On crée le texte pour l'IA
-            contextStr = topVotes
-              .map(v => `- [${v.date}] ${v.titre} => A VOTÉ : ${v.vote}`)
-              .join('\n');
-              
-          } else {
-            // Fallback : Si pas de RAG, on prend juste les 5 derniers votes (pour éviter le crash)
-            contextStr = currentDepute.votes.slice(0, 5)
-              .map(v => `- [${v.date}] ${v.titre} => A VOTÉ : ${v.vote}`)
-              .join('\n');
+            const semanticVotes = scores.slice(0, 5).map(s => currentDepute.votes[s.index]);
+            contextVotes.push(...semanticVotes);
           }
-          
-          // --- FIN DU RAG ---
 
-          // 4. Construction du Prompt Système
+          // 2. Récupération des votes "Chronologiques" (les plus récents)
+          // On ajoute TOUJOURS les 5 derniers votes, quoi qu'il arrive.
+          // Comme ça, si la question est "C'était quoi le dernier vote ?", l'info est là.
+          const recentVotes = currentDepute.votes.slice(0, 5);
+          contextVotes.push(...recentVotes);
+
+          // 3. Nettoyage (Dédoublonnage)
+          // Si un vote est à la fois récent ET pertinent, on ne le met pas deux fois.
+          const uniqueVotes = Array.from(new Set(contextVotes.map(v => JSON.stringify(v))))
+                                   .map(s => JSON.parse(s));
+
+          // ----------------------------------------------------
+
+          // Construction du texte pour l'IA
+          const contextStr = uniqueVotes
+            .map(v => `- [${v.date}] ${v.titre} => A VOTÉ : ${v.vote}`)
+            .join('\n');
+
           const systemPrompt =
-            `Tu es un assistant politique expert. Tu dois répondre à la question de l'utilisateur en te basant UNIQUEMENT sur l'historique de votes ci-dessous.\n` +
-            `Député: ${currentDepute.nom} (${currentDepute.groupeNom})\n\n` +
-            `Votes pertinents trouvés :\n${contextStr}\n\n` +
-            `Si l'information n'est pas dans les votes ci-dessus, dis simplement "Je ne trouve pas de vote correspondant dans l'historique récent". Sois factuel.`;
+            `Tu es un expert politique. Tu as accès aux votes suivants de ${currentDepute.nom} :\n` +
+            `${contextStr}\n\n` +
+            `Consigne : En utilisant UNIQUEMENT ces votes, réponds à la question de l'utilisateur.\n` +
+            `Si la question porte sur le dernier vote, regarde les dates.\n` +
+            `Si aucun vote ne correspond, dis-le.`;
 
           const messages = [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: question }
           ];
 
-          // 5. Génération de la réponse
           const out = await generator(messages, {
             max_new_tokens: 300,
-            temperature: 0.5, // Plus bas = plus factuel
-            do_sample: true,
-            top_p: 0.9
+            temperature: 0.3, // Assez bas pour être précis et factuel
+            do_sample: true
           });
 
           const answer = out?.[0]?.generated_text?.at(-1)?.content || "(Pas de réponse)";
           addMessage('ai', answer);
 
         }catch(err){
-          addMessage('system', `Erreur: ${err?.message || err}`);
+          addMessage('system', `Erreur: ${err.message}`);
           console.error(err);
         }finally{
           loader.classList.remove('active');
+          sendBtn.disabled = false;
         }
       });
 
-      // Gestion de la touche Entrée
       input.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !e.shiftKey){
           e.preventDefault();
