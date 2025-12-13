@@ -487,94 +487,100 @@
     }
 
     async function selectDepute(depute){
+      // 1. Debug : On vérifie quel député on a reçu
+      console.log("--- DEBUG: selectDepute ---");
+      console.log("Député sélectionné :", depute.nom, "| ID:", depute.id);
+      
       currentDepute = depute;
 
-      // 1. Mise à jour visuelle immédiate (Carte d'identité)
+      // ... (Mise à jour UI : Carte, Nom, Photo... on garde ça, c'est OK) ...
       const card = document.getElementById('selected-depute');
       card.classList.add('active');
-
       document.getElementById('depute-name').textContent = `${depute.prenom} ${depute.nom}`;
       document.getElementById('depute-group').textContent = depute.groupe || depute.groupeNom;
-      
       const circoTexte = depute.departementNom ? `${depute.departementNom} (${depute.circo})` : depute.circonscription;
       document.getElementById('depute-circum').textContent = circoTexte;
-
-      // Photo
+      
       const idNum = depute.id.replace('PA', '');
       const photoUrl = `https://www2.assemblee-nationale.fr/static/tribun/17/photos/${idNum}.jpg`;
       const imgEl = document.getElementById('depute-img');
       imgEl.src = photoUrl;
-      imgEl.onerror = () => { 
-        imgEl.src = 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'; 
-      };
+      imgEl.onerror = () => { imgEl.src = 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'; };
 
-      // 2. Préparation de l'interface "Chat"
-      // On bloque le chat tant que les données ne sont pas prêtes
+      // 2. Préparation UI Chat
       const sendBtn = document.getElementById('send-btn');
       const userInput = document.getElementById('user-input');
-      
       sendBtn.disabled = true;
       userInput.disabled = true;
       userInput.placeholder = "Chargement des votes en cours...";
 
-      // Stats en "chargement"
+      // 3. CHARGEMENT DES VOTES (Le point critique)
       const statsContainer = document.getElementById('stats-container');
-      statsContainer.style.display = 'grid';
       statsContainer.style.opacity = '0.5';
-      document.getElementById('stat-votes').textContent = "...";
-      document.getElementById('stat-pour').textContent = "...";
-      document.getElementById('stat-contre').textContent = "...";
+      document.getElementById('stat-votes').textContent = "0";
+
+      // On construit l'URL et on l'affiche dans la console
+      const urlVotes = `data/votes/${depute.id}.json`;
+      console.log("Tentative de chargement URL :", urlVotes);
 
       try {
-        // 3. Téléchargement du fichier JSON des votes
-        // Note: Assurez-vous que le chemin 'data/votes/' est correct par rapport à votre index.html
-        const response = await fetch(`data/votes/${depute.id}.json`);
-        
+        const response = await fetch(urlVotes);
+        console.log("Statut réponse HTTP :", response.status, response.statusText);
+
         if (response.ok) {
           const votes = await response.json();
+          console.log("Succès ! Nombre de votes trouvés :", votes.length);
+          
+          if(votes.length > 0) {
+             console.log("Exemple du premier vote :", votes[0]);
+          }
+
           currentDepute.votes = votes;
         } else {
-          console.warn(`Pas d'historique trouvé pour ${depute.id}`);
+          console.warn(`ERREUR HTTP : Le fichier ${urlVotes} n'existe pas ou est inaccessible.`);
           currentDepute.votes = [];
         }
       } catch (error) {
-        console.error("Erreur chargement votes :", error);
+        console.error("ERREUR TECHNIQUE (Fetch) :", error);
         currentDepute.votes = [];
       }
 
-      // 4. Mise à jour des stats finales
+      // 4. Debug des compteurs finaux
+      console.log("Compteurs finaux -> Total:", currentDepute.votes.length);
+      
+      // Mise à jour de l'affichage
       statsContainer.style.opacity = '1';
       document.getElementById('stat-votes').textContent = currentDepute.votes.length;
       document.getElementById('stat-pour').textContent = currentDepute.votes.filter(v => v.vote === 'Pour').length;
       document.getElementById('stat-contre').textContent = currentDepute.votes.filter(v => v.vote === 'Contre').length;
 
-      addMessage('system', `Données chargées pour ${depute.prenom} ${depute.nom}.`);
+      addMessage('system', `Données chargées pour ${depute.prenom} ${depute.nom}. (${currentDepute.votes.length} votes)`);
 
-      // 5. INDEXATION INTELLIGENTE (RAG)
-      // C'est l'étape cruciale pour la recherche sémantique
+      // 5. RAG (Indexation)
       if (featureExtractor && currentDepute.votes.length > 0) {
+        console.log("Lancement indexation RAG...");
         userInput.placeholder = "Analyse intelligente des votes...";
-        addMessage('system', "L'IA analyse l'historique des votes (création des vecteurs)...");
+        addMessage('system', "L'IA analyse l'historique des votes...");
         
-        // On crée les vecteurs mathématiques (ça prend 1 à 2 secondes)
-        // On combine Titre + Objet + Vote pour que l'IA trouve tout
-        const textes = currentDepute.votes.map(v => 
-            `Sujet: ${v.titre}. Contexte: ${v.objet || ''}. Vote: ${v.vote}`
-        );
-        
-        const output = await featureExtractor(textes, { pooling: 'mean', normalize: true });
-        deputeVectors = output.tolist();
-        
-        addMessage('system', "Analyse terminée. L'IA est prête à répondre !");
+        try {
+            const textes = currentDepute.votes.map(v => 
+                `Sujet: ${v.titre}. Contexte: ${v.objet || ''}. Vote: ${v.vote}`
+            );
+            const output = await featureExtractor(textes, { pooling: 'mean', normalize: true });
+            deputeVectors = output.tolist();
+            console.log("Indexation RAG terminée avec succès.");
+            addMessage('system', "Analyse terminée.");
+        } catch(e) {
+            console.error("Erreur RAG :", e);
+        }
       } else {
-        // Si pas de modèle chargé ou pas de votes
-        deputeVectors = []; 
+        console.log("Pas d'indexation RAG (Pas de votes ou modèle non chargé).");
+        deputeVectors = [];
       }
 
-      // 6. Tout est prêt, on débloque le chat
       sendBtn.disabled = false;
       userInput.disabled = false;
-      userInput.placeholder = "Posez votre question sur les votes de ce député...";
+      userInput.placeholder = "Posez votre question...";
     }
 
 function fmtTime(seconds) {
