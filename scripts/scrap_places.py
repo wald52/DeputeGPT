@@ -1,30 +1,51 @@
+import requests
 import re
 import html
 import json
+import os
 
-# 1. Lire le fichier HTML source
-with open('Situez-votre-depute-dans-l-hemicycle-Assemblee-nationale.html', 'r', encoding='utf-8') as f:
-    content = f.read()
+# 1. Configuration
+URL_PAGE = "https://www.assemblee-nationale.fr/dyn/vos-deputes/hemicycle"
+OUTPUT_FILE = "public/data/places_mapping.json"
 
-# 2. Extraire la structure JSON encodée
-# On cherche le pattern "NUMERO":{... "PAxxxx"}
-# On nettoie d'abord les entités HTML (&quot; -> ")
-content_decoded = html.unescape(content)
+print(f"Téléchargement de la page {URL_PAGE}...")
 
-# Regex pour trouver : "123":{"couleur":..., "tooltipUrl":".../PA123456"}
-# On capture le numéro de siège (group 1) et l'ID du député (group 2)
-pattern = re.compile(r'"(\d+)":\{[^}]*acteur-presentation\\/([^"]+)"\}')
+try:
+    # 2. Récupération de la page en ligne
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+    response = requests.get(URL_PAGE, headers=headers)
+    response.raise_for_status()
+    content = response.text
 
-matches = pattern.findall(content_decoded)
+    # 3. Extraction (Même logique que le test local)
+    print("Analyse du contenu...")
+    content_decoded = html.unescape(content)
+    
+    # Regex : cherche "123":{..."tooltipUrl":".../PA123456"}
+    pattern = re.compile(r'"(\d+)":\{[^}]*acteur-presentation\\/([^"]+)"\}')
+    matches = pattern.findall(content_decoded)
+    
+    if not matches:
+        print("⚠️ AUCUNE correspondance trouvée ! La structure du site a peut-être changé.")
+        exit(1) # Force l'erreur pour voir le log dans Github Actions
 
-mapping = {}
-for seat_num, depute_id in matches:
-    mapping[depute_id] = seat_num
+    mapping = {}
+    for seat_num, depute_id in matches:
+        mapping[depute_id] = seat_num
 
-print(f"Trouvé {len(mapping)} correspondances siège <-> député.")
+    print(f"✅ Trouvé {len(mapping)} correspondances siège <-> député.")
 
-# 3. Sauvegarder en JSON
-with open('public/data/places_mapping.json', 'w', encoding='utf-8') as f:
-    json.dump(mapping, f, indent=2)
+    # 4. Sauvegarde dans le dossier public/data
+    # On s'assure que le dossier existe
+    os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
 
-print("Fichier 'places_mapping.json' créé avec succès !")
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+        json.dump(mapping, f, indent=2)
+
+    print(f"Fichier sauvegardé : {OUTPUT_FILE}")
+
+except Exception as e:
+    print(f"❌ Erreur critique : {e}")
+    exit(1)
