@@ -427,14 +427,14 @@
               🚀 Charger le modèle IA
           </button>
 
-        <div id="model-progress-wrap" style="display:none; margin-top:8px;">
-          <div style="display:flex; justify-content:space-between; gap:12px; font-weight:600; font-size: 0.85em; margin-bottom: 2px;">
+        <div id="model-progress-wrap" style="display:none; margin-top:5px;">
+          <div style="display:flex; justify-content:space-between; font-weight:600; font-size: 0.8em; margin-bottom: 2px; line-height: 1;">
             <span id="model-progress-label">Préparation…</span>
             <span id="model-progress-pct">0%</span>
           </div>
 
-          <div style="height:14px; background:#e9ecef; border-radius:999px; overflow:hidden; margin-top:8px;">
-            <div id="model-progress-bar" style="height:100%; width:0%; background:#667eea;"></div>
+          <div style="height:8px; background:#e9ecef; border-radius:4px; overflow:hidden;">
+            <div id="model-progress-bar" style="height:100%; width:0%; background:#667eea; transition: width 0.2s;"></div>
           </div>
 
         </div>
@@ -792,7 +792,7 @@ function setupModelLoadUI() {
             setTimeout(() => { wrap.style.display = 'none'; }, 500);
             
             // <--- MODIF : Petit message de succès personnalisé
-            status.innerHTML = `<div style="color:green; font-weight:bold; margin-top:10px;">✅ ${modelConfig.name} actif</div>`;
+            status.innerHTML = `<div style="color:#28a745; font-weight:bold; font-size:0.85em; margin-top:5px; text-align:center;">✅ ${modelConfig.name} actif</div>`;
         }, 2000);
 
       } catch (error) {
