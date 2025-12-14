@@ -6,7 +6,7 @@ import os
 
 # 1. Configuration
 URL_PAGE = "https://www.assemblee-nationale.fr/dyn/vos-deputes/hemicycle"
-OUTPUT_FILE = "public/data/places_mapping.json"
+OUTPUT_FILE = "public/data/place_mapping/places_mapping.json"
 
 print(f"Téléchargement de la page {URL_PAGE}...")
 
