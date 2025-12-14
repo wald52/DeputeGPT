@@ -1015,8 +1015,8 @@ async function setupHemicycle() {
             // On cherche le siège dans le SVG.
             // L'Assemblée utilise souvent des IDs numériques directs ou des data-attributes.
             // Ce sélecteur essaie les cas les plus courants :
-            let seatElement = container.getElementById(seatId) || 
-                              container.querySelector(`[id="place_${seatId}"]`) ||
+            let seatElement = container.querySelector(`[id="${seatId}"]`) || 
+                              container.querySelector(`#seat-${seatId}`) ||
                               container.querySelector(`[data-place="${seatId}"]`);
 
             if (seatElement) {
