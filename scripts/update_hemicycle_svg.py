@@ -48,7 +48,9 @@ def update_svg():
 
             # 3. TAILLE RESPONSIVE
             target_svg['width'] = "100%"
-            target_svg['height'] = "auto"
+            if 'height' in target_svg.attrs:
+                del target_svg['height']  # On supprime l'attribut height fixe
+            target_svg['viewBox'] = target_svg.get('viewBox', '0 0 1000 500')
             target_svg['id'] = "hemicycle-svg-content"
             
             # Sauvegarde
