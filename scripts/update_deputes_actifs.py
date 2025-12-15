@@ -1,11 +1,26 @@
 import json, hashlib, os, sys, urllib.request
 from datetime import datetime, timezone
-from urllib.parse import urlencode
 import urllib.error
 
 RESOURCE_ID = "092bd7bb-1543-405b-b53c-932ebb49bb8e"
 BASE = f"https://tabular-api.data.gouv.fr/api/resources/{RESOURCE_ID}/data/"
 OUT_DIR = "public/data/deputes_actifs"
+
+# Définition des couleurs connues (Table de correspondance)
+COULEURS_OFFICIELLES = {
+    "GDR": "#dd0000",
+    "LFI": "#cc2443", "LFI-NFP": "#cc2443",
+    "SOC": "#ff8080",
+    "ECO": "#00c000", "EcoS": "#00c000",
+    "LIOT": "#e1a5e1",
+    "DEM": "#ff9900",
+    "EPR": "#ffeb00", "ENS": "#ffeb00", "RE": "#ffeb00", "Ensemble": "#ffeb00",
+    "HOR": "#0001b8",
+    "DR": "#0066cc", "LR": "#0066cc",
+    "UDR": "#162561", "UED": "#162561",
+    "RN": "#0d378a",
+    "NI": "#dddddd"
+}
 
 def fetch_json(url: str) -> dict:
     req = urllib.request.Request(
@@ -14,20 +29,17 @@ def fetch_json(url: str) -> dict:
             "Accept": "application/json",
             "User-Agent": "deputeGPT-bot/1.0 (+https://github.com/wald52/deputeGPT)",
         },
-    )  # Ajout d'en-têtes via Request(headers=...) [web:567]
-
+    )
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
-        # HTTPError fournit un flux lisible via e.read() (utile pour comprendre un 400) [web:573]
         body = e.read().decode("utf-8", errors="replace")
         print(f"HTTPError {e.code} {e.reason} on URL: {url}")
         print("Body (first 1000 chars):", body[:1000])
         raise
 
 def canonical_bytes(rows) -> bytes:
-    # JSON canonique (stable) pour un hash stable
     return json.dumps(rows, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode("utf-8")
 
 def read_latest_sha256(latest_path: str) -> str | None:
@@ -43,8 +55,8 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     latest_path = os.path.join(OUT_DIR, "latest.json")
 
-    # 1) Récupération paginée (suivre links.next)
-    url = BASE  # pas de page_size forcé
+    # 1) Récupération paginée des députés
+    url = BASE
     all_rows = []
     while url:
         print("GET:", url)
@@ -54,16 +66,46 @@ def main():
         links = payload.get("links") or payload.get("link") or {}
         url = links.get("next")
 
-    # 2) Hash + comparaison avec latest
+    # --- AJOUT: GÉNÉRATION DU FICHIER GROUPES.JSON ---
+    # On profite d'avoir la liste à jour pour extraire les groupes
+    print("Génération du fichier groupes.json...")
+    groupes_map = {}
+    
+    for d in all_rows:
+        code = d.get('groupeAbrev')
+        nom_complet = d.get('groupe')
+        
+        if code: # Sécurité si code vide
+            if code not in groupes_map:
+                groupes_map[code] = {
+                    "code": code,
+                    "nom": nom_complet,
+                    "seats": 0,
+                    "couleur": COULEURS_OFFICIELLES.get(code, "#bdc3c7") # Couleur ou Gris par défaut
+                }
+            groupes_map[code]["seats"] += 1
+
+    # Transformation en liste et tri par nombre de sièges (décroissant)
+    groupes_list = list(groupes_map.values())
+    groupes_list.sort(key=lambda x: x['seats'], reverse=True)
+
+    # Sauvegarde du fichier groupes.json TOUJOURS (même si hash députés identique, c'est pas grave)
+    groupes_path = os.path.join(OUT_DIR, "groupes.json")
+    with open(groupes_path, 'w', encoding='utf-8') as f:
+        json.dump(groupes_list, f, indent=2, ensure_ascii=False)
+    print(f"✅ Groupes sauvegardés : {len(groupes_list)} groupes trouvés.")
+    # --------------------------------------------------
+
+    # 2) Hash + comparaison avec latest (Logique existante pour les députés)
     blob = canonical_bytes(all_rows)
     sha256 = hashlib.sha256(blob).hexdigest()
     prev_sha256 = read_latest_sha256(latest_path)
 
     if prev_sha256 == sha256:
-        print("No change detected (sha256 identical).")
+        print("No change detected on deputes list (sha256 identical).")
         return 0
 
-    # 3) Écriture d'une nouvelle version + bascule latest
+    # 3) Écriture nouvelle version députés
     version = "v" + datetime.now(timezone.utc).strftime("%Y-%m-%d")
     out_path = os.path.join(OUT_DIR, f"{version}.json")
 
@@ -82,7 +124,7 @@ def main():
         )
     os.replace(tmp_latest, latest_path)
 
-    print(f"Updated: {out_path} rows={len(all_rows)} sha256={sha256}")
+    print(f"Updated Deputes: {out_path} rows={len(all_rows)} sha256={sha256}")
     return 0
 
 if __name__ == "__main__":
