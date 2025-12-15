@@ -106,12 +106,12 @@
       justify-content: center;
     }
 
-    /* Cible le SVG injecté directement */
     #hemicycle-container svg {
-      width: 100%;
-      height: auto;
+      width: 100% !important; /* Force la largeur */
+      height: auto !important;
       display: block;
-      max-height: 100%; /* Important pour ne pas déborder verticalement */
+      /* On enlève max-height pour laisser le SVG grandir si besoin */
+      /* max-height: 100%; */ 
     }
 
     /* --- PANNEAU DROITE (Chat & IA) --- */
