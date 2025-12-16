@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import os
 import re
 import json
+import html
 
 # Config
 URL_PAGE = "https://www.assemblee-nationale.fr/dyn/vos-deputes/hemicycle"
@@ -22,8 +23,9 @@ def update_hemicycle_data():
         
         soup = BeautifulSoup(content, 'html.parser')
         
-        # --- 1. EXTRACTION DU SVG (Comme avant) ---
+        # --- 1. EXTRACTION DU SVG ---
         target_svg = None
+        # On cherche un SVG qui a beaucoup de chemins (l'hémicycle)
         for svg in soup.find_all('svg'):
             if len(svg.find_all(['path', 'circle', 'g'])) > 300:
                 target_svg = svg
@@ -31,24 +33,24 @@ def update_hemicycle_data():
         
         if target_svg:
             print("✅ SVG trouvé ! Nettoyage...")
-            # Nettoyage
+            
+            # Suppression des liens parasites
             for a_tag in target_svg.find_all('a'):
                 g_tag = soup.new_tag("g")
                 g_tag.attrs = a_tag.attrs
                 g_tag.extend(a_tag.contents)
                 a_tag.replace_with(g_tag)
             
+            # Standardisation des styles
             for seat in target_svg.find_all(['path', 'circle', 'rect']):
-                # On enlève le fill par défaut pour laisser le JS colorier
                 if 'style' in seat.attrs: del seat['style']
-                # On met un gris neutre de base
-                seat['fill'] = '#e0e0e0' 
+                seat['fill'] = '#e0e0e0' # Gris neutre de base
 
-            # Optimisation ViewBox
+            # ViewBox et Dimensions
             if 'width' in target_svg.attrs: del target_svg['width']
             if 'height' in target_svg.attrs: del target_svg['height']
             if 'viewbox' not in target_svg.attrs and 'viewBox' not in target_svg.attrs:
-                target_svg['viewBox'] = "0 0 1100 600" # Centrage standard
+                target_svg['viewBox'] = "0 0 1100 600" 
                 
             target_svg['id'] = "hemicycle-svg-content"
             
@@ -59,32 +61,52 @@ def update_hemicycle_data():
         else:
             print("❌ Erreur: SVG non trouvé.")
 
-        # --- 2. EXTRACTION DES COULEURS DES SIÈGES (NOUVEAU) ---
+        # --- 2. EXTRACTION DES COULEURS DES SIÈGES ---
         print("Extraction des couleurs officielles...")
         
-        # On cherche le gros objet JSON qui contient la config
-        # Il est souvent dans une variable JS ou un attribut data
-        # Sur cette page, c'est souvent dans un script React ou similaire.
-        # On va utiliser une Regex pour trouver les motifs "123":{"couleur":"ABCDEF"}
-        
-        # Motif : "numero_siege": {"couleur": "HEX"}
-        # Ex: "10":{"couleur":"DCDCDC"}
-        pattern = r'"(\d+)":\s*\{\s*"couleur":\s*"([0-9A-Fa-f]{6})"'
-        
-        matches = re.findall(pattern, content)
-        
         sieges_map = {}
-        for siege_num, hex_code in matches:
-            sieges_map[siege_num] = "#" + hex_code
+        
+        # MÉTHODE A : Via attribut data-siege (Le plus fiable sur la page actuelle)
+        # On cherche n'importe quel élément ayant cet attribut
+        elements_with_data = soup.find_all(attrs={"data-siege": True})
+        
+        if elements_with_data:
+            print(f"Trouvé {len(elements_with_data)} élément(s) avec data-siege.")
+            try:
+                raw_json = elements_with_data[0]["data-siege"]
+                # Décodage des entités HTML (&quot; -> ")
+                clean_json = html.unescape(raw_json)
+                data = json.loads(clean_json)
+                
+                # Le JSON est sous la forme : {"10": {"couleur": "ABCDEF"}, ...}
+                count = 0
+                for num, infos in data.items():
+                    if isinstance(infos, dict) and "couleur" in infos:
+                        sieges_map[num] = "#" + infos["couleur"]
+                        count += 1
+                print(f"Méthode data-siege : {count} couleurs trouvées.")
+            except Exception as e:
+                print(f"Erreur parsing data-siege : {e}")
 
-        if sieges_map:
+        # MÉTHODE B : Fallback Regex (Si la structure HTML change)
+        if len(sieges_map) < 100:
+            print("Tentative Regex de secours...")
+            # Pattern souple :  "123" ... : ... { ... "couleur" ... : ... "ABCDEF"
+            pattern = r'["\']?(\d+)["\']?\s*:\s*\{[^}]*?["\']?couleur["\']?\s*:\s*["\']?([0-9A-Fa-f]{6})["\']?'
+            matches = re.findall(pattern, content)
+            
+            for num, color in matches:
+                sieges_map[num] = "#" + color
+            print(f"Méthode Regex : {len(matches)} correspondances.")
+
+        # SAUVEGARDE
+        if len(sieges_map) > 100:
+            os.makedirs(os.path.dirname(OUTPUT_COLORS), exist_ok=True)
             with open(OUTPUT_COLORS, "w", encoding="utf-8") as f:
                 json.dump(sieges_map, f, indent=2)
-            print(f"✅ Couleurs extraites : {len(sieges_map)} sièges configurés -> {OUTPUT_COLORS}")
+            print(f"✅ SUCCÈS : {len(sieges_map)} couleurs de sièges sauvegardées.")
         else:
-            print("⚠️ Aucune couleur de siège trouvée via Regex.")
-            # Fallback : Si la regex échoue, on regarde si un data-attribut existe dans le HTML
-            # (Analyse plus poussée si besoin)
+            print("❌ ÉCHEC : Trop peu de couleurs trouvées. Vérifiez le format de la page.")
 
     except Exception as e:
         print(f"❌ Erreur critique : {e}")
