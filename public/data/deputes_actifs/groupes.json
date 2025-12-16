@@ -15,7 +15,7 @@
     "code": "LFI-NFP",
     "nom": "La France insoumise - Nouveau Front Populaire",
     "seats": 71,
-    "couleur": "#bdc3c7"
+    "couleur": "#cc2443"
   },
   {
     "code": "SOC",
@@ -39,19 +39,19 @@
     "code": "DEM",
     "nom": "Les Démocrates",
     "seats": 36,
-    "couleur": "#bdc3c7"
+    "couleur": "#ff9900"
   },
   {
     "code": "HOR",
     "nom": "Horizons & Indépendants",
     "seats": 33,
-    "couleur": "#bdc3c7"
+    "couleur": "#0001b8"
   },
   {
     "code": "LIOT",
     "nom": "Libertés, Indépendants, Outre-mer et Territoires",
     "seats": 22,
-    "couleur": "#bdc3c7"
+    "couleur": "#e1a5e1"
   },
   {
     "code": "GDR",
@@ -69,6 +69,6 @@
     "code": "NI",
     "nom": "Non inscrit",
     "seats": 14,
-    "couleur": "#bdc3c7"
+    "couleur": "#dddddd"
   }
 ]
