@@ -983,9 +983,16 @@ async function setupHemicycle() {
   const container = document.getElementById('hemicycle-container');
   
   try {
-    // 1. On charge le NOUVEAU SVG (celui téléchargé par Python)
-    const responseSvg = await fetch('public/data/hemicycle_svg/hemicycle.svg');
-    if (!responseSvg.ok) throw new Error("SVG introuvable (Vérifiez le workflow Github)");
+    // --- 1. CHARGEMENT DES RESSOURCES ---
+    const [responseSvg, responseMapping, responseColors] = await Promise.all([
+        fetch('public/data/hemicycle_svg/hemicycle.svg'),
+        fetch('public/data/place_mapping/places_mapping.json'),
+        fetch('public/data/hemicycle_svg/sieges_couleurs.json') // <--- NOUVEAU
+    ]);
+
+    if (!responseSvg.ok) throw new Error("SVG introuvable");
+    
+    // Insertion SVG
     const svgText = await responseSvg.text();
     container.innerHTML = svgText;
 
@@ -995,31 +1002,28 @@ async function setupHemicycle() {
         svgElement.style.width = '100%';
         svgElement.style.height = 'auto';
         svgElement.style.display = 'block';
-        // On nettoie les tailles fixes qui pourraient gêner
         svgElement.removeAttribute('width');
         svgElement.removeAttribute('height');
     }
 
-    // 2. On charge le MAPPING (Le fichier qui lie PA... -> Siège N°)
-    const responseMapping = await fetch('public/data/place_mapping/places_mapping.json');
-    let placesMapping = {};
-    if (responseMapping.ok) {
-        placesMapping = await responseMapping.json();
-    } else {
-        console.warn("Mapping introuvable. Les députés ne seront pas placés précisément.");
-    }
+    // Parsage des données
+    let placesMapping = responseMapping.ok ? await responseMapping.json() : {};
+    let seatColors = responseColors.ok ? await responseColors.json() : {}; // <--- NOUVEAU
 
-    // 3. On place chaque député à sa place exacte
+    // --- 2. PLACEMENT ET COLORATION ---
     deputesData.forEach(depute => {
         const seatId = placesMapping[depute.id]; // Ex: "389"
 
         if (seatId) {
-            // CORRECTION : On cible le format exact "p389" vu dans votre SVG
             let seatElement = container.querySelector(`#p${seatId}`);
 
             if (seatElement) {
-                // VICTOIRE : On a trouvé le siège !
-                applySeatStyle(seatElement, depute);
+                // On récupère la couleur officielle du siège (si dispo)
+                const officialColor = seatColors[seatId];
+                
+                // On l'applique. 
+                // Note : il faudra adapter applySeatStyle pour accepter cette couleur
+                applySeatStyle(seatElement, depute, officialColor);
             }
         }
     });
@@ -1033,51 +1037,53 @@ async function setupHemicycle() {
 }
 
 // Fonction pour gérer le style et les clics (séparée pour la clarté)
-function applySeatStyle(element, d) {
+function applySeatStyle(element, d, forcedColor = null) {
     // 1. COULEUR
-    const groupeInfo = groupesPolitiques.find(g => g.code === d.groupeAbrev);
+    let finalColor = '#bdc3c7'; // Gris par défaut
 
-    if (groupeInfo) {
-        element.style.fill = groupeInfo.couleur;
+    if (forcedColor) {
+        // Cas A : Couleur officielle du siège (Priorité absolue)
+        finalColor = forcedColor;
     } else {
-        console.warn(`Pas de couleur trouvée pour le groupe : ${d.groupeAbrev}`);
-        element.style.fill = '#999'; // Gris foncé pour les inconnus
+        // Cas B : Couleur via le Groupe (Fallback)
+        const groupeInfo = groupesPolitiques.find(g => g.code === d.groupeAbrev);
+        if (groupeInfo) {
+            finalColor = groupeInfo.couleur;
+        } else {
+            // Debug si besoin
+            // console.warn(`Pas de couleur pour ${d.nom} (${d.groupeAbrev})`);
+        }
     }
-  
-    const color = groupeInfo ? groupeInfo.couleur : '#bdc3c7'; // Gris si inconnu
     
-    // Le SVG officiel utilise souvent des <path>, donc on colore le fill
-    element.style.fill = color;
+    // Application de la couleur
+    element.style.fill = finalColor;
     
     // 2. INTERACTION
     element.style.cursor = 'pointer';
-    element.style.pointerEvents = 'all'; // Rend le siège cliquable
+    element.style.pointerEvents = 'all'; 
     element.style.transition = 'all 0.15s ease';
 
-    // 3. TOOLTIP (Survol souris)
+    // 3. TOOLTIP
     const title = document.createElement('title');
     title.textContent = `${d.prenom} ${d.nom} (${d.groupeAbrev})`;
-    element.innerHTML = ''; // Nettoie d'anciens titres
+    element.innerHTML = ''; 
     element.appendChild(title);
 
     // 4. CLIC
     element.onclick = (e) => {
         e.stopPropagation();
-        selectDepute(d); // Votre fonction existante
+        selectDepute(d); 
     };
 
     // 5. HOVER EFFECT
-    // Attention: sur des <path> complexes, changer le rayon (r) ne marche pas.
-    // On joue plutôt sur l'opacité ou le contour.
     element.onmouseenter = function() {
-        this.style.opacity = '0.7';      // Devient un peu transparent
-        this.style.stroke = '#000';      // Contour noir
-        this.style.strokeWidth = '2px';
-        // Note: transform: scale() est risqué sur un SVG complexe sans transform-origin défini
+        this.style.opacity = '0.7';
+        this.style.stroke = '#333'; 
+        this.style.strokeWidth = '1px'; // Un peu plus fin pour être élégant
     };
     
     element.onmouseleave = function() {
-        this.style.opacity = '1';        // Retour à la normale
+        this.style.opacity = '1';
         this.style.stroke = 'none';
         this.style.strokeWidth = '0';
     };
