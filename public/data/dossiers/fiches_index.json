@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-07-24T05:37:15Z",
+ "generatedAt": "2026-07-25T05:34:49Z",
  "totalFiches": 226,
  "fiches": {
   "DLR5L16N46127": {
@@ -2718,25 +2718,28 @@
   },
   "DLR5L17N53940": {
    "titre": "Projet de loi sur la justice criminelle et le respect des victimes",
-   "verdictIncitations": "indetermine",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-05T23:02:35Z",
+   "verdictIncitations": "incitations_alignees",
+   "statut": "promulgue",
+   "generatedAt": "2026-07-25T05:34:49Z",
    "themes": [
     "justice criminelle",
     "droits des victimes",
-    "procédure pénale"
+    "aide juridictionnelle",
+    "justice restaurative",
+    "cours d'assises"
    ]
   },
   "DLR5L17N53942": {
    "titre": "Projet de loi organique relatif au renforcement des juridictions criminelles",
-   "verdictIncitations": "indetermine",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-05T23:01:42Z",
+   "verdictIncitations": "incitations_alignees",
+   "statut": "promulgue",
+   "generatedAt": "2026-07-25T05:32:34Z",
    "themes": [
     "justice",
-    "juridictions criminelles",
-    "droit pénal",
-    "organisation judiciaire"
+    "cours criminelles départementales",
+    "magistrature",
+    "formation",
+    "violences intrafamiliales"
    ]
   },
   "DLR5L17N53980": {

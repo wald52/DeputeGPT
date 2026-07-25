@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-07-24T05:37:14Z",
+ "generatedAt": "2026-07-25T05:30:34Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -53183,7 +53183,7 @@
    "titre": "Projet de loi organique relatif au renforcement des juridictions criminelles",
    "titreChemin": "DLR5L17N53942",
    "procedure": "Projet ou proposition de loi organique",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N53942",
    "texteRefs": [
     "PRJLANR5L17B2682",
@@ -53221,7 +53221,7 @@
    "titre": "Projet de loi sur la justice criminelle et le respect des victimes",
    "titreChemin": "DLR5L17N53940",
    "procedure": "Projet de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N53940",
    "texteRefs": [
     "PRJLANR5L17B2681",

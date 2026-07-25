@@ -2,40 +2,73 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N53942",
- "generatedAt": "2026-07-05T23:01:42Z",
+ "generatedAt": "2026-07-25T05:32:34Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Projet de loi organique relatif au renforcement des juridictions criminelles",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N53942",
-  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b2908_texte-adopte-commission",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0330_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Le texte est un projet de loi organique relatif au renforcement des juridictions criminelles, déposé le 10 juin 2026. L'objectif affiché est de renforcer les juridictions criminelles, mais l'exposé des motifs n'est pas fourni dans le texte transmis.",
- "mecanismesCles": [],
- "verdictIncitations": "indetermine",
- "justificationVerdict": "Le texte fourni ne contient ni exposé des motifs ni articles : seuls la page de garde et les métadonnées du dossier législatif (commission des lois, procédure accélérée, numéro 2908-A0) ont été transmis. Sans contenu normatif ni exposé des motifs, il est impossible d'identifier les mécanismes concrets créés par le texte et donc de déterminer si les incitations réelles vont dans le sens de l'objectif affiché.",
+ "objectifAffiche": "Le projet de loi organique vise à renforcer les juridictions criminelles, en pérennisant et en étendant le recours aux avocats honoraires comme assesseurs dans les cours criminelles départementales, et en imposant des formations spécifiques aux magistrats et assesseurs siégeant dans ces juridictions.",
+ "mecanismesCles": [
+  {
+   "resume": "Création d'une sous-section permettant la nomination d'avocats honoraires comme assesseurs dans les cours criminelles départementales, sous conditions (ancienneté de 3 ans hors ressort, limite d'âge de 75 ans, mandat de 5 ans renouvelable une fois).",
+   "articleRef": "art. 1er (art. 41-33 et 41-34 de l'ordonnance de 1958)",
+   "citation": "« Des avocats honoraires peuvent être nommés pour exercer les fonctions d'assesseur dans les cours criminelles départementales. »"
+  },
+  {
+   "resume": "Soumission des avocats honoraires exerçant des fonctions juridictionnelles au statut de la magistrature, avec interdiction d'avancement, de mutation sans consentement, et restrictions d'activités professionnelles concomitantes.",
+   "articleRef": "art. 1er (art. 41-35 et 41-36)",
+   "citation": "« Les avocats honoraires exerçant des fonctions juridictionnelles sont soumis au présent statut. »"
+  },
+  {
+   "resume": "Obligation de formation préalable à l'ENM pour les magistrats (civils/pénaux) traitant de violences intrafamiliales et pour ceux siégeant en cours criminelles départementales (violences sexuelles et sexistes).",
+   "articleRef": "art. 1er bis (art. 14 de l'ordonnance)",
+   "citation": "« Tout magistrat désigné pour siéger dans les cours criminelles départementales en qualité de président ou d'assesseur suit, préalablement à l'exercice de ces fonctions, une formation spécifique en matière de violences sexuelles et sexistes »"
+  },
+  {
+   "resume": "Formation obligatoire identique pour toute personne désignée comme assesseur (non-magistrat) dans les cours criminelles départementales.",
+   "articleRef": "art. 1er bis (art. 41-10 B)",
+   "citation": "« Toute personne désignée pour siéger dans les cours criminelles départementales en qualité d'assesseur suit, préalablement à l'exercice de ces fonctions, une formation spécifique en matière de violences sexuelles et sexistes »"
+  },
+  {
+   "resume": "Possibilité pour les avocats honoraires ayant déjà effectué un mandat dans le cadre de l'expérimentation de 2021 d'être nommés pour un second mandat de cinq ans.",
+   "articleRef": "art. 2 (II)",
+   "citation": "« Les avocats honoraires exerçant des fonctions juridictionnelles qui ont effectué un premier mandat dans le cadre de l'expérimentation [...] peuvent être nommés pour un second mandat d'une durée de cinq ans »"
+  },
+  {
+   "resume": "Entrée en vigueur différée et délai de mise en conformité (formation avant le 31 décembre 2028 pour les magistrats déjà en poste).",
+   "articleRef": "art. 2 (III et IV)",
+   "citation": "« suivent cette formation avant le 31 décembre 2028 »"
+  }
+ ],
+ "verdictIncitations": "incitations_alignees",
+ "justificationVerdict": "Le texte crée des mécanismes directement orientés vers l'objectif affiché de renforcement des juridictions criminelles. L'article 1er pérennise et structure le recrutement d'avocats honoraires assesseurs (art. 41-33 à 41-38), ce qui élargit le vivier de magistrats non-professionnels pour les cours criminelles départementales. L'article 1er bis impose des formations spécialisées (violences intrafamiliales, violences sexuelles et sexistes) aux magistrats et assesseurs concernés, renforçant la qualité de la réponse juridictionnelle. L'article 2 organise la transition depuis l'expérimentation de 2021 et prévoit des délais de mise en conformité. Ces incitations convergent vers le renforcement annoncé.",
  "pointsDeVigilance": [
-  "Aucun article ni exposé des motifs n'a été transmis : le texte officiel semble tronqué ou inaccessible",
-  "Le titre mentionne un 'renforcement des juridictions criminelles' mais sans contenu, la portée réelle est inconnue",
-  "Le texte ayant été adopté par le Sénat puis examiné en commission à l'Assemblée nationale, il pourrait contenir des modifications substantielles par rapport à la version initiale"
+  "Le texte ne contient pas de dispositions sur les moyens budgétaires alloués à l'ENM pour absorber ces nouvelles obligations de formation.",
+  "L'absence de mécanisme de contrôle de l'effectivité des formations suivies.",
+  "La dépendance à des décrets en Conseil d'État pour les modalités concrètes (indemnisation, conditions de candidature).",
+  "Le risque de conflit d'intérêts lié à la possibilité pour les avocats honoraires d'exercer une activité professionnelle concomitante, malgré les garde-fous prévus à l'article 41-36."
  ],
  "themes": [
   "justice",
-  "juridictions criminelles",
-  "droit pénal",
-  "organisation judiciaire"
+  "cours criminelles départementales",
+  "magistrature",
+  "formation",
+  "violences intrafamiliales"
  ],
  "scrutinsCles": [
-  "7975",
-  "7976",
-  "7977",
-  "7978"
+  "7978",
+  "7981",
+  "8041",
+  "8043"
  ],
  "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
- "sourceTextHash": "sha256:39678ed6c9ea458297e1841e6f4f2168cf6b1aaeafa2181cff91c9217b7940cd"
+ "sourceTextHash": "sha256:e56b33c23f802c8616d37588a604add38e16ee4f821e130cd8d9acfd4427b26f"
 }

@@ -2,39 +2,73 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N53940",
- "generatedAt": "2026-07-05T23:02:35Z",
+ "generatedAt": "2026-07-25T05:34:49Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Projet de loi sur la justice criminelle et le respect des victimes",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N53940",
-  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b2681_projet-loi",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0329_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Le texte est un projet de loi ordinaire n°2681, adopté par le Sénat après engagement de la procédure accélérée, déposé le 15 avril 2026, intitulé 'justice criminelle et le respect des victimes'. L'objectif affiché n'est pas explicité dans le contenu fourni (ni exposé des motifs, ni articles).",
- "mecanismesCles": [],
- "verdictIncitations": "indetermine",
- "justificationVerdict": "Le texte fourni ne contient ni exposé des motifs, ni articles de loi, ni aucun dispositif normatif. Seules des métadonnées de navigation (titre, identifiant, commission saisie, procédure) sont présentes. Sans contenu substantiel, il est impossible d'identifier des mécanismes concrets (obligations, sanctions, dérogations) et donc de déterminer si les incitations vont dans le sens de l'objectif affiché.",
+ "objectifAffiche": "Améliorer l'organisation et le fonctionnement de la justice criminelle et renforcer le respect des victimes, notamment par une meilleure information sur les droits (assistance d'avocat, aide juridictionnelle, justice restaurative) et par des aménagements procéduraux des cours d'assises.",
+ "mecanismesCles": [
+  {
+   "resume": "Information obligatoire de la victime (plainte contre conjoint/concubin/PACS ou infraction sur mineur de 15 ans par ascendant) sur son droit à être assistée par un avocat et à bénéficier de l'aide juridictionnelle, y compris lors de la première audition.",
+   "articleRef": "art. 1er",
+   "citation": "« l'officier ou l'agent de police judiciaire qui reçoit la plainte […] informe la victime […] de son droit d'être assistée par un avocat et de bénéficier de l'aide juridictionnelle »"
+  },
+  {
+   "resume": "Extension de l'aide juridictionnelle (rétribution de l'avocat) aux dépôts de plainte et auditions de victime dans les affaires de violences conjugales ou sur mineurs.",
+   "articleRef": "art. 1er (III, 3° bis)",
+   "citation": "« 5° Dépôt de plainte ou audition de victime pour une infraction commise par le conjoint de la victime, par son concubin ou par le partenaire lié à elle par un pacte civil de solidarité »"
+  },
+  {
+   "resume": "Information systématique de la victime et de l'auteur sur leur droit à une mesure de justice restaurative, à tout moment de la procédure (parquet, instruction, jugement, JAP).",
+   "articleRef": "art. 1er bis",
+   "citation": "« la victime et l'auteur d'une infraction qui a reconnu les faits sont informés […] de leur droit de se voir proposer une mesure de justice restaurative »"
+  },
+  {
+   "resume": "Suppression de l'exception « hors récidive » pour l'appel des décisions du JIRS et limitation à une seule prolongation de la détention provisoire.",
+   "articleRef": "art. 2 (I, 1°)",
+   "citation": "« les mots : ', hors récidive,' sont supprimés »"
+  },
+  {
+   "resume": "Possibilité de renvoi d'une affaire criminelle vers une autre cour d'assises du ressort lorsque la cour compétente ne peut fixer une audience dans un délai raisonnable.",
+   "articleRef": "art. 2 (I, 1° bis, art. 235-1)",
+   "citation": "« le premier président de la cour d'appel peut […] ordonner […] que l'affaire soit renvoyée à une autre cour d'assises du ressort de la cour d'appel »"
+  },
+  {
+   "resume": "Possibilité d'appel limité à certaines infractions ou aux seules peines complémentaires, avec composition restreinte (président + 2 assesseurs, sans jury) et dispense de réentendre les témoins sur la culpabilité.",
+   "articleRef": "art. 2 (I, 6° et 7°, art. 380-2-1 A et B)",
+   "citation": "« L'appel formé par l'accusé ou par le ministère public peut être limité aux peines complémentaires […] la cour d'assises statuant en appel est composée d'un président et de deux assesseurs »"
+  }
+ ],
+ "verdictIncitations": "incitations_alignees",
+ "justificationVerdict": "Les mécanismes créés convergent avec l'objectif affiché. L'article 1er renforce l'information des victimes vulnérables (violences conjugales, infractions sur mineurs) sur leurs droits à l'avocat et à l'aide juridictionnelle, ce qui améliore concrètement le respect des victimes. L'article 1er bis institue une information systématique sur la justice restaurative, outil de réparation. L'article 2 fluidifie la justice criminelle (renvoi entre cours d'assises, appels limités, composition sans jury pour les appels restreints aux peines), ce qui réduit les délais et améliore le fonctionnement. Le maintien en détention du mineur mis en accusation (art. L. 434-9) répond à un objectif de sécurité tout en encadrant strictement les prolongations. Aucun mécanisme du texte ne va à l'encontre de l'objectif affiché.",
  "pointsDeVigilance": [
-  "Le texte officiel transmis est tronqué à 15000 caractères mais ne contient en réalité que des éléments de structure du dossier législatif (sommaire, liens de navigation), sans aucun contenu normatif.",
-  "L'absence d'exposé des motifs et d'articles empêche toute analyse de second ordre sur la cohérence entre l'objectif affiché et les mécanismes créés.",
-  "Le titre évoque deux dimensions (justice criminelle et respect des victimes) qui peuvent impliquer des incitations contradictoires (renforcement répressif vs garanties procédurales), mais cela ne peut être vérifié sans le contenu."
+  "Le texte est tronqué à 15000 caractères : de nombreux articles et l'exposé des motifs ne sont pas visibles, ce qui limite l'analyse des mécanismes complets (notamment les dispositions pénales de fond).",
+  "L'absence d'exposé des motifs dans le texte fourni empêche de vérifier la cohérence entre les intentions gouvernementales et les mécanismes adoptés.",
+  "La suppression de l'exception « hors récidive » pour l'appel (art. 2, I, 1°) élargit le champ de l'appel et pourrait mécaniquement allonger la durée totale des procédures criminelles.",
+  "Le maintien en détention du mineur de 16 ans jusqu'à comparution devant la cour d'assises (avec prolongations possibles jusqu'à 18 mois) constitue une atteinte à la présomption d'innocence et à la liberté individuelle qu'il faut mettre en balance avec l'impératif de protection de l'ordre public."
  ],
  "themes": [
   "justice criminelle",
   "droits des victimes",
-  "procédure pénale"
+  "aide juridictionnelle",
+  "justice restaurative",
+  "cours d'assises"
  ],
  "scrutinsCles": [
-  "7971",
-  "7972",
-  "7973",
-  "7974"
+  "7974",
+  "7980",
+  "8040",
+  "8042"
  ],
  "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
- "sourceTextHash": "sha256:618b45919b7e378ecd3f2f7876040ebdf3e7183869724a3355b8a3a1020f1040"
+ "sourceTextHash": "sha256:e47708e4c1544ed275eabbc2f05c8f5089249b2fb9277ed1b29280f46b538c76"
 }
