@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-07-28T05:32:19Z",
+ "generatedAt": "2026-07-29T05:43:37Z",
  "totalFiches": 226,
  "fiches": {
   "DLR5L16N46127": {
@@ -2481,14 +2481,14 @@
   "DLR5L17N53284": {
    "titre": "Renforcer la sécurité, la rétention administrative et la prévention des risques d’attentat",
    "verdictIncitations": "incitations_alignees",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-08T05:44:48Z",
+   "statut": "promulgue",
+   "generatedAt": "2026-07-29T05:40:50Z",
    "themes": [
     "sécurité intérieure",
     "terrorisme",
     "rétention administrative",
     "soins psychiatriques sous contrainte",
-    "mesures post-sentence"
+    "rétention de sûreté"
    ]
   },
   "DLR5L17N53304": {
@@ -2567,14 +2567,15 @@
   },
   "DLR5L17N53426": {
    "titre": "Accélérer la prévention cardio-neuro-vasculaire et anticiper un risque sanitaire et social majeur",
-   "verdictIncitations": "indetermine",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-11T05:32:01Z",
+   "verdictIncitations": "incitations_alignees",
+   "statut": "promulgue",
+   "generatedAt": "2026-07-29T05:43:37Z",
    "themes": [
     "santé publique",
     "prévention",
     "maladies cardio-neuro-vasculaires",
-    "stratégie nationale"
+    "dépistage",
+    "santé au travail"
    ]
   },
   "DLR5L17N53427": {

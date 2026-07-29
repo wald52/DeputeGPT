@@ -2,67 +2,67 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N53284",
- "generatedAt": "2026-07-08T05:44:48Z",
+ "generatedAt": "2026-07-29T05:40:50Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Renforcer la sécurité, la rétention administrative et la prévention des risques d’attentat",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/retention_admin_prevention_attentats_17e",
   "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0315_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Renforcer la sécurité, la rétention administrative et la prévention des risques d'attentat, via une proposition de loi ordinaire créant de nouveaux mécanismes de surveillance et de privation de liberté à l'encontre de personnes jugées dangereuses en raison d'une idéologie terroriste ou de troubles mentaux associés.",
+ "objectifAffiche": "Renforcer la sécurité, la rétention administrative et la prévention des risques d'attentat, via une proposition de loi ordinaire examinée en CMP après navette parlementaire.",
  "mecanismesCles": [
   {
-   "resume": "Création d'une injonction d'examen psychiatrique prononcée par le préfet à l'encontre d'une personne suspectée de menace grave pour l'ordre public en raison d'une adhésion à des théories terroristes et de troubles mentaux, avec possibilité de visite domiciliaire par les forces de l'ordre en cas de non-soumission.",
+   "resume": "Création d'une injonction préfectorale d'examen psychiatrique pour les personnes suspectées de menace grave liée à une idéologie terroriste et à des troubles mentaux, avec possibilité de visite domiciliaire par les forces de l'ordre sur autorisation d'un magistrat.",
    "articleRef": "art. 1er (art. L. 229-7 CSI)",
-   "citation": "le représentant de l'État dans le département ou, à Paris, le préfet de police peut faire obligation à une personne [...] de se soumettre à un examen psychiatrique"
+   "citation": "Aux seules fins de prévenir la commission d'actes de terrorisme... le représentant de l'État dans le département... peut faire obligation à une personne... de se soumettre à un examen psychiatrique"
   },
   {
-   "resume": "Possibilité d'admission en soins psychiatriques sous contrainte (soins psychiatriques au sens de l'article L. 3213-1 du code de la santé publique) si le certificat médical conclut à des troubles mentaux compromettant la sûreté des personnes.",
-   "articleRef": "art. 1er (V, art. L. 229-7 CSI)",
-   "citation": "le représentant de l'État [...] peut prononcer l'admission en soins psychiatriques dans les conditions prévues aux II et IV de l'article L. 3213-1 du code de la santé publique"
+   "resume": "Possibilité d'admission en soins psychiatriques sous le régime des articles L. 3213-1 II et IV du code de la santé publique si le certificat psychiatrique révèle des troubles mentaux compromettant la sûreté.",
+   "articleRef": "art. 1er (V)",
+   "citation": "le représentant de l'État... peut prononcer l'admission en soins psychiatriques dans les conditions prévues aux II et IV de l'article L. 3213-1 du code de la santé publique"
   },
   {
-   "resume": "Création d'une 'rétention de sûreté terroriste' : placement dans un centre socio-médico-judiciaire de sûreté à l'issue de la peine pour les condamnés à au moins 15 ans de réclusion pour terrorisme présentant une dangerosité très élevée liée à une idéologie et un trouble grave de la personnalité.",
+   "resume": "Création d'une rétention de sûreté terroriste dans un centre socio-médico-judiciaire de sûreté, applicable aux condamnés à ≥15 ans de réclusion pour crimes de terrorisme (art. 421-1 1° CP) présentant une dangerosité caractérisée par une idéologie persistante et un trouble grave de la personnalité.",
    "articleRef": "art. 3 (art. 706-25-23 CPP)",
-   "citation": "peuvent faire l'objet à l'issue de cette peine d'une rétention de sûreté terroriste [...] placement de la personne dans un centre socio-médico-judiciaire de sûreté"
+   "citation": "les personnes dont il est établi... qu'elles présentent une particulière dangerosité... peuvent faire l'objet à l'issue de cette peine d'une rétention de sûreté terroriste"
   },
   {
-   "resume": "Procédure d'évaluation de la dangerosité par une commission pluridisciplinaire avec observation de six semaines et double expertise médicale, préalable à toute rétention de sûreté terroriste.",
-   "articleRef": "art. 3 (art. 706-25-23 et 706-25-24 CPP)",
-   "citation": "demande le placement de la personne [...] pour une durée d'au moins six semaines [...] aux fins d'une évaluation pluridisciplinaire de dangerosité assortie d'une expertise médicale réalisée par deux experts"
+   "resume": "Procédure dérogatoire : la cour d'assises peut prévoir dès la condamnation la possibilité d'un réexamen en vue d'une rétention de sûreté ; à défaut, le parquet national antiterroriste peut saisir la commission pluridisciplinaire des mesures de sûreté.",
+   "articleRef": "art. 3 (art. 706-25-23 II)",
+   "citation": "le procureur de la République antiterroriste peut... saisir la commission pluridisciplinaire des mesures de sûreté prévue à l'article 763-10 afin d'évaluer sa dangerosité"
   },
   {
-   "resume": "Création d'une mesure judiciaire de prévention de la commission d'actes terroristes par des condamnés de droit commun radicalisés, imposant prise en charge sanitaire/sociale/psychologique, activité professionnelle ou formation, et résidence contrôlée.",
+   "resume": "Examen obligatoire de la situation au moins un an avant la libération, avec placement ≥6 semaines en service d'observation et expertise médicale par deux experts ; la rétention n'est possible que si les autres mesures (FJNAIT, injonction de soins, surveillance électronique, mesure judiciaire de prévention) sont jugées insuffisantes.",
+   "articleRef": "art. 3 (art. 706-25-24)",
+   "citation": "La situation des personnes mentionnées à l'article 706-25-23 est examinée, au moins un an avant la date prévue pour leur libération"
+  },
+  {
+   "resume": "Création d'une mesure judiciaire de prévention de la commission d'actes terroristes par des condamnés de droit commun radicalisés, prononcée par le TAP de Paris pour les peines ≥10 ans, avec obligations de prise en charge sanitaire/sociale/psychologique, activité professionnelle, formation et résidence.",
    "articleRef": "art. 4 (art. 706-25-26 CPP)",
-   "citation": "une mesure judiciaire de prévention de la commission d'actes terroristes [...] La décision peut imposer à la personne concernée d'exercer une activité professionnelle ou de suivre un enseignement ou une formation professionnelle"
-  },
-  {
-   "resume": "Garanties procédurales : recours suspensif devant le tribunal administratif en 48/72h pour l'injonction psychiatrique, contrôle par magistrat du siège pour les visites domiciliaires (entre 6h et 21h), débat contradictoire et assistance d'avocat pour la rétention de sûreté.",
-   "articleRef": "art. 1er (III et IV)",
-   "citation": "La mesure ne peut entrer en vigueur avant que le juge ait statué sur la demande [...] Elles ne peuvent être commencées avant 6 heures ni après 21 heures"
+   "citation": "le tribunal de l'application des peines de Paris peut... ordonner... une mesure judiciaire de prévention de la commission d'actes terroristes"
   }
  ],
  "verdictIncitations": "incitations_alignees",
- "justificationVerdict": "Les mécanismes créés convergent directement avec l'objectif affiché de prévention du terrorisme. L'article 1er instaure une injonction d'examen psychiatrique ciblant explicitement les personnes 'à l'égard desquelles il existe des raisons sérieuses de penser que [leur] comportement constitue une menace grave pour l'ordre et la sécurité publics, en raison de [leur] adhésion à des théories incitant ou faisant l'apologie d'actes de terrorisme' (art. L. 229-7 CSI). L'article 3 crée la 'rétention de sûreté terroriste' pour les condamnés à 15 ans ou plus présentant une 'probabilité très élevée de récidive' liée à une idéologie terroriste (art. 706-25-23 CPP). L'article 4 vise les 'condamnés de droit commun radicalisés' avec une 'probabilité très élevée de commission d'un acte terroriste' (art. 706-25-26 CPP). L'ensemble des incitations (placement en centre socio-médico-judiciaire, soins psychiatriques contraints, mesures de prévention post-peine) pousse dans le sens d'une plus grande contrainte étatique à l'égard de profils jugés dangereux, ce qui correspond à l'objectif de renforcement de la sécurité et de prévention des risques d'attentat.",
+ "justificationVerdict": "L'ensemble des mécanismes créés vise directement la prévention des actes de terrorisme : l'injonction d'examen psychiatrique (art. 1er) cible les personnes dont le comportement traduit une adhésion à des thèses terroristes associée à des troubles mentaux ; la rétention de sûreté terroriste (art. 3) est expressément conditionnée à une 'probabilité très élevée de récidive' liée à une idéologie incitant au terrorisme ; la mesure judiciaire de prévention (art. 4) impose une prise en charge pluridisciplinaire aux condamnés radicalisés. Les incitations convergent vers l'objectif affiché de prévention du risque d'attentat, avec des garde-foues procéduraux (recours juridictionnel, expertise médicale contradictoire, débat contradictoire).",
  "pointsDeVigilance": [
-  "L'injonction d'examen psychiatrique (art. 1er) repose sur des 'raisons sérieuses' et non sur des indices concrets d'infraction, ce qui abaisse le seuil d'intervention étatique et peut concerner des personnes n'ayant commis aucun acte.",
-  "La rétention de sûreté terroriste (art. 3) peut être prononcée à l'issue d'une peine déjà exécutée, créant une forme de détention indéfinie subordonnée à la persistance d'une dangerosité, ce qui pose la question de la nature punitive vs préventive de la mesure.",
-  "Le critère de 'trouble grave de la personnalité' combiné à l'adhésion idéologique peut conduire à médicaliser un comportement politique ou religieux.",
-  "Les visites domiciliaires autorisées entre 6h et 21h (art. 1er IV) constituent une atteinte au domicile sans commission d'infraction préalable.",
-  "Le texte est tronqué à 15000 caractères : les articles 4 et suivants sont incomplets, ce qui limite l'analyse exhaustive des mécanismes."
+  "Le texte est tronqué à 15000 caractères : les articles 4 et suivants sont incomplets (le dispositif de l'art. 706-25-26 est coupé avant la fin des obligations imposables).",
+  "L'art. 1er I a été supprimé en CMP, ce qui peut modifier l'économie initiale du texte.",
+  "L'art. 4 (1°) est supprimé, ne reste que le 2° créant la section 7.",
+  "La visite domiciliaire (art. 1er IV) et la rétention de sûreté post-peine soulèvent des questions de proportionnalité et de respect des libertés individuelles non tranchées par le texte lui-même.",
+  "Le seuil de 15 ans pour la rétention de sûreté terroriste et de 10 ans pour la mesure judiciaire de prévention emporte des effets très différents selon les qualifications retenues."
  ],
  "themes": [
   "sécurité intérieure",
   "terrorisme",
   "rétention administrative",
   "soins psychiatriques sous contrainte",
-  "mesures post-sentence"
+  "rétention de sûreté"
  ],
  "scrutinsCles": [
   "7402",

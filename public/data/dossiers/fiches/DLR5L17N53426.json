@@ -2,33 +2,67 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N53426",
- "generatedAt": "2026-07-11T05:32:01Z",
+ "generatedAt": "2026-07-29T05:43:37Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Accélérer la prévention cardio-neuro-vasculaire et anticiper un risque sanitaire et social majeur",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/accelerer_prevention_cardio_neuro_vasculaire_et_anticiper_risque_sanitaire_et_social_majeur_17e",
-  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b2995_texte-adopte-commission",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0335_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Doter la France d'une stratégie nationale de lutte contre les maladies cardio-neuro-vasculaires, en accélérant la prévention cardio-neuro-vasculaire et en anticipant un risque sanitaire et social majeur.",
- "mecanismesCles": [],
- "verdictIncitations": "indetermine",
- "justificationVerdict": "Le texte fourni ne contient ni exposé des motifs ni articles : seul l'en-tête du dossier législatif (titre, identifiant, procédure, statut, sommaire et liens de navigation) est transmis. Aucun mécanisme concret (obligation, taxe, subvention, seuil, sanction, dérogation) ne peut être identifié ni analysé. En l'absence du contenu normatif, il est impossible de déterminer si les incitations créées par les articles vont dans le sens de l'objectif affiché ou s'y opposent.",
+ "objectifAffiche": "Doter la France d'une stratégie nationale de lutte contre les maladies cardio-neuro-vasculaires (MCNV), en renforçant la prévention, le dépistage précoce et la sensibilisation aux facteurs de risque (tabagisme, sédentarité, hypertension, etc.), tout en réduisant les inégalités sociales et territoriales de prise en charge.",
+ "mecanismesCles": [
+  {
+   "resume": "Intégration des MCNV et de leurs facteurs de risque (tabagisme, alcool, sédentarité, obésité, cholestérol, diabète, MRC, HTA) dans les rendez-vous de prévention existants, avec mise à disposition d'outils de repérage précoce validés scientifiquement via l'espace numérique de santé.",
+   "articleRef": "art. 1er (art. L. 1411-6-2 CSP)",
+   "citation": "« Ils permettent de sensibiliser aux facteurs de risques cardio-neuro-vasculaires, notamment le tabagisme, l'excès de consommation d'alcool, la sédentarité, l'obésité, le cholestérol, le diabète, la maladie rénale chronique et l'hypertension artérielle. »"
+  },
+  {
+   "resume": "Création d'une stratégie nationale pluriannuelle de lutte contre les MCNV, élaborée en coordination avec la recherche, les professionnels et les usagers, visant à réduire les inégalités sociales et territoriales.",
+   "articleRef": "art. 1er (art. L. 1411-6-6 CSP)",
+   "citation": "« L'État conduit une politique de lutte contre les maladies cardio-neuro-vasculaires […] une stratégie nationale pluriannuelle, qui définit les orientations prioritaires en matière de prévention, de dépistage et d'organisation des parcours de soins. »"
+  },
+  {
+   "resume": "Instauration d'un rendez-vous obligatoire de dépistage précoce des MCNV (notamment hypercholestérolémie familiale) dans l'année suivant le 6e anniversaire de l'enfant, réalisé par un médecin spécialement formé.",
+   "articleRef": "art. 1er (art. L. 2132-2-3 CSP)",
+   "citation": "« Un rendez-vous de dépistage précoce des maladies cardio-neuro-vasculaires, notamment de l'hypercholestérolémie familiale, est réalisé dans l'année qui suit le sixième anniversaire de l'enfant par un médecin spécialement formé. »"
+  },
+  {
+   "resume": "Élargissement des professionnels habilités à mesurer la pression artérielle en prévention des risques cardio-neuro-vasculaires : masseurs-kinésithérapeutes, pharmaciens d'officine, infirmiers en pratique avancée.",
+   "articleRef": "art. 2 (art. L. 4321-1, L. 5125-1-1 A CSP)",
+   "citation": "« Il est autorisé à mesurer la pression artérielle de patients dans une démarche de prévention des risques cardio-neuro-vasculaires. »"
+  },
+  {
+   "resume": "Intégration des MCNV dans la mission des services de santé au travail : campagnes de dépistage, sensibilisation annuelle aux facteurs de risque, partenariats avec mutuelles, CPTS, étudiants en santé (service sanitaire), assureurs.",
+   "articleRef": "art. 3 (art. L. 4622-2 et L. 4624-2-2 Code du travail)",
+   "citation": "« notamment des campagnes de dépistage des maladies cardio-neuro-vasculaires […] sensibilisation annuelles aux facteurs de risques mentionnés à l'article L. 1411-6-2 du code de la santé publique »"
+  },
+  {
+   "resume": "Renforcement de la promotion de la santé à l'école : information sur les facteurs de risque cardio-neuro-vasculaires et actions de sensibilisation réalisées une fois par an dès l'école élémentaire.",
+   "articleRef": "art. 4 (art. L. 541-1 Code de l'éducation)",
+   "citation": "« Elles sont réalisées une fois par an dès l'école élémentaire, dans des conditions fixées par décret. »"
+  }
+ ],
+ "verdictIncitations": "incitations_alignees",
+ "justificationVerdict": "L'ensemble des mécanismes créés convergent vers l'objectif affiché de prévention et de dépistage des MCNV. L'article 1er enrichit les rendez-vous de prévention existants avec un repérage ciblé des facteurs de risque cardio-neuro-vasculaires et crée une stratégie nationale pluriannuelle (art. L. 1411-6-6). L'article 1er instaure un dépistage obligatoire dès l'enfance (art. L. 2132-2-3), ce qui ancre la logique de prévention primaire. L'article 2 élargit l'offre de mesure de la pression artérielle à de nouveaux professionnels (kinés, pharmaciens, infirmiers), facilitant l'accès au dépistage. L'article 3 mobilise la santé au travail avec des campagnes annuelles de sensibilisation et de dépistage, et l'article 4 inscrit la sensibilisation dès l'école élémentaire. Le rapport d'évaluation à 3 ans (art. 5) permet de mesurer l'efficacité réelle des dispositifs. Aucun mécanisme n'introduit de taxe, de subvention contradictoire ou de disposition susceptible d'aller à l'encontre de l'objectif.",
  "pointsDeVigilance": [
-  "Le texte officiel est tronqué à 15000 caractères mais, en pratique, seul l'en-tête administratif a été transmis : aucun article ni exposé des motifs n'est disponible.",
-  "Le statut 'en cours' et la mention 'commission mixte paritaire' indiquent que le texte pourrait encore évoluer ; l'analyse définitive devrait porter sur la version définitivement adoptée.",
-  "Sans contenu substantiel, toute conclusion sur l'alignement entre mécanismes et objectif serait purement spéculative."
+  "Le texte ne crée pas de financement dédié ni de moyens budgétaires nouveaux pour la stratégie nationale : la portée opérationnelle dépendra de décrets d'application non fournis.",
+  "Le dépistage obligatoire à 6 ans (art. L. 2132-2-3) est 'réputé rempli' en cas de refus parental : l'effectivité réelle du dispositif n'est donc pas garantie.",
+  "L'élargissement des professionnels habilités à mesurer la pression artérielle (art. 2) suppose une formation préalable dont les modalités ne sont pas précisées dans le texte.",
+  "Plusieurs articles initialement prévus ont été supprimés en CMP (I bis, I ter, II, III de l'art. 1er ; art. 2 ter ; art. 3 final), ce qui réduit l'ambition initiale du texte sans qu'on puisse savoir quels mécanismes ont été retirés.",
+  "L'article 5 prévoit une évaluation médico-économique mais ne fixe aucun objectif chiffré de réduction de morbi-mortalité cardio-neuro-vasculaire."
  ],
  "themes": [
   "santé publique",
   "prévention",
   "maladies cardio-neuro-vasculaires",
-  "stratégie nationale"
+  "dépistage",
+  "santé au travail"
  ],
  "scrutinsCles": [
   "6058",
@@ -37,5 +71,5 @@
   "6061"
  ],
  "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
- "sourceTextHash": "sha256:a1f69e4e6f15368b708f1baf1c8870c4043f2680fbed8d9f11e639fcfb368b57"
+ "sourceTextHash": "sha256:84df5daf49868e99029334bdbf3c665106030d2f77312f34f0c4d2f6b66abb25"
 }

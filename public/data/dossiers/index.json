@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-07-28T05:32:18Z",
+ "generatedAt": "2026-07-29T05:37:59Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -50506,7 +50506,7 @@
    "titre": "Accélérer la prévention cardio-neuro-vasculaire et anticiper un risque sanitaire et social majeur",
    "titreChemin": "accelerer_prevention_cardio_neuro_vasculaire_et_anticiper_risque_sanitaire_et_social_majeur_17e",
    "procedure": "Proposition de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/accelerer_prevention_cardio_neuro_vasculaire_et_anticiper_risque_sanitaire_et_social_majeur_17e",
    "texteRefs": [
     "PIONANR5L17B2309",
@@ -50947,7 +50947,7 @@
    "titre": "Renforcer la sécurité, la rétention administrative et la prévention des risques d’attentat",
    "titreChemin": "retention_admin_prevention_attentats_17e",
    "procedure": "Proposition de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/retention_admin_prevention_attentats_17e",
    "texteRefs": [
     "PIONANR5L17B2180",
