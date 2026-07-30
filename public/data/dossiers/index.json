@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-07-29T05:37:59Z",
+ "generatedAt": "2026-07-30T05:24:58Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -53656,6 +53656,7 @@
     "PRJLANR5L17BTA0338",
     "PRJLANR5L17BTC3018",
     "PRJLANR5L17TAP0338",
+    "PRJLSNR5S479B0911",
     "RAPPANR5L17B3018"
    ],
    "refJo": null,
