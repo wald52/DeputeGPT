@@ -1,4 +1,4 @@
-const SW_BUILD_VERSION = '53fb4937219c';
+const SW_BUILD_VERSION = 'a5252846aaca';
 const PRECACHE_NAME = `deputegpt-precache-${SW_BUILD_VERSION}`;
 const RUNTIME_CACHE_NAME = `deputegpt-runtime-${SW_BUILD_VERSION}`;
 const NAVIGATION_CACHE_NAME = `deputegpt-navigation-${SW_BUILD_VERSION}`;
