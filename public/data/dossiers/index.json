@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-08-04T05:32:52Z",
+ "generatedAt": "2026-08-05T05:32:06Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -53077,7 +53077,7 @@
    "titre": "Proposition de loi relative à l'organisation, à la gestion et au financement du sport professionnel",
    "titreChemin": "DLR5L17N51732",
    "procedure": "Proposition de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N51732",
    "texteRefs": [
     "PIONANR5L17B1560",
