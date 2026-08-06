@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-05T05:38:19Z",
+ "generatedAt": "2026-08-06T05:37:32Z",
  "totalFiches": 226,
  "fiches": {
   "DLR5L16N46127": {
@@ -1553,14 +1553,14 @@
   "DLR5L17N51732": {
    "titre": "Proposition de loi relative à l'organisation, à la gestion et au financement du sport professionnel",
    "verdictIncitations": "incitations_alignees",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-08T05:39:14Z",
+   "statut": "promulgue",
+   "generatedAt": "2026-08-06T05:37:32Z",
    "themes": [
-    "sport professionnel",
-    "gouvernance",
+    "gouvernance du sport",
     "fédérations sportives",
     "ligues professionnelles",
-    "rémunération"
+    "encadrement des rémunérations",
+    "éthique sportive"
    ]
   },
   "DLR5L17N51775": {
