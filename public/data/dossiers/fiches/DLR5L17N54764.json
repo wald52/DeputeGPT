@@ -1,0 +1,41 @@
+{
+ "schemaVersion": 1,
+ "analysisVersion": 2,
+ "dossierId": "DLR5L17N54764",
+ "generatedAt": "2026-08-08T03:52:25Z",
+ "model": {
+  "provider": "nvidia-nim",
+  "id": "minimaxai/minimax-m3",
+  "baseUrl": "https://integrate.api.nvidia.com/v1"
+ },
+ "titre": "Proposition de loi visant à simplifier l'ouverture des débits de boissons en zone rurale",
+ "statut": "en_cours",
+ "sources": {
+  "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N54764",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N54764",
+  "legifrance": null
+ },
+ "objectifAffiche": "La proposition de loi vise à simplifier l'ouverture des débits de boissons en zone rurale, comme l'indique son titre. L'exposé des motifs n'est pas fourni dans le texte transmis, ce qui empêche de préciser davantage l'objectif affiché.",
+ "mecanismesCles": [],
+ "verdictIncitations": "indetermine",
+ "justificationVerdict": "Le texte fourni ne contient ni l'exposé des motifs ni le contenu des articles de la proposition de loi. Seules les métadonnées procédurales (dépôt au Sénat le 4 août 2026, n° 930, renvoi à la commission des affaires sociales) sont disponibles. Sans accès aux dispositions concrètes, il est impossible d'identifier les mécanismes créés ni de déterminer si les incitations vont dans le sens de l'objectif affiché.",
+ "pointsDeVigilance": [
+  "L'exposé des motifs est absent du texte fourni",
+  "Le contenu des articles n'est pas disponible dans la trame transmise",
+  "Le texte semble tronqué (limite de 15000 caractères mentionnée) et ne contient que les informations procédurales du dossier législatif",
+  "La date de dépôt (4 août 2026) est postérieure à la date de connaissance du modèle et n'a pu être vérifiée"
+ ],
+ "themes": [
+  "débits de boissons",
+  "zone rurale",
+  "simplification administrative"
+ ],
+ "scrutinsCles": [
+  "928",
+  "929",
+  "930",
+  "931"
+ ],
+ "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
+ "sourceTextHash": "sha256:3b1c8d43319d2a6b708f275a61dcfb914d494f8c715b9039f50441c677a72d34"
+}

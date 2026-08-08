@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-08-07T04:38:09Z",
+ "generatedAt": "2026-08-08T03:52:18Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -41749,44 +41749,44 @@
    "confidence": 0.6
   },
   "922": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "923": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "924": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "925": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "926": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "927": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "928": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "929": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "93": {
    "dossierId": "DLR5L17N50198",
@@ -41794,14 +41794,14 @@
    "confidence": 0.8
   },
   "930": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "931": {
-   "dossierId": null,
-   "method": "unmatched",
-   "confidence": 0.0
+   "dossierId": "DLR5L17N54764",
+   "method": "title_match",
+   "confidence": 0.714
   },
   "932": {
    "dossierId": "DLR5L17N51002",
@@ -54076,6 +54076,30 @@
     "921"
    ]
   },
+  "DLR5L17N54764": {
+   "titre": "Proposition de loi visant à simplifier l'ouverture des débits de boissons en zone rurale",
+   "titreChemin": "DLR5L17N54764",
+   "procedure": "Proposition de loi ordinaire",
+   "statut": "en_cours",
+   "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N54764",
+   "texteRefs": [
+    "PIONSNR5S479B0930"
+   ],
+   "refJo": null,
+   "legifranceUrl": null,
+   "scrutinNumeros": [
+    "922",
+    "923",
+    "924",
+    "925",
+    "926",
+    "927",
+    "928",
+    "929",
+    "930",
+    "931"
+   ]
+  },
   "DLR5L16N48701": {
    "titre": "Proposition de loi créant une dérogation à la participation minimale pour la maîtrise d'ouvrage pour les communes rurales",
    "titreChemin": "DLR5L16N48701",
@@ -54273,16 +54297,6 @@
   "911",
   "912",
   "918",
-  "922",
-  "923",
-  "924",
-  "925",
-  "926",
-  "927",
-  "928",
-  "929",
-  "930",
-  "931",
   "1195",
   "1539",
   "1540",
@@ -55617,15 +55631,15 @@
  ],
  "stats": {
   "totalScrutins": 8434,
-  "totalDossiersLies": 226,
-  "matchRate": 0.8381,
+  "totalDossiersLies": 227,
+  "matchRate": 0.8393,
   "methods": {
    "override": 0,
    "field": 0,
    "title_containment": 6525,
-   "title_match": 521,
+   "title_match": 531,
    "none": 27,
-   "unmatched": 1361
+   "unmatched": 1351
   }
  }
 }
