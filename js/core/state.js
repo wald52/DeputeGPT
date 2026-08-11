@@ -29,7 +29,10 @@ export const appState = {
   semanticModelConfig: null,
   semanticIndexMode: 'single_vector',
   semanticRagStatus: 'disabled',
-  isChatBusy: false
+  isChatBusy: false,
+  // Vrai entre la selection d'un depute et la fin du chargement de ses votes :
+  // distingue "votes en cours de chargement" de "aucun vote disponible".
+  isDeputeVotesLoading: false
 };
 
 export function resetChatSessionState(activeDeputeId = null) {

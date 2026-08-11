@@ -29,6 +29,11 @@ export function createChatAvailabilityController({
       return;
     }
 
+    if (appState.isDeputeVotesLoading) {
+      badge.textContent = `Chargement des votes de ${appState.currentDepute.prenom} ${appState.currentDepute.nom}…`;
+      return;
+    }
+
     if (!appState.currentDepute.votes || appState.currentDepute.votes.length === 0) {
       badge.textContent = 'Aucun vote disponible pour ce député.';
       return;
@@ -73,6 +78,16 @@ export function createChatAvailabilityController({
       userInput.disabled = true;
       sendBtn.disabled = true;
       userInput.placeholder = 'Choisissez un député pour commencer.';
+      updateChatCapabilitiesBanner();
+      renderQuickActions();
+      updateChatEmptyState();
+      return;
+    }
+
+    if (appState.isDeputeVotesLoading) {
+      userInput.disabled = true;
+      sendBtn.disabled = true;
+      userInput.placeholder = 'Chargement des votes en cours…';
       updateChatCapabilitiesBanner();
       renderQuickActions();
       updateChatEmptyState();

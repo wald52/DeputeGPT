@@ -34,6 +34,7 @@ export function createSearchPanelController({
     const input = document.getElementById('search-input');
     const resultsList = document.getElementById('search-results');
     const searchStatus = document.getElementById('search-status');
+    const clearButton = document.getElementById('search-clear-btn');
 
     if (!input || !resultsList) {
       return;
@@ -74,6 +75,14 @@ export function createSearchPanelController({
       input.setAttribute('aria-expanded', String(isVisible));
     };
 
+    // Apres une selection, l'input garde le nom complet : sans ce bouton il faut
+    // tout selectionner au clavier pour relancer une recherche.
+    const syncClearButton = () => {
+      if (clearButton) {
+        clearButton.hidden = input.value.length === 0;
+      }
+    };
+
     const clearResults = ({ clearStatus = false } = {}) => {
       resultsList.innerHTML = '';
       currentResults = [];
@@ -82,6 +91,15 @@ export function createSearchPanelController({
       setResultsVisibility(false);
       if (clearStatus) {
         setStatus('');
+      }
+    };
+
+    const clearSearchInput = ({ focusInput = true } = {}) => {
+      input.value = '';
+      syncClearButton();
+      clearResults({ clearStatus: true });
+      if (focusInput) {
+        input.focus();
       }
     };
 
@@ -102,9 +120,14 @@ export function createSearchPanelController({
       const fullName = `${depute.prenom} ${depute.nom}`;
       selectDepute(depute);
       input.value = fullName;
+      syncClearButton();
       clearResults();
       setStatus(`Député sélectionné: ${fullName}.`);
     };
+
+    clearButton?.addEventListener('click', () => {
+      clearSearchInput();
+    });
 
     document.addEventListener('click', event => {
       if (!input.contains(event.target) && !resultsList.contains(event.target)) {
@@ -114,6 +137,7 @@ export function createSearchPanelController({
 
     input.addEventListener('input', event => {
       try {
+        syncClearButton();
         const query = normalizeQuestion(event.target.value);
 
         if (query.length < 2) {
@@ -220,7 +244,12 @@ export function createSearchPanelController({
 
     input.addEventListener('keydown', event => {
       if (event.key === 'Escape') {
-        clearResults();
+        // Premiere pression : referme la liste. Seconde : vide le champ.
+        if (resultsList.hidden) {
+          clearSearchInput();
+        } else {
+          clearResults();
+        }
         return;
       }
 

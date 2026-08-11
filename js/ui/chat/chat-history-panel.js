@@ -74,8 +74,42 @@ export function createChatHistoryPanelController({
   selectDepute,
   escapeHtml
 }) {
+  let hasGlobalDismissalListeners = false;
+
   function getHistoryPanel() {
     return document.getElementById('history-panel');
+  }
+
+  // Le panneau se ferme comme les autres surfaces temporaires : Echap, ou un
+  // clic en dehors. Les ecouteurs sont poses une seule fois, meme si le panneau
+  // est recree.
+  function setupHistoryPanelDismissal() {
+    if (hasGlobalDismissalListeners) {
+      return;
+    }
+
+    hasGlobalDismissalListeners = true;
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && isHistoryPanelOpen()) {
+        event.preventDefault();
+        closeHistoryPanel();
+      }
+    });
+
+    document.addEventListener('click', event => {
+      if (!isHistoryPanelOpen()) {
+        return;
+      }
+
+      const panel = getHistoryPanel();
+      const trigger = document.getElementById('history-btn');
+      if (panel?.contains(event.target) || trigger?.contains(event.target)) {
+        return;
+      }
+
+      closeHistoryPanel({ restoreFocus: false });
+    });
   }
 
   async function ensureChatHistoryReady() {
@@ -106,13 +140,26 @@ export function createChatHistoryPanelController({
     }
   }
 
-  function closeHistoryPanel() {
+  function isHistoryPanelOpen(panel = getHistoryPanel()) {
+    return panel?.style.right === '0px';
+  }
+
+  function closeHistoryPanel({ restoreFocus = true } = {}) {
     const panel = getHistoryPanel();
     if (!panel) {
       return;
     }
 
+    const wasOpen = isHistoryPanelOpen(panel);
     panel.style.right = panel.dataset.closedRight || '-340px';
+    panel.setAttribute('aria-hidden', 'true');
+
+    if (wasOpen && restoreFocus) {
+      const trigger = document.getElementById('history-btn');
+      if (trigger?.isConnected) {
+        trigger.focus();
+      }
+    }
   }
 
   async function refreshHistoryList() {
@@ -241,6 +288,9 @@ export function createChatHistoryPanelController({
 
     const panel = document.createElement('div');
     panel.id = 'history-panel';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-label', 'Historique des chats');
+    panel.setAttribute('aria-hidden', 'true');
     panel.style.cssText = `
       position: fixed;
       top: 0;
@@ -262,7 +312,7 @@ export function createChatHistoryPanelController({
     updateHistoryPanelLayout(panel);
     window.addEventListener('resize', () => updateHistoryPanelLayout(panel));
 
-    document.getElementById('close-history-btn').addEventListener('click', closeHistoryPanel);
+    document.getElementById('close-history-btn').addEventListener('click', () => closeHistoryPanel());
 
     document.getElementById('export-json-btn').addEventListener('click', () => {
       const chatHistory = getChatHistory();
@@ -319,8 +369,7 @@ export function createChatHistoryPanelController({
 
     updateHistoryPanelLayout(panel);
 
-    const isOpen = panel.style.right === '0px';
-    if (isOpen) {
+    if (isHistoryPanelOpen(panel)) {
       closeHistoryPanel();
       return;
     }
@@ -333,6 +382,8 @@ export function createChatHistoryPanelController({
 
     await refreshHistoryList();
     panel.style.right = '0px';
+    panel.setAttribute('aria-hidden', 'false');
+    document.getElementById('close-history-btn')?.focus();
   }
 
   async function showExportMenu() {
@@ -393,6 +444,7 @@ export function createChatHistoryPanelController({
     }
 
     createHistoryPanel();
+    setupHistoryPanelDismissal();
   }
 
   return {

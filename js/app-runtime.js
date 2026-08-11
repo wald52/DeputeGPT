@@ -55,7 +55,6 @@ import {
   createChatScopeController,
   createChatViewportController,
   createConsentModalController,
-  createVoteSourceModalController,
   createDeputePanelController,
   createHemicyclePanelController,
   createMobileWorkspaceController,
@@ -770,8 +769,6 @@ const consentModal = createConsentModalController({
   resolveThinkingModeFlag: (modelConfig = null, explicitValue) => modelSelection.resolveThinkingModeFlag(modelConfig, explicitValue)
 });
 
-const voteSourceModal = createVoteSourceModalController();
-
 const modelSelection = createModelSelectionController({
   appState,
   getModelsConfig: () => modelsConfig,
@@ -909,7 +906,6 @@ chatRenderer = createChatRenderer({
   defaultChatListLimit: DEFAULT_CHAT_LIST_LIMIT,
   formatChatTime,
   buildMessageReferencesFromVoteIds,
-  openVoteSourceModal: payload => voteSourceModal.showVoteSourceModal(payload),
   submitChatQuestion: question => chatComposer.submitChatQuestion(question),
   resolvePaginationOffset: metadata => chatPaginationController.resolvePaginationOffset(metadata),
   handlePaginationRequest: metadata => chatPaginationController.handlePaginationRequest(metadata),

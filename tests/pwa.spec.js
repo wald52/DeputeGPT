@@ -22,6 +22,9 @@ test('la page expose le manifest, enregistre le service worker et recharge le sh
   await page.reload({ waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => Boolean(navigator.serviceWorker.controller));
   await expect(page.locator('#pwa-status-text')).toContainText('Hors ligne partiel');
+  // Etat purement informatif : le statut existe mais aucun bandeau ne recouvre
+  // le contenu.
+  await expect(page.locator('#pwa-toolbar')).toBeHidden();
 
   await context.setOffline(true);
 
@@ -29,9 +32,48 @@ test('la page expose le manifest, enregistre le service worker et recharge le sh
     await page.reload({ waitUntil: 'domcontentloaded' });
     await expect(page.locator('#search-input')).toBeVisible();
     await expect(page.locator('#pwa-status-text')).toContainText('IA en ligne indisponible');
+    // Hors ligne, le bandeau s'affiche : il explique la perte de l'IA en ligne.
+    await expect(page.locator('#pwa-toolbar')).toBeVisible();
   } finally {
     await context.setOffline(false);
   }
+});
+
+test('le bandeau PWA rejete ne revient pas au chargement suivant', async ({ page }) => {
+  await page.goto('/tests/fixtures/pwa-harness.html');
+
+  const installOfferedAndDismissed = async () => await page.evaluate(async () => {
+    const { createPwaController } = await import('/js/ui/pwa-controller.js');
+
+    const controller = createPwaController({
+      windowObject: window,
+      documentObject: document,
+      navigatorObject: {
+        onLine: true,
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0 Safari/537.36',
+        serviceWorker: { controller: null, addEventListener() {} }
+      },
+      registerServiceWorker: async () => ({ waiting: null, installing: null, addEventListener() {} }),
+      reloadPage: () => {}
+    });
+
+    await controller.init();
+
+    const promptEvent = new Event('beforeinstallprompt');
+    Object.defineProperty(promptEvent, 'prompt', { value: () => Promise.resolve() });
+    window.dispatchEvent(promptEvent);
+
+    return document.getElementById('pwa-toolbar').hidden;
+  });
+
+  expect(await installOfferedAndDismissed()).toBe(false);
+
+  await page.locator('#pwa-dismiss-btn').click();
+  await expect(page.locator('#pwa-toolbar')).toBeHidden();
+
+  // Nouveau chargement : le meme etat reste rejete.
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  expect(await installOfferedAndDismissed()).toBe(true);
 });
 
 test('le controleur PWA masque le bouton d installation par defaut et gere la mise a jour manuelle', async ({ page }) => {
@@ -124,7 +166,7 @@ test('le controleur PWA masque le bouton d installation par defaut et gere la mi
   });
 
   await expect(page.locator('#pwa-update-btn')).toBeVisible();
-  await expect(page.locator('#pwa-status-text')).toContainText('Mise a jour disponible');
+  await expect(page.locator('#pwa-status-text')).toContainText('Mise à jour disponible');
 
   await page.locator('#pwa-update-btn').click();
   await expect.poll(() => page.evaluate(() => window.__waitingMessages.slice())).toEqual([

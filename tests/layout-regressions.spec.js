@@ -101,7 +101,7 @@ async function measureDesktopChatBlocks(page) {
   });
 }
 
-test('les overlays restent masques avant le chargement differe de app.css', async ({ page }) => {
+test('l overlay de consentement reste masque avant le chargement differe de app.css', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#search-input')).toBeVisible();
 
@@ -110,9 +110,7 @@ test('les overlays restent masques avant le chargement differe de app.css', asyn
   )).toBeTruthy();
 
   await expect(page.locator('#model-consent-overlay')).toBeHidden();
-  await expect(page.locator('#vote-source-overlay')).toBeHidden();
   await expect(page.locator('#model-consent-overlay .consent-dialog')).toBeHidden();
-  await expect(page.locator('#vote-source-overlay .vote-source-dialog')).toBeHidden();
 });
 
 test('le layout mobile reste mono-colonne a 390px sans debordement horizontal', async ({ page }) => {

@@ -14,12 +14,35 @@ async function defaultRegisterServiceWorker({ navigatorObject }) {
   return navigatorObject.serviceWorker.register('./sw.js', { scope: './' });
 }
 
+const DISMISSED_STATES_STORAGE_KEY = 'deputegpt_pwa_dismissed_states';
+
+function defaultReadDismissedStates(windowObject) {
+  try {
+    const raw = windowObject?.localStorage?.getItem(DISMISSED_STATES_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed.filter(entry => typeof entry === 'string') : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function defaultWriteDismissedStates(windowObject, stateKeys) {
+  try {
+    windowObject?.localStorage?.setItem(DISMISSED_STATES_STORAGE_KEY, JSON.stringify(stateKeys));
+  } catch (error) {
+    // Stockage indisponible (navigation privee, quota) : le rejet reste valable
+    // pour la session en cours.
+  }
+}
+
 export function createPwaController({
   windowObject = window,
   documentObject = document,
   navigatorObject = navigator,
   registerServiceWorker = defaultRegisterServiceWorker,
-  reloadPage = () => windowObject.location.reload()
+  reloadPage = () => windowObject.location.reload(),
+  readDismissedStates = () => defaultReadDismissedStates(windowObject),
+  writeDismissedStates = stateKeys => defaultWriteDismissedStates(windowObject, stateKeys)
 } = {}) {
   const canRegisterServiceWorker = Boolean(
     navigatorObject?.serviceWorker && typeof registerServiceWorker === 'function'
@@ -36,7 +59,7 @@ export function createPwaController({
   const hadControllerAtInit = Boolean(navigatorObject?.serviceWorker?.controller);
   let shouldReloadAfterUpdate = false;
   let registration = null;
-  let dismissedStateKey = '';
+  let dismissedStateKeys = new Set();
 
   const elements = {
     root: null,
@@ -55,6 +78,18 @@ export function createPwaController({
     elements.updateButton = documentObject.getElementById('pwa-update-btn');
     elements.dismissButton = documentObject.getElementById('pwa-dismiss-btn');
   }
+
+  // Le bandeau flotte au-dessus du contenu (en bas de l'ecran sur mobile) : il
+  // n'apparait que pour les etats sur lesquels l'utilisateur peut agir ou qui
+  // expliquent une degradation du service. Les etats purement informatifs
+  // ("hors ligne partiel disponible", "application installee") alimentent le
+  // texte de statut mais ne declenchent plus d'overlay.
+  const ACTIONABLE_BANNER_STATE_KEYS = new Set([
+    'update_ready',
+    'offline',
+    'install_prompt',
+    'install_ios'
+  ]);
 
   function getBannerStateKey() {
     if (updateReady) {
@@ -84,7 +119,8 @@ export function createPwaController({
     return Boolean(
       elements.root &&
       stateKey &&
-      dismissedStateKey !== stateKey
+      ACTIONABLE_BANNER_STATE_KEYS.has(stateKey) &&
+      !dismissedStateKeys.has(stateKey)
     );
   }
 
@@ -119,8 +155,19 @@ export function createPwaController({
 
     const stateKey = getBannerStateKey();
     const showInstallButton = installMode === 'prompt' || installMode === 'ios';
+    const isRootVisible = shouldShowRoot(stateKey);
 
-    elements.root.hidden = !shouldShowRoot(stateKey);
+    elements.root.hidden = !isRootVisible;
+
+    // Permet aux barres fixes de l'application (barre de selection mobile) de se
+    // decaler au lieu de passer sous le bandeau.
+    if (documentObject.body) {
+      if (isRootVisible) {
+        documentObject.body.dataset.pwaToolbar = 'visible';
+      } else {
+        delete documentObject.body.dataset.pwaToolbar;
+      }
+    }
 
     if (elements.statusText) {
       elements.statusText.textContent = computeStatusText();
@@ -152,7 +199,10 @@ export function createPwaController({
       return false;
     }
 
-    dismissedStateKey = stateKey;
+    // Le rejet est memorise : un bandeau ferme ne doit pas revenir a chaque
+    // chargement de page.
+    dismissedStateKeys.add(stateKey);
+    writeDismissedStates([...dismissedStateKeys]);
     showIosHelp = false;
     render();
     return true;
@@ -322,6 +372,7 @@ export function createPwaController({
       return null;
     }
 
+    dismissedStateKeys = new Set(readDismissedStates() || []);
     render();
 
     windowObject.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);

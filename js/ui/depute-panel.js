@@ -32,21 +32,51 @@ export function createDeputePanelController({
   loadDeputeVotes,
   addMessage
 }) {
+  // Deux sieges cliques coup sur coup lancent deux chargements concurrents :
+  // seul le plus recent a le droit d'ecrire dans l'interface et dans l'etat.
+  let latestSelectionToken = 0;
+
   async function selectDepute(depute) {
+    const selectionToken = latestSelectionToken + 1;
+    latestSelectionToken = selectionToken;
+    const isSelectionStale = () => latestSelectionToken !== selectionToken;
+
     appState.currentDepute = depute;
+    // Les votes du depute precedemment charge ne doivent pas etre pris pour
+    // ceux du nouveau : l'interface s'appuie sur leur absence pour afficher
+    // l'etat de chargement.
+    delete depute.votes;
+    appState.isDeputeVotesLoading = true;
+    // Retour immediat au clic, avant tout await : sur mobile la carte du depute
+    // est dans le panneau Chat masque.
+    document.dispatchEvent(new CustomEvent('depute:selecting', {
+      detail: {
+        deputeId: depute.id
+      }
+    }));
     resetChatSession(depute.id);
     setActiveSeatByDepute(depute);
     updateChatScopeSummary();
+    syncChatAvailability();
 
     const chatHistoryPromise = typeof initChatHistory === 'function'
       ? initChatHistory()
       : Promise.resolve(getChatHistory());
     const chatHistory = await chatHistoryPromise;
+
+    if (isSelectionStale()) {
+      return;
+    }
+
     if (chatHistory) {
       try {
         await chatHistory.getOrCreateActiveSession(depute, getActiveModelConfig());
       } catch (error) {
         console.warn('⚠️ Erreur création session historique:', error);
+      }
+
+      if (isSelectionStale()) {
+        return;
       }
     }
 
@@ -72,20 +102,26 @@ export function createDeputePanelController({
     statsContainer.style.opacity = '0.5';
     document.getElementById('stat-votes').textContent = '0';
     syncChatAvailability();
-    document.getElementById('user-input').placeholder = 'Chargement des votes en cours...';
 
     const { votes, error } = await loadDeputeVotes(depute.id);
-    appState.currentDepute.votes = votes;
+
+    if (isSelectionStale()) {
+      return;
+    }
+
+    depute.votes = votes;
+    appState.isDeputeVotesLoading = false;
 
     statsContainer.hidden = false;
     statsContainer.style.opacity = '1';
     document.getElementById('stat-votes').textContent = votes.length;
 
+    // Le succes n'a plus besoin de message systeme : la carte du depute affiche
+    // le nom et le nombre de votes, et #chat-capabilities annonce l'etat du chat.
     if (error) {
       await addMessage('system', `Impossible de charger les votes de ${depute.prenom} ${depute.nom}. Vérifiez votre connexion ou réessayez plus tard.`, { method: 'system' });
-    } else {
-      await addMessage('system', `Données chargées pour ${depute.prenom} ${depute.nom}. (${votes.length} votes)`, { method: 'system' });
     }
+
     syncChatAvailability();
     updateChatScopeSummary();
     document.dispatchEvent(new CustomEvent('depute:selected', {

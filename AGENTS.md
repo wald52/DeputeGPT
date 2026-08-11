@@ -460,6 +460,28 @@
 - Si l'information manque, le dire clairement.
 - Si un backend distant est utilise, l'UI doit l'indiquer clairement avant l'envoi.
 - Eviter les lignes horizontales pour separer des composants visuels; preferer l'espacement, les cartes et les contrastes de fond.
+- Tout clic doit produire un retour visible immediat. Les blocs de feedback du
+  panneau chat sont obligatoires dans `index.html` et pilotes par le JS :
+  `#chat-capabilities` (etat du chat), `#chat-quick-actions` (questions
+  suggerees), `#chat-scope-summary` et `#chat-scope-actions` (perimetre applique
+  et retrait des filtres). Ne jamais retirer ce markup sans retirer le code qui
+  l'alimente : un `getElementById` qui renvoie `null` desactive la
+  fonctionnalite en silence.
+- Sur mobile la carte du depute vit dans `#chat-panel`, masque en vue Explorer :
+  la selection est confirmee par `#mobile-selection-bar`, affichee des le clic
+  (evenement `depute:selecting`) avant la fin du chargement des votes.
+- Aucune page externe n'est integree dans l'application. Le site est servi en
+  isolation cross-origin (`Cross-Origin-Embedder-Policy: require-corp` dans
+  `_headers` et `serve_local.py`, requis par WebGPU et les threads WASM) et
+  `assemblee-nationale.fr` ne renvoie ni `Cross-Origin-Resource-Policy` ni COEP :
+  un `<iframe>` vers une source officielle est donc bloque par le navigateur.
+  Les scrutins s'ouvrent par un lien `target="_blank"`, jamais dans un modal.
+- Pas de `confirm()`/`alert()` natif pour une decision produit : reutiliser le
+  modal de consentement ou une confirmation en place.
+- Le bandeau PWA (`#pwa-toolbar`) flotte au-dessus du contenu : il n'apparait
+  que pour un etat actionnable (mise a jour, installation) ou explicatif (hors
+  ligne). Les etats purement informatifs alimentent le texte de statut sans
+  overlay, et un bandeau ferme reste ferme (rejet memorise).
 
 ### Donnees et enrichissement
 - Enrichir les scrutins cote serveur avec:

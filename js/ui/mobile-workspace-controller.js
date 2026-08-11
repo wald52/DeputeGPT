@@ -11,8 +11,51 @@ export function createMobileWorkspaceController({
       exploreBtn: document.getElementById('workspace-switch-explore'),
       chatBtn: document.getElementById('workspace-switch-chat'),
       explorePanel: document.getElementById('explorer-panel'),
-      chatPanel: document.getElementById('chat-panel')
+      chatPanel: document.getElementById('chat-panel'),
+      selectionBar: document.getElementById('mobile-selection-bar'),
+      selectionName: document.getElementById('mobile-selection-name'),
+      selectionStatus: document.getElementById('mobile-selection-status'),
+      selectionOpenBtn: document.getElementById('mobile-selection-open-chat')
     };
+  }
+
+  // La carte du depute vit dans #chat-panel, masque en vue Explorer : sans cette
+  // barre, un clic sur un siege ne produit aucun retour visible sur mobile.
+  function syncSelectionBar() {
+    const {
+      selectionBar,
+      selectionName,
+      selectionStatus,
+      selectionOpenBtn
+    } = getElements();
+
+    if (!selectionBar) {
+      return;
+    }
+
+    const depute = appState.currentDepute;
+    const shouldShow = Boolean(mediaQuery.matches && depute && activeView !== 'chat');
+    selectionBar.hidden = !shouldShow;
+
+    if (!shouldShow) {
+      return;
+    }
+
+    if (selectionName) {
+      selectionName.textContent = `${depute.prenom} ${depute.nom}`;
+    }
+
+    const votes = Array.isArray(depute.votes) ? depute.votes : null;
+
+    if (selectionStatus) {
+      selectionStatus.textContent = votes
+        ? `${votes.length} vote${votes.length > 1 ? 's' : ''} chargé${votes.length > 1 ? 's' : ''}`
+        : 'Chargement des votes…';
+    }
+
+    if (selectionOpenBtn) {
+      selectionOpenBtn.disabled = !votes;
+    }
   }
 
   function syncButtons({ exploreBtn, chatBtn }, hasSelectedDepute) {
@@ -58,6 +101,7 @@ export function createMobileWorkspaceController({
       explorePanel.hidden = false;
       chatPanel.hidden = false;
       document.body.removeAttribute('data-mobile-view');
+      syncSelectionBar();
       return;
     }
 
@@ -65,6 +109,7 @@ export function createMobileWorkspaceController({
     document.body.dataset.mobileView = activeView;
     explorePanel.hidden = activeView !== 'explore';
     chatPanel.hidden = activeView !== 'chat';
+    syncSelectionBar();
   }
 
   function setActiveView(view, { scrollIntoView = false } = {}) {
@@ -99,7 +144,7 @@ export function createMobileWorkspaceController({
   }
 
   function setupMobileWorkspace() {
-    const { exploreBtn, chatBtn } = getElements();
+    const { exploreBtn, chatBtn, selectionOpenBtn } = getElements();
 
     exploreBtn?.addEventListener('click', () => {
       setActiveView('explore', { scrollIntoView: true });
@@ -109,10 +154,17 @@ export function createMobileWorkspaceController({
       setActiveView('chat', { scrollIntoView: true });
     });
 
+    selectionOpenBtn?.addEventListener('click', () => {
+      setActiveView('chat', { scrollIntoView: true });
+    });
+
     mediaQuery.addEventListener('change', () => {
       applyLayout();
     });
 
+    // 'depute:selecting' accuse reception du clic tout de suite, sans attendre
+    // le chargement des votes annonce par 'depute:selected'.
+    document.addEventListener('depute:selecting', handleDeputeSelected);
     document.addEventListener('depute:selected', handleDeputeSelected);
     applyLayout();
   }

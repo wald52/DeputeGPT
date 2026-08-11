@@ -8,7 +8,6 @@ async function mountRenderer(page, options = {}) {
 
     window.__submittedQuestions = [];
     window.__paginationCalls = [];
-    window.__openedSources = [];
     window.__persistedMessages = [];
     window.__appState = appState;
 
@@ -19,10 +18,6 @@ async function mountRenderer(page, options = {}) {
       buildMessageReferencesFromVoteIds: () => [],
       submitChatQuestion: question => {
         window.__submittedQuestions.push(question);
-        return true;
-      },
-      openVoteSourceModal: payload => {
-        window.__openedSources.push(payload);
         return true;
       },
       resolvePaginationOffset: metadata => Array.isArray(metadata?.displayedVoteIds) ? metadata.displayedVoteIds.length : 0,
@@ -88,30 +83,24 @@ test('le renderer affiche une liste inline sans bloc References et resynchronise
   await expect(page.locator('.message-inline-vote-item').first()).toContainText('scrutin 101');
   await expect(page.locator('.message-inline-vote-item').first()).toContainText('Thème: sante');
 
-  const firstSourceButton = page.locator('.message-inline-vote-item').first().getByRole('button', { name: "Voir dans l'app" });
+  // La source est un lien vers assemblee-nationale.fr : elle reste cliquable
+  // meme pendant une analyse, contrairement aux actions de message.
+  const firstSourceLink = page.locator('.message-inline-vote-item').first().getByRole('link', { name: /Voir Amendement test/ });
   const paginationButton = page.getByRole('button', { name: 'Afficher 1 de plus' });
 
-  await expect(firstSourceButton).toBeDisabled();
+  await expect(firstSourceLink).toHaveAttribute('href', 'https://www.assemblee-nationale.fr/dyn/17/scrutins/101');
+  await expect(firstSourceLink).toHaveAttribute('target', '_blank');
+  await expect(firstSourceLink).toHaveAttribute('rel', 'noopener noreferrer');
+  await expect(firstSourceLink).toContainText('Voir le scrutin');
   await expect(paginationButton).toBeDisabled();
-  await expect(page.locator('.message-inline-vote-item').nth(1).getByRole('button', { name: "Voir dans l'app" })).toHaveCount(0);
+  await expect(page.locator('.message-inline-vote-item').nth(1).getByRole('link')).toHaveCount(0);
 
   await page.evaluate(() => {
     window.__appState.isChatBusy = false;
     window.__renderer.syncInteractiveMessageStates();
   });
 
-  await expect(firstSourceButton).toBeEnabled();
   await expect(paginationButton).toBeEnabled();
-
-  await firstSourceButton.click();
-  await expect.poll(() => page.evaluate(() => window.__openedSources.slice())).toEqual([
-    {
-      title: 'Amendement test',
-      voteId: '101',
-      date: '2025-02-01',
-      sourceUrl: 'https://www.assemblee-nationale.fr/dyn/17/scrutins/101'
-    }
-  ]);
 
   await paginationButton.click();
   await expect.poll(() => page.evaluate(() => window.__paginationCalls.length)).toBe(1);
@@ -183,6 +172,6 @@ test('les analyses conservent un panneau de references separe', async ({ page })
   });
 
   await expect(page.locator('.message-references')).toHaveCount(1);
-  await expect(page.locator('.message-references-title')).toHaveText('Votes cites dans l analyse');
+  await expect(page.locator('.message-references-title')).toHaveText('Votes cités dans l’analyse');
   await expect(page.locator('.message-inline-vote-item')).toHaveCount(0);
 });

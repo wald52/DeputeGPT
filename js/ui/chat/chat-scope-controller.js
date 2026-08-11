@@ -136,7 +136,7 @@ export function createChatScopeController({
     }
 
     if (chatSessionState.lastSort) {
-      const sortLabel = chatSessionState.lastSort === 'date_asc' ? 'date croissante' : 'date decroissante';
+      const sortLabel = chatSessionState.lastSort === 'date_asc' ? 'date croissante' : 'date décroissante';
       container.appendChild(createChatScopeChipInternal('Tri', sortLabel));
     }
 
@@ -145,7 +145,7 @@ export function createChatScopeController({
     }
 
     if (chatSessionState.lastResultQuery) {
-      container.appendChild(createChatScopeChipInternal('Derniere demande', chatSessionState.lastResultQuery, { multiline: true }));
+      container.appendChild(createChatScopeChipInternal('Dernière demande', chatSessionState.lastResultQuery, { multiline: true }));
     }
 
     container.classList.remove('hidden');

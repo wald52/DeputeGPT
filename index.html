@@ -811,6 +811,8 @@
             <input type="text" id="search-input" placeholder="Rechercher par nom, groupe, ou circonscription..."
               autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"
               aria-describedby="search-help search-status" aria-controls="search-results" />
+            <button id="search-clear-btn" class="search-clear-btn" type="button" aria-label="Effacer la recherche"
+              hidden>&times;</button>
             <p id="search-status" class="sr-only" aria-live="polite"></p>
             <ul id="search-results" class="search-results" role="listbox" aria-label="Résultats de recherche de députés" hidden></ul>
           </div>
@@ -1074,6 +1076,18 @@
             </div>
           </div>
 
+          <p id="chat-capabilities" class="chat-capabilities" role="status" aria-live="polite">
+            Sélectionnez un député pour activer le chat.
+          </p>
+
+          <div id="chat-quick-actions" class="chat-quick-actions" role="group" aria-label="Questions suggérées"></div>
+
+          <div id="chat-scope-summary" class="chat-scope-summary hidden" role="group"
+            aria-label="Périmètre appliqué à la prochaine question"></div>
+
+          <div id="chat-scope-actions" class="chat-scope-actions hidden" role="group"
+            aria-label="Ajuster le périmètre"></div>
+
           <div id="messages" role="log" aria-live="polite" aria-relevant="additions text">
             <div id="chat-empty-state" class="chat-empty-state">
               <p class="chat-empty-title">Commencez par une question exacte, puis passez à l’analyse si besoin.</p>
@@ -1097,6 +1111,19 @@
       </div>
     </div>
   </main>
+
+  <!-- Mobile : la carte du député vit dans le panneau Chat, masqué en vue
+       Explorer. Cette barre accuse réception du clic sur un siège et donne
+       l'accès direct au chat. -->
+  <div id="mobile-selection-bar" class="mobile-selection-bar" role="status" aria-live="polite" hidden>
+    <div class="mobile-selection-copy">
+      <span id="mobile-selection-name" class="mobile-selection-name"></span>
+      <span id="mobile-selection-status" class="mobile-selection-status"></span>
+    </div>
+    <button id="mobile-selection-open-chat" class="mobile-selection-open-btn" type="button">
+      Ouvrir le chat
+    </button>
+  </div>
 
   <div id="model-consent-overlay" class="consent-overlay" aria-hidden="true">
     <div class="consent-dialog" role="dialog" aria-modal="true" aria-labelledby="consent-title" aria-describedby="consent-description consent-alert">
@@ -1126,41 +1153,6 @@
       <div class="consent-actions">
         <button id="cancel-consent-btn" type="button">Annuler</button>
         <button id="confirm-consent-btn" type="button">Télécharger</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="vote-source-overlay" class="consent-overlay vote-source-overlay" aria-hidden="true">
-    <div class="consent-dialog vote-source-dialog" role="dialog" aria-modal="true"
-      aria-labelledby="vote-source-title" aria-describedby="vote-source-status">
-      <div class="vote-source-header">
-        <div class="vote-source-heading">
-          <div class="vote-source-title-row">
-            <h3 id="vote-source-title">Source Assemblée</h3>
-            <span id="vote-source-meta" class="vote-source-meta" hidden></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="vote-source-frame-shell">
-        <div id="vote-source-loading" class="vote-source-loading" role="status" aria-live="polite">
-          Chargement de la page de l’Assemblée…
-        </div>
-        <iframe id="vote-source-frame" class="vote-source-frame" title="Source Assemblée" src="about:blank"
-          tabindex="-1" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
-      </div>
-
-      <div class="vote-source-footer">
-        <p id="vote-source-status" class="vote-source-status">
-          Si la page Assemblée reste vide ou partielle, ouvrez la source dans un nouvel onglet.
-        </p>
-
-        <div class="consent-actions vote-source-actions">
-          <a id="vote-source-link" class="vote-source-open-link" href="" target="_blank" rel="noopener noreferrer">
-            Source Assemblée
-          </a>
-          <button id="dismiss-vote-source-btn" type="button">Fermer</button>
-        </div>
       </div>
     </div>
   </div>

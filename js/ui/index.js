@@ -7,7 +7,6 @@ export { createChatRenderer } from './chat/chat-renderer.js';
 export { createChatScopeController } from './chat/chat-scope-controller.js';
 export { createChatViewportController } from './chat/chat-viewport.js';
 export { createConsentModalController } from './chat/consent-modal.js';
-export { createVoteSourceModalController } from './chat/vote-source-modal.js';
 export { createDeputePanelController } from './depute-panel.js';
 export { createHemicyclePanelController } from './hemicycle-panel.js';
 export { createMobileWorkspaceController } from './mobile-workspace-controller.js';

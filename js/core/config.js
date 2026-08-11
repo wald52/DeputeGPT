@@ -56,8 +56,10 @@ export const CIRCUIT_BREAKER = {
 
 export const ASSEMBLEE_SCRUTIN_URL_BASE = 'https://www.assemblee-nationale.fr/dyn/17/scrutins/';
 
+// Libelles d'affichage du perimetre (chips de #chat-scope-summary) : purement
+// presentationnels, jamais compares a une question normalisee.
 export const SCOPE_SOURCE_LABELS = {
-  depute_all: 'tout l historique',
-  explicit_filter: 'sous-ensemble filtre',
-  last_result: 'dernier resultat'
+  depute_all: 'tout l’historique',
+  explicit_filter: 'sous-ensemble filtré',
+  last_result: 'dernier résultat'
 };

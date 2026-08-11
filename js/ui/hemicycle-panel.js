@@ -154,11 +154,40 @@ export function createHemicyclePanelController({
     });
   }
 
-  function updateTooltipPosition(event) {
-    if (window.seatTooltip && window.seatTooltip.classList.contains('visible')) {
-      window.seatTooltip.style.left = `${event.clientX + 12}px`;
-      window.seatTooltip.style.top = `${event.clientY + 12}px`;
+  // Sur ecran tactile, mouseenter est emis au moment du tap : l'infobulle
+  // resterait affichee sous le doigt sans jamais recevoir de mouseleave. Le
+  // retour de selection est deja assure par la barre mobile.
+  function isHoverCapablePointer() {
+    return window.matchMedia?.('(hover: hover)')?.matches !== false;
+  }
+
+  // Place l'infobulle en restant dans le viewport : un siege proche du bord
+  // droit ou bas la poussait hors de l'ecran.
+  function positionSeatTooltip(x, y) {
+    if (!window.seatTooltip || !window.seatTooltip.classList.contains('visible')) {
+      return;
     }
+
+    const tooltipRect = window.seatTooltip.getBoundingClientRect();
+    const maxLeft = Math.max(8, window.innerWidth - tooltipRect.width - 8);
+    const maxTop = Math.max(8, window.innerHeight - tooltipRect.height - 8);
+
+    window.seatTooltip.style.left = `${Math.min(Math.max(8, x), maxLeft)}px`;
+    window.seatTooltip.style.top = `${Math.min(Math.max(8, y), maxTop)}px`;
+  }
+
+  function updateTooltipPosition(event) {
+    positionSeatTooltip(event.clientX + 12, event.clientY + 12);
+  }
+
+  function ensureSeatTooltipElement() {
+    if (!window.seatTooltip) {
+      window.seatTooltip = document.createElement('div');
+      window.seatTooltip.className = 'seat-tooltip';
+      document.body.appendChild(window.seatTooltip);
+    }
+
+    return window.seatTooltip;
   }
 
   function updateHemicycleSyncStatus(mappedSeats = 0) {
@@ -269,28 +298,31 @@ export function createHemicyclePanelController({
 
     const seatNumber = element.id ? element.id.substring(1) : '?';
 
-    element.onmouseenter = function () {
+    element.onmouseenter = function (event) {
+      if (!isHoverCapablePointer()) {
+        return;
+      }
+
       this.style.opacity = '0.7';
       this.style.stroke = '#333';
       this.style.strokeWidth = '1px';
 
-      if (!window.seatTooltip) {
-        window.seatTooltip = document.createElement('div');
-        window.seatTooltip.className = 'seat-tooltip';
-        document.body.appendChild(window.seatTooltip);
-      }
-
+      const tooltip = ensureSeatTooltipElement();
       const photoUrl = getDeputePhotoUrl(depute);
       const groupeInfo = getGroupesPolitiques().find(groupe => groupe.code === depute.groupeAbrev);
       const groupeNom = groupeInfo ? groupeInfo.nom : depute.groupeAbrev;
 
-      window.seatTooltip.innerHTML = buildHemicycleTooltipHtmlInternal(depute, {
+      tooltip.innerHTML = buildHemicycleTooltipHtmlInternal(depute, {
         seatNumber,
         groupeNom,
         photoUrl,
         deputePhotoPlaceholderUrl
       });
-      window.seatTooltip.classList.add('visible');
+      tooltip.classList.add('visible');
+      // Positionnee des l'entree : l'ecouteur mousemove ajoute ici ne recoit pas
+      // l'evenement en cours, l'infobulle s'affichait donc d'abord au mauvais
+      // endroit (et pouvait sortir de l'ecran).
+      positionSeatTooltip(event.clientX + 12, event.clientY + 12);
       document.addEventListener('mousemove', updateTooltipPosition);
     };
 
@@ -322,27 +354,23 @@ export function createHemicyclePanelController({
       element.style.stroke = '#333';
       element.style.strokeWidth = '1px';
 
-      if (!window.seatTooltip) {
-        window.seatTooltip = document.createElement('div');
-        window.seatTooltip.className = 'seat-tooltip';
-        document.body.appendChild(window.seatTooltip);
-      }
-
+      const tooltip = ensureSeatTooltipElement();
       const photoUrl = getDeputePhotoUrl(depute);
       const groupeInfo = getGroupesPolitiques().find(groupe => groupe.code === depute.groupeAbrev);
       const groupeNom = groupeInfo ? groupeInfo.nom : depute.groupeAbrev;
 
-      window.seatTooltip.innerHTML = buildHemicycleTooltipHtmlInternal(depute, {
+      tooltip.innerHTML = buildHemicycleTooltipHtmlInternal(depute, {
         seatNumber: element.id ? element.id.substring(1) : '?',
         groupeNom,
         photoUrl,
         deputePhotoPlaceholderUrl
       });
-      window.seatTooltip.classList.add('visible');
+      tooltip.classList.add('visible');
 
+      // Navigation clavier : l'infobulle suit le siege focalise, en restant
+      // dans le viewport.
       const rect = element.getBoundingClientRect();
-      window.seatTooltip.style.left = `${rect.left + rect.width / 2}px`;
-      window.seatTooltip.style.top = `${rect.top - 10}px`;
+      positionSeatTooltip(rect.left + rect.width / 2, rect.top - 10);
     };
 
     element.onblur = () => {
@@ -454,6 +482,9 @@ export function createHemicyclePanelController({
       item.setAttribute('role', 'button');
       item.setAttribute('tabindex', '0');
       item.setAttribute('aria-label', `${groupe.nom}, ${groupe.seats} sièges. Sélectionner un député au hasard.`);
+      // Le clic tire un depute au hasard dans le groupe : sans indice visible,
+      // l'action surprend.
+      item.title = `Sélectionner un député au hasard dans ${groupe.nom}`;
       item.innerHTML = `
         <div class="legend-color" style="background-color:${groupe.couleur}"></div>
         <span>${groupe.nom} (${groupe.seats})</span>

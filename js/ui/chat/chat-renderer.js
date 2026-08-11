@@ -2,7 +2,7 @@ const CHAT_RENDERER_METHOD_LABELS = {
   deterministic: 'exacte',
   analysis_rag: 'analyse',
   clarify: 'clarification',
-  system: 'systeme',
+  system: 'système',
   llm: 'llm'
 };
 
@@ -13,12 +13,45 @@ function escapeChatRendererHtml(str) {
     .replaceAll('>', '&gt;');
 }
 
+// Les pages de l'Assemblee ne peuvent pas etre integrees dans l'application :
+// le site est servi avec Cross-Origin-Embedder-Policy: require-corp (WebGPU +
+// threads WASM) et les reponses de assemblee-nationale.fr n'envoient ni
+// Cross-Origin-Resource-Policy ni COEP. Un <iframe> reste donc bloque. La
+// source s'ouvre dans un nouvel onglet, ce qui donne aussi a l'utilisateur les
+// gestes natifs (clic milieu, copier le lien) et reste cliquable pendant une
+// analyse en cours.
+function createVoteSourceLink({ sourceUrl, voteId, title }) {
+  const link = document.createElement('a');
+  link.className = 'message-reference-action-btn message-reference-source-link';
+  link.href = sourceUrl;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+
+  const label = document.createElement('span');
+  label.textContent = 'Voir le scrutin';
+  link.appendChild(label);
+
+  const hint = document.createElement('span');
+  hint.className = 'message-reference-external-hint';
+  hint.setAttribute('aria-hidden', 'true');
+  hint.textContent = '↗';
+  link.appendChild(hint);
+
+  const describedTarget = String(title || '').trim() || (voteId ? `scrutin ${voteId}` : 'ce scrutin');
+  link.setAttribute(
+    'aria-label',
+    `Voir ${describedTarget} sur assemblee-nationale.fr (nouvel onglet)`
+  );
+  link.title = 'Ouvre la page officielle du scrutin dans un nouvel onglet';
+
+  return link;
+}
+
 export function createChatRenderer({
   appState,
   defaultChatListLimit,
   formatChatTime,
   buildMessageReferencesFromVoteIds,
-  openVoteSourceModal,
   submitChatQuestion,
   resolvePaginationOffset,
   handlePaginationRequest,
@@ -162,25 +195,11 @@ export function createChatRenderer({
       actions.className = 'message-inline-vote-actions';
 
       if (sourceUrl) {
-        const sourceBtn = document.createElement('button');
-        sourceBtn.type = 'button';
-        sourceBtn.className = 'message-reference-action-btn';
-        sourceBtn.textContent = "Voir dans l'app";
-        configureInteractiveMessageButton(sourceBtn, {
-          intrinsicallyDisabled: typeof openVoteSourceModal !== 'function'
-        });
-        sourceBtn.addEventListener('click', () => {
-          const opened = openVoteSourceModal?.({
-            title: String(item?.modalTitle || `Scrutin ${voteId}`),
-            voteId,
-            date: String(item?.date || ''),
-            sourceUrl
-          });
-          if (opened === false) {
-            setInteractiveMessageButtonLockState(sourceBtn, false);
-          }
-        });
-        actions.appendChild(sourceBtn);
+        actions.appendChild(createVoteSourceLink({
+          sourceUrl,
+          voteId,
+          title: String(item?.modalTitle || '')
+        }));
       }
 
       if (actions.childNodes.length > 0) {
@@ -221,7 +240,7 @@ export function createChatRenderer({
 
     const refsTitle = document.createElement('div');
     refsTitle.className = 'message-references-title';
-    refsTitle.textContent = metadata.method === 'analysis_rag' ? 'Votes cites dans l analyse' : 'References';
+    refsTitle.textContent = metadata.method === 'analysis_rag' ? 'Votes cités dans l’analyse' : 'Références';
     refsDiv.appendChild(refsTitle);
 
     const refsList = document.createElement('div');
@@ -261,25 +280,11 @@ export function createChatRenderer({
       actions.className = 'message-reference-actions';
 
       if (sourceUrl) {
-        const sourceBtn = document.createElement('button');
-        sourceBtn.type = 'button';
-        sourceBtn.className = 'message-reference-action-btn';
-        sourceBtn.textContent = "Voir dans l'app";
-        configureInteractiveMessageButton(sourceBtn, {
-          intrinsicallyDisabled: typeof openVoteSourceModal !== 'function'
-        });
-        sourceBtn.addEventListener('click', () => {
-          const opened = openVoteSourceModal?.({
-            title: reference.title || `Scrutin ${reference.voteId}`,
-            voteId: reference.voteId || '',
-            date: reference.date || '',
-            sourceUrl
-          });
-          if (opened === false) {
-            setInteractiveMessageButtonLockState(sourceBtn, false);
-          }
-        });
-        actions.appendChild(sourceBtn);
+        actions.appendChild(createVoteSourceLink({
+          sourceUrl,
+          voteId: reference.voteId || '',
+          title: reference.title || ''
+        }));
       }
 
       if (actions.childNodes.length === 0) {
@@ -335,7 +340,7 @@ export function createChatRenderer({
     const serviceDiv = document.createElement('div');
     serviceDiv.className = 'message-service-meta';
     serviceDiv.textContent = [
-      'Clarification assistee',
+      'Clarification assistée',
       assistantProvider || null,
       assistantModel || null
     ].filter(Boolean).join(' · ');
