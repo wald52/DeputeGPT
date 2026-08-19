@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-08-18T03:24:39Z",
+ "generatedAt": "2026-08-19T03:27:02Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -51137,7 +51137,7 @@
    "titre": "Projet de loi actualisant la programmation militaire pour les années 2024 à 2030 et portant diverses dispositions intéressant la défense",
    "titreChemin": "PJL_actualisation_loi_programmation_militaire_annees_2024_2030_diverses_dispositions_defense",
    "procedure": "Projet de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/PJL_actualisation_loi_programmation_militaire_annees_2024_2030_diverses_dispositions_defense",
    "texteRefs": [
     "AVCEANR5L17B2630",

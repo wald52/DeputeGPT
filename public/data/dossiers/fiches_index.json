@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-18T03:24:40Z",
+ "generatedAt": "2026-08-19T03:27:46Z",
  "totalFiches": 227,
  "fiches": {
   "DLR5L16N46127": {
@@ -2782,12 +2782,12 @@
   "DLR5L17N54083": {
    "titre": "Projet de loi actualisant la programmation militaire pour les années 2024 à 2030 et portant diverses dispositions intéressant la défense",
    "verdictIncitations": "incitations_alignees",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-08T05:38:30Z",
+   "statut": "promulgue",
+   "generatedAt": "2026-08-19T03:27:46Z",
    "themes": [
     "défense",
     "programmation militaire",
-    "budget de l'état",
+    "budget",
     "industrie de défense",
     "souveraineté"
    ]
