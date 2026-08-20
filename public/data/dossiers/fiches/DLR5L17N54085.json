@@ -2,42 +2,73 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N54085",
- "generatedAt": "2026-07-08T05:51:02Z",
+ "generatedAt": "2026-08-20T03:28:13Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Projet de loi d’urgence pour la protection et la souveraineté agricoles",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/projet_loi_urgence_pour_protection_et_souverainete_agricoles",
-  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/projet_loi_urgence_pour_protection_et_souverainete_agricoles",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0337_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Le texte est un projet de loi d'urgence intitulé 'pour la protection et la souveraineté agricoles', engagé via la procédure accélérée le 8 avril 2026. L'objectif affiché, tel qu'il ressort du titre et de la dénomination officielle, est de protéger le secteur agricole français et de renforcer la souveraineté agricole nationale.",
- "mecanismesCles": [],
- "verdictIncitations": "indetermine",
- "justificationVerdict": "Le document fourni est uniquement une page de navigation du dossier législatif de l'Assemblée nationale (DLR5L17N54085). Il retrace les étapes procédurales (dépôt, examen en commission, séance publique, CMP) et mentionne l'existence de rapports, d'amendements et d'une étude d'impact, mais ne contient ni l'exposé des motifs, ni le texte des articles du projet de loi. Aucun mécanisme concret (obligation, taxe, subvention, seuil, sanction) ne peut être identifié à partir des éléments fournis, ce qui rend impossible toute évaluation des incitations réellement créées par le texte.",
+ "objectifAffiche": "Le projet de loi d'urgence vise à protéger les agriculteurs français des concurrences déloyales et à bâtir des projets de territoire pour reconquérir la souveraineté alimentaire française, notamment via des conférences de la souveraineté alimentaire et des comités de pilotage régionaux.",
+ "mecanismesCles": [
+  {
+   "resume": "Création de projets d'avenir agricole reconnus par les comités de pilotage régionaux, bénéficiant d'une priorité d'accompagnement financier et d'engagements réciproques contractuels.",
+   "articleRef": "art. 1er",
+   "citation": "Ces projets peuvent concerner une ou plusieurs régions. Ils bénéficient d'une priorité dans l'accompagnement, notamment financier, par l'État et les collectivités territoriales."
+  },
+  {
+   "resume": "Ciblage des filières en déficit structurel, valorisation de la venaison sauvage et des filières à forte valeur ajoutée, maintien du maillage des infrastructures de transformation.",
+   "articleRef": "art. 1er",
+   "citation": "Ils ciblent notamment les filières pour lesquelles un déficit structurel a été identifié lors des conférences de la souveraineté alimentaire."
+  },
+  {
+   "resume": "Mesures conservatoires (suspension ou conditions particulières) à l'importation ou mise sur le marché de denrées contenant des résidus de substances phytopharmaceutiques ou médicaments vétérinaires retirés/non renouvelés en UE.",
+   "articleRef": "art. 2",
+   "citation": "le ministre chargé de la sécurité sanitaire des aliments [...] suspend ou fixe des conditions particulières à l'introduction, à l'importation ou à la mise sur le marché en France de denrées alimentaires [...] contenant des résidus de ces substances"
+  },
+  {
+   "resume": "Rapport annuel au Parlement sur les mesures conservatoires prises, avec une partie spécifique sur les outre-mer analysant les distorsions de concurrence (bananes, canne à sucre, fruits tropicaux).",
+   "articleRef": "art. 2",
+   "citation": "Cette partie analyse [...] les effets des distorsions de concurrence résultant de l'utilisation de ces substances par les producteurs des pays non membres de l'Union européenne"
+  },
+  {
+   "resume": "Délai de grâce fixé à la durée maximale autorisée par le règlement UE 1107/2009 en cas de retrait d'autorisation de mise sur le marché de produits phytopharmaceutiques.",
+   "articleRef": "art. 2 bis A",
+   "citation": "le délai de grâce [...] est fixé [...] à la durée maximale autorisée par le même règlement"
+  },
+  {
+   "resume": "Amende administrative pouvant atteindre 10% du chiffre d'affaires moyen annuel pour introduction/importation/mise sur marché en méconnaissance des mesures de l'article L. 236-1 A, avec publication possible de la décision.",
+   "articleRef": "art. 2 bis",
+   "citation": "Le montant de l'amende ne peut excéder 10 % du chiffre d'affaires moyen annuel, calculé sur les trois derniers chiffres d'affaires annuels connus à la date des faits."
+  }
+ ],
+ "verdictIncitations": "incitations_alignees",
+ "justificationVerdict": "Les mécanismes créés convergent avec l'objectif affiché de protection et souveraineté agricoles. L'article 1er instaure une gouvernance territoriale (comités de pilotage régionaux) accordant une priorité d'accompagnement financier aux projets d'avenir agricole ciblant les filières en déficit structurel. L'article 2 permet des mesures conservatoires unilatérales contre les importations de denrées contenant des substances interdites en UE, protégeant les agriculteurs de distorsions de concurrence. L'article 2 bis crée une sanction dissuasive (amende jusqu'à 10% du CA) renforçant l'effectivité de ces mesures. L'article 2 quater offre une flexibilité pour l'utilisation de semences traitées, soutenant la production. L'ensemble des dispositifs crée des incitations cohérentes avec la protection contre les concurrences déloyales et la reconquête de souveraineté alimentaire.",
  "pointsDeVigilance": [
-  "Le texte officiel des articles n'est pas inclus dans le document fourni",
-  "L'exposé des motifs n'est pas reproduit",
-  "Seuls les éléments procéduraux (dates, commissions, numéros de texte) sont accessibles",
-  "L'étude d'impact et l'avis du Conseil d'Etat sont mentionnés mais non reproduits",
-  "Le titre mentionne 'urgence' et 'souveraineté' mais le contenu normatif reste inconnu"
+  "Le texte fourni est tronqué (15000 caractères) et ne contient pas l'exposé des motifs ni l'ensemble des articles ; l'analyse se limite au Titre I et au début du Titre II.",
+  "Les mesures conservatoires de l'article 2 sont conditionnées à l'adoption de mesures adéquates par la Commission européenne, ce qui peut limiter leur effectivité.",
+  "L'article 2 quater (dérogation aux semences traitées) semble a priori contradictoire avec l'objectif de protection sanitaire, mais vise à soutenir la production agricole.",
+  "Le texte ne précise pas les moyens budgétaires concrets alloués aux projets d'avenir agricole au-delà d'une 'priorité' d'accompagnement."
  ],
  "themes": [
-  "agriculture",
   "souveraineté alimentaire",
-  "procédure législative",
-  "urgence"
+  "protection agricole",
+  "concurrence déloyale",
+  "produits phytopharmaceutiques",
+  "outre-mer"
  ],
  "scrutinsCles": [
-  "7206",
-  "7207",
-  "7208",
-  "7259"
+  "8424",
+  "8425",
+  "8426",
+  "8427"
  ],
  "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
- "sourceTextHash": "sha256:441edbbb5ee0df6b0d2e44e8852d81302bb64b6ca3682c77e924b1957c62195e"
+ "sourceTextHash": "sha256:ef86e8a4304793c79f9a9ad01a6f90805dc57c1a3620beda897b71992cc5d2c4"
 }

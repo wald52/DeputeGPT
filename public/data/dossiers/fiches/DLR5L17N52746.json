@@ -2,39 +2,74 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N52746",
- "generatedAt": "2026-07-12T16:48:02Z",
+ "generatedAt": "2026-08-20T03:27:08Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Moderniser la gestion du patrimoine immobilier de l'État",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/gestion_patrimoine_immobilier_etat_17e",
-  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b3004_texte-adopte-commission",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0341_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Moderniser la gestion du patrimoine immobilier de l'État (titre de la proposition de loi). L'exposé des motifs n'est pas fourni dans le texte transmis.",
- "mecanismesCles": [],
- "verdictIncitations": "indetermine",
- "justificationVerdict": "Le texte fourni ne contient ni exposé des motifs, ni articles : seuls l'identifiant du dossier, le titre de la proposition de loi et des métadonnées de navigation sont transmis. Aucun mécanisme concret (obligation, taxe, subvention, dérogation, seuil, sanction) ne peut être identifié, ce qui empêche toute analyse des incitations produites par le texte.",
+ "objectifAffiche": "La proposition de loi vise à moderniser la gestion du patrimoine immobilier de l'État. L'exposé des motifs n'est pas fourni dans le texte, mais l'objectif affiché transparaît dans le titre et les mécanismes : transformer la société anonyme Agence de gestion de l'immobilier de l'État en un établissement public national à caractère industriel et commercial (EPIC) dénommé « Établissement public immobilier et foncier de l'État ».",
+ "mecanismesCles": [
+  {
+   "resume": "Transformation de la SA Agence de gestion de l'immobilier de l'État en EPIC dénommé « Établissement public immobilier et foncier de l'État », placé sous la tutelle du ministre chargé des domaines.",
+   "articleRef": "art. 1er (IV/V-A)",
+   "citation": "La société anonyme Agence de gestion de l'immobilier de l'État est transformée en un établissement public national à caractère industriel et commercial, dénommé « Établissement public immobilier et foncier de l'État »"
+  },
+  {
+   "resume": "Transfert gratuit en pleine propriété de biens immobiliers du domaine privé ou public de l'État vers le nouvel établissement public, par décret.",
+   "articleRef": "art. 1er (III/IV)",
+   "citation": "Des biens immobiliers relevant du domaine privé ou du domaine public de l'État ou de ses établissements publics peuvent être transférés en pleine propriété à l'établissement public [...] Ces transferts s'effectuent à titre gratuit."
+  },
+  {
+   "resume": "Information obligatoire des collectivités territoriales et de l'EPCI à fiscalité propre en cas de cession d'un immeuble de l'État.",
+   "articleRef": "art. 1er (I-1°A)",
+   "citation": "Lorsque l'État envisage de procéder à la cession d'un immeuble mentionné à l'article L. 2211-1, il en informe les collectivités territoriales et l'établissement public de coopération intercommunale à fiscalité propre"
+  },
+  {
+   "resume": "Exonération de taxe foncière et de droits de mutation pour les propriétés du nouvel EPIC affectées à un service public et mises à disposition de l'État.",
+   "articleRef": "art. 1er (II bis/III-2° et 3°)",
+   "citation": "Les propriétés qui appartiennent à l'établissement public [...] qui sont affectées à un service public ou à un service d'utilité générale et qui sont mises à la disposition de l'État [...] sont exonérées"
+  },
+  {
+   "resume": "Missions de l'EPIC incluant gestion, entretien, rénovation, valorisation, acquisition, aménagement, et contribution aux objectifs de transition écologique et énergétique.",
+   "articleRef": "art. 1er (IV/V-C)",
+   "citation": "De gérer, d'entretenir et de rénover les biens immobiliers dont il est propriétaire afin d'optimiser leurs usages et de contribuer aux objectifs de l'État en matière de transition écologique et énergétique"
+  },
+  {
+   "resume": "Possibilité de créer des filiales ou prises de participations, avec plafond de 30% de capital privé dans l'ensemble consolidé.",
+   "articleRef": "art. 1er (IV/V-C)",
+   "citation": "La part du capital détenue directement ou indirectement par des personnes privées dans l'ensemble des sociétés contrôlées par l'établissement public ne peut excéder 30 % du capital consolidé du groupe."
+  }
+ ],
+ "verdictIncitations": "incitations_alignees",
+ "justificationVerdict": "Les mécanismes créés vont dans le sens de l'objectif affiché de modernisation de la gestion du patrimoine immobilier de l'État. La transformation de la SA en EPIC (art. 1er IV/V-A) et le transfert gratuit de biens (art. 1er III/IV) constituent les outils centraux de cette modernisation. Les missions confiées à l'EPIC (gestion, entretien, rénovation, valorisation, contribution à la transition écologique — art. 1er IV/V-C) sont cohérentes avec un objectif de modernisation. L'information des collectivités en cas de cession (art. 1er I-1°A) renforce la transparence. Les exonérations fiscales (art. 1er II bis/III) facilitent la structuration du nouveau groupe public. Aucun mécanisme ne contredit l'objectif affiché.",
  "pointsDeVigilance": [
-  "Le texte officiel est tronqué à 15000 caractères mais, en pratique, seul l'en-tête du dossier législatif est présent : pas d'exposé des motifs, pas de corps d'articles.",
-  "Le statut 'en cours' et la mention 'commission mixte paritaire' indiquent que le texte est encore en discussion, ce qui peut modifier son contenu final.",
-  "Sans accès aux articles, il est impossible de vérifier si les mécanismes de modernisation (cession, regroupement, valorisation, etc.) sont réellement orientés vers l'intérêt général ou vers une logique de pur désengagement patrimonial."
+  "L'exposé des motifs n'est pas fourni dans le texte tronqué, ce qui limite l'analyse de l'intention initiale du législateur.",
+  "Le texte est manifestement issu d'une CMP avec de nombreuses renumérotations (IV/V, D bis/F, etc.) et des références croisées incomplètes (numéros de loi non remplis), ce qui rend la lecture peu lisible.",
+  "L'habilitation à légiférer par ordonnance (art. 1er IV/V-G) reporte des choix structurants (régime des fonctionnaires, réemploi) à un acte ultérieur du Gouvernement.",
+  "Le plafond de 30% de capital privé dans les filiales (art. 1er IV/V-C) ouvre la voie à une privatisation partielle de la gestion, ce qui mérite attention.",
+  "Le transfert gratuit de biens du domaine public vers un EPIC soulève des questions de patrimonialité publique non discutées dans le texte fourni."
  ],
  "themes": [
   "patrimoine immobilier de l'état",
-  "gestion domaniale",
-  "modernisation de l'action publique"
+  "établissement public",
+  "réforme administrative",
+  "transition écologique",
+  "domaine public"
  ],
  "scrutinsCles": [
-  "5237",
   "5238",
   "5239",
-  "5240"
+  "5240",
+  "8434"
  ],
  "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
- "sourceTextHash": "sha256:b830fd90b4631147b6fa378cab954aec8257e7b023821dae095ee2f842f95ada"
+ "sourceTextHash": "sha256:02e784eedf74d42c0eab76860a3d3bfb0636596dc3f1ca9c087cf5f97e288790"
 }

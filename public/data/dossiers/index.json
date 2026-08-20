@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-08-19T03:27:02Z",
+ "generatedAt": "2026-08-20T03:26:27Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -49162,7 +49162,7 @@
    "titre": "Moderniser la gestion du patrimoine immobilier de l'État",
    "titreChemin": "gestion_patrimoine_immobilier_etat_17e",
    "procedure": "Proposition de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/gestion_patrimoine_immobilier_etat_17e",
    "texteRefs": [
     "PIONANR5L17B1796",
@@ -51786,7 +51786,7 @@
    "titre": "Projet de loi d’urgence pour la protection et la souveraineté agricoles",
    "titreChemin": "projet_loi_urgence_pour_protection_et_souverainete_agricoles",
    "procedure": "Projet de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/projet_loi_urgence_pour_protection_et_souverainete_agricoles",
    "texteRefs": [
     "AVCEANR5L17B2632",
