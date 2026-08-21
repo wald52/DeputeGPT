@@ -2,37 +2,74 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N53980",
- "generatedAt": "2026-07-09T06:30:29Z",
+ "generatedAt": "2026-08-21T03:36:21Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Projet de loi visant à offrir des réponses immédiates aux phénomènes troublant l’ordre public, la sécurité et la tranquillité de nos concitoyens",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N53980",
-  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b2984_texte-adopte-commission",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0340_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Le projet de loi vise à offrir des réponses immédiates aux phénomènes troublant l'ordre public, la sécurité et la tranquillité des concitoyens. Il s'agit d'un texte présenté en procédure accélérée, adopté par le Sénat puis examiné en commission à l'Assemblée nationale.",
- "mecanismesCles": [],
- "verdictIncitations": "indetermine",
- "justificationVerdict": "Le texte fourni ne contient ni exposé des motifs ni articles : seul l'en-tête administratif du dossier législatif (titre, identifiant, procédure, statut, sommaire et liens de navigation) est transmis. Aucun mécanisme concret (obligation, sanction, seuil, dérogation, taxe, subvention) ne peut être identifié ni cité, ce qui empêche toute analyse de l'alignement entre les incitations créées et l'objectif affiché.",
+ "objectifAffiche": "Le projet de loi vise à apporter des réponses immédiates aux phénomènes troublant l'ordre public, la sécurité et la tranquillité des concitoyens. Il cible notamment les nuisances et la délinquance du quotidien (titre Ier), en renforçant l'arsenal administratif et pénal contre les usages illicites de produits explosifs, d'articles pyrotechniques et les rassemblements non déclarés ou interdits.",
+ "mecanismesCles": [
+  {
+   "resume": "Le préfet peut ordonner la fermeture administrative (jusqu'à 6 mois, prolongeable 6 mois par le ministre de l'intérieur) d'un établissement commercialisant des produits explosifs, articles pyrotechniques ou précurseurs en violation de la réglementation, après mise en demeure restée sans effet (sauf urgence).",
+   "articleRef": "art. 1er (I, art. L. 333-3 CSI)",
+   "citation": "le représentant de l'État dans le département ou, à Paris, le préfet de police peut ordonner, pour une durée n'excédant pas six mois, la fermeture de l'établissement"
+  },
+  {
+   "resume": "Création d'un mécanisme de dessaisissement administratif obligeant un détenteur à vendre ou détruire ses produits explosifs/pyrotechniques, avec saisie possible au domicile (6h-21h) sur autorisation du JLD en cas de non-exécution, sans indemnisation.",
+   "articleRef": "art. 1er (II, art. L. 2352-3 à L. 2352-5 code de la défense)",
+   "citation": "La remise ou la saisie des produits explosifs, des articles pyrotechniques ou des précurseurs d'explosifs ne donne lieu à aucune indemnisation."
+  },
+  {
+   "resume": "Renforcement des sanctions pénales : sanctions alourdies pour les infractions au code de la défense (3 ans d'emprisonnement et 45 000 € d'amende) et création d'amendes forfaitaires (300 €) pour certaines infractions du code de l'environnement.",
+   "articleRef": "art. 1er (II 2° et III 3°)",
+   "citation": "sont punis de trois ans d'emprisonnement et de 45 000 euros"
+  },
+  {
+   "resume": "Obligations nouvelles pour les loueurs de matériel de diffusion de musique amplifiée : conservation pendant 3 mois de l'identité du locataire, vérification de la déclaration préalable du rassemblement, avec sanction de 2 mois d'emprisonnement et 3 750 € d'amende en cas de manquement.",
+   "articleRef": "art. 3 (2°, art. L. 211-7-1 CSI)",
+   "citation": "le loueur est tenu de s'assurer que le rassemblement ou la manifestation envisagés ont fait l'objet de l'une des déclarations mentionnées à l'article L. 211-5"
+  },
+  {
+   "resume": "Création d'un délit de participation à un rassemblement non déclaré, interdit ou déclaré de manière inexacte, puni de 2 ans d'emprisonnement et 30 000 € d'amende, avec peines complémentaires obligatoires (confiscation du matériel, suspension du permis).",
+   "articleRef": "art. 3 (3° a, art. L. 211-15 CSI)",
+   "citation": "Est puni de deux ans d'emprisonnement et de 30 000 euros d'amende le fait de contribuer, de manière directe ou indirecte, à la préparation, à la mise en place ou au déroulement d'un rassemblement"
+  },
+  {
+   "resume": "Délit autonome de participation à un rassemblement illégal dont le caractère illégal a été porté à la connaissance du public : 6 mois d'emprisonnement et 7 500 € d'amende, éteignable par amende forfaitaire de 500 €.",
+   "articleRef": "art. 3 (3° b, art. L. 211-15-4 CSI)",
+   "citation": "Le fait de participer à un rassemblement mentionné à l'article L. 211-15 dont le caractère illégal a été porté à la connaissance du public [...] est puni de six mois d'emprisonnement et de 7 500 euros d'amende."
+  }
+ ],
+ "verdictIncitations": "incitations_alignees",
+ "justificationVerdict": "Les mécanismes créés convergent directement avec l'objectif affiché de lutte contre les troubles à l'ordre public. La fermeture administrative des commerces vendant illicitement des produits explosifs (art. 1er, L. 333-3 CSI) et le dessaisissement obligatoire avec saisie sans indemnisation (art. L. 2352-3 et s. code de la défense) renforcent les moyens de prévention des troubles graves. L'alourdissement des sanctions pénales (3 ans/45 000 €) et la création de l'amende forfaitaire (300 €) dissuadent les comportements illicites. S'agissant des rassemblements, l'obligation faite aux loueurs de sonorisation de vérifier la déclaration préalable (art. L. 211-7-1) et la pénalisation de la contribution aux rassemblements non déclarés ou interdits (art. L. 211-15) visent clairement à mieux encadrer les manifestations sources de nuisances. L'ensemble des incitations (fermetures, saisies, sanctions alourdies, obligations déclaratives) pousse dans le sens de l'ordre public et de la tranquillité revendiqués.",
  "pointsDeVigilance": [
-  "Le texte officiel a été tronqué à 15000 caractères mais, en réalité, seul l'en-tête du document est présent ; aucun contenu normatif (exposé des motifs, articles) n'a été transmis.",
-  "Le titre seul, très large ('phénomènes troublant l'ordre public, la sécurité et la tranquillité'), ne permet pas de déduire les instruments juridiques utilisés.",
-  "La procédure accélérée et l'adoption préalable par le Sénat suggèrent un calendrier contraint, à vérifier au regard du contenu réel des articles."
+  "La saisie au domicile autorisée entre 6h et 21 heures sur autorisation du JLD (art. L. 2352-4) constitue une atteinte à la vie privée dont la proportionnalité dépend des critères retenus par le juge.",
+  "Le délit de 'contribution directe ou indirecte' à un rassemblement non déclaré (art. L. 211-15) est formulé largement et pourrait englober des comportements de soutien matériel ou logistique divers.",
+  "La confiscation obligatoire du matériel (art. L. 211-15-1, 1°) n'est écartée que par 'décision spécialement motivée', renversant la logique habituelle du caractère facultatif de la peine complémentaire.",
+  "L'absence d'indemnisation en cas de saisie de produits explosifs (art. L. 2352-4, avant-dernier alinéa) peut poser question si les produits sont licitement détenus au moment de la décision.",
+  "Le texte est tronqué (15 000 caractères) : les titres et articles suivants (au-delà de l'art. 3 partiellement reproduit) ne sont pas visibles et pourraient contenir des mécanismes non analysés."
  ],
  "themes": [
   "ordre public",
-  "sécurité",
-  "tranquillité publique",
-  "procédure législative accélérée"
+  "sécurité publique",
+  "pyrotechnie",
+  "explosifs",
+  "rassemblements"
  ],
  "scrutinsCles": [
-  "7988"
+  "8278",
+  "8279",
+  "8432",
+  "8433"
  ],
  "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
- "sourceTextHash": "sha256:1a23ebcba94b7337dcec52fd4905e846f88d7bc1a7cf0ba7b2c0a08038defc1a"
+ "sourceTextHash": "sha256:62ab6dcee0c088ea03bf7e5dfaadd0b39396081b3838dcb335bb024381beeb79"
 }

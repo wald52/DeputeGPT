@@ -2,40 +2,73 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N54006",
- "generatedAt": "2026-07-08T05:55:32Z",
+ "generatedAt": "2026-08-21T03:39:23Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Pour une montagne vivante et souveraine",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/montagne_vivante_souveraine_17e",
-  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b3019_proposition-loi",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0336_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Le titre et l'intitulé indiquent une proposition de loi 'pour une montagne vivante et souveraine', visant apparemment à préserver la vitalité et l'autonomie des territoires de montagne. L'exposé des motifs n'est pas disponible dans le texte fourni.",
- "mecanismesCles": [],
- "verdictIncitations": "indetermine",
- "justificationVerdict": "Le texte fourni ne contient ni exposé des motifs, ni articles, ni aucun dispositif législatif. Seul l'intitulé de la proposition de loi (n° 3019) et des métadonnées procédurales sont communiqués, avec la mention explicite 'Document non encore publié'. En l'absence de tout mécanisme concret (obligation, taxe, subvention, seuil, sanction), il est impossible de déterminer si les incitations créées par le texte vont dans le sens de l'objectif affiché ou s'y opposent.",
+ "objectifAffiche": "La proposition de loi 'pour une montagne vivante et souveraine' vise à adapter les dispositions législatives aux spécificités des territoires de montagne, en agissant sur le maillage des services essentiels (éducation, santé), l'urbanisme, la gouvernance intercommunale, ainsi qu'à renforcer la résilience et la souveraineté économique, agricole et forestière de ces territoires.",
+ "mecanismesCles": [
+  {
+   "resume": "Obligation pour l'État d'informer les collectivités des prévisions d'effectifs scolaires sur 3 à 5 ans et concertation renforcée avant ouverture/fermeture de classes, avec adaptation des seuils en zone de montagne.",
+   "articleRef": "art. 1er et 1er bis",
+   "citation": "« L'État informe chaque année les collectivités territoriales compétentes des prévisions de variation des effectifs scolaires dans le premier degré [...] sur une période de trois à cinq ans. »"
+  },
+  {
+   "resume": "Le projet régional de santé doit garantir l'accès aux services de santé (pharmacie, urgences, maternité, réanimation) dans des délais raisonnables en zone de montagne, avec transport sanitaire aérien pour les zones très enclavées.",
+   "articleRef": "art. 2",
+   "citation": "« Dans les zones de montagne très enclavées où l'accès à un service d'urgence ne peut être assuré dans un délai raisonnable par voie terrestre, le projet régional de santé prévoit un système de transport sanitaire d'urgence par voie aérienne. »"
+  },
+  {
+   "resume": "Création obligatoire d'une commission spécifique à la montagne dans les EPCI à fiscalité propre comprenant au moins une commune de montagne, consultée avant les délibérations affectant ces communes.",
+   "articleRef": "art. 3",
+   "citation": "« il est créé une commission spécifique à la montagne. [...] Elle est consultée pour avis avant les délibérations ayant un effet direct sur ces communes. »"
+  },
+  {
+   "resume": "Élargissement de la notion d'utilisation partagée de l'eau en montagne pour inclure le stockage, avec des usages multiples (eau potable, irrigation, abreuvement, pastoralisme, industrie, loisirs de neige), en excluant le pompage dans les nappes inertielles.",
+   "articleRef": "art. 4",
+   "citation": "« Sont ajoutés les mots : « nécessaire pour l'accès à l'eau potable, la sécurité civile, l'irrigation des sols, l'abreuvement du bétail, les activités pastorales, l'industrie, l'artisanat, la production d'électricité et les loisirs de neige, en excluant le pompage dans les nappes inertielles ». »"
+  },
+  {
+   "resume": "Le schéma d'infrastructures de recharge pour véhicules électriques doit assurer un maillage équilibré en zone de montagne, avec solutions de recharge rapide et prise en compte des véhicules utilitaires.",
+   "articleRef": "art. 5",
+   "citation": "« Ce schéma veille à assurer un maillage équilibré et accessible des infrastructures de recharge ouvertes au public pour les véhicules électriques dans les territoires comprenant des zones de montagne »"
+  },
+  {
+   "resume": "Assouplissement du principe de continuité en zone de montagne (urbanisme) en intégrant les caractéristiques de l'habitat traditionnel, voies et réseaux existants.",
+   "articleRef": "art. 6",
+   "citation": "« Le principe de continuité intègre les caractéristiques locales de l'habitat traditionnel, les constructions implantées, l'existence de voies et réseaux et les coupures physiques. »"
+  }
+ ],
+ "verdictIncitations": "incitations_alignees",
+ "justificationVerdict": "Les mécanismes créés vont dans le sens de l'objectif affiché d'adaptation aux spécificités de la montagne. L'article 1er adapte les seuils d'effectifs scolaires pour éviter les fermetures de classes en zone de montagne. L'article 2 garantit l'accès aux soins avec un dispositif spécifique pour les zones enclavées (transport aérien). L'article 3 crée une gouvernance dédiée via la commission montagne. L'article 6 bis assouplit les règles d'urbanisme pour permettre le maintien de l'activité pastorale et la reconstruction du patrimoine montagnard. L'article 7 protège les abattoirs de proximité. L'ensemble de ces dispositifs concourt à maintenir les services essentiels, l'activité économique et la vitalité des territoires de montagne.",
  "pointsDeVigilance": [
-  "Le document officiel est marqué 'non encore publié' : aucun article ni exposé des motifs n'est disponible pour analyse.",
-  "L'intitulé 'montagne vivante et souveraine' est politiquement marqué et pourrait recouvrir des orientations très diverses (autonomie locale, protection environnementale, soutien économique, etc.) impossibles à vérifier sans le contenu.",
-  "Le texte a été modifié par le Sénat, ce qui implique des aller-retour parlementaires dont la teneur n'est pas accessible ici."
+  "Le texte est tronqué (15000 caractères) : le Titre II sur la souveraineté économique, agricole et forestière n'est que partiellement visible, ce qui limite l'analyse complète.",
+  "L'article 4 autorise explicitement l'usage de l'eau pour 'les loisirs de neige' (artificialisation des pistes), ce qui peut entrer en tension avec la protection environnementale de la montagne.",
+  "L'article 6 bis permet la reconstruction de chalets d'alpage 'y compris lorsque la construction est à l'état de ruine', ce qui constitue une dérogation significative au principe de continuité urbaine.",
+  "L'article 6 bis A reporte de 2027 à 2030 une disposition de la loi Climat de 2021, ce qui affaiblit potentiellement un objectif climatique antérieur."
  ],
  "themes": [
   "montagne",
   "aménagement du territoire",
-  "développement local",
-  "souveraineté territoriale"
+  "services publics",
+  "santé",
+  "éducation"
  ],
  "scrutinsCles": [
-  "6642",
-  "6643",
   "6644",
-  "6645"
+  "6645",
+  "8420",
+  "8421"
  ],
  "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
- "sourceTextHash": "sha256:2248291c25536ed4f10ac4119d446fe766b8f9bbf8b6bedc027a90ebbaafacb9"
+ "sourceTextHash": "sha256:4dfb8862c04d471d483f25b09c61e3582969c13a61cd78e2dc7c5c4c4581a4ff"
 }

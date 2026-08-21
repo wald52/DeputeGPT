@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-08-20T03:26:27Z",
+ "generatedAt": "2026-08-21T03:31:38Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -51622,7 +51622,7 @@
    "titre": "Pour une montagne vivante et souveraine",
    "titreChemin": "montagne_vivante_souveraine_17e",
    "procedure": "Proposition de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/montagne_vivante_souveraine_17e",
    "texteRefs": [
     "PIONANR5L17B2595",
@@ -53326,7 +53326,7 @@
    "titre": "Projet de loi visant à offrir des réponses immédiates aux phénomènes troublant l’ordre public, la sécurité et la tranquillité de nos concitoyens",
    "titreChemin": "DLR5L17N53980",
    "procedure": "Projet de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N53980",
    "texteRefs": [
     "PRJLANR5L17B2850",

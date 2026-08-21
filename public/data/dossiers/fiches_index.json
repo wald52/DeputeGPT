@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-20T03:28:13Z",
+ "generatedAt": "2026-08-21T03:39:23Z",
  "totalFiches": 227,
  "fiches": {
   "DLR5L16N46127": {
@@ -2747,14 +2747,15 @@
   },
   "DLR5L17N53980": {
    "titre": "Projet de loi visant à offrir des réponses immédiates aux phénomènes troublant l’ordre public, la sécurité et la tranquillité de nos concitoyens",
-   "verdictIncitations": "indetermine",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-09T06:30:29Z",
+   "verdictIncitations": "incitations_alignees",
+   "statut": "promulgue",
+   "generatedAt": "2026-08-21T03:36:21Z",
    "themes": [
     "ordre public",
-    "sécurité",
-    "tranquillité publique",
-    "procédure législative accélérée"
+    "sécurité publique",
+    "pyrotechnie",
+    "explosifs",
+    "rassemblements"
    ]
   },
   "DLR5L17N53981": {
@@ -2771,14 +2772,15 @@
   },
   "DLR5L17N54006": {
    "titre": "Pour une montagne vivante et souveraine",
-   "verdictIncitations": "indetermine",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-08T05:55:32Z",
+   "verdictIncitations": "incitations_alignees",
+   "statut": "promulgue",
+   "generatedAt": "2026-08-21T03:39:23Z",
    "themes": [
     "montagne",
     "aménagement du territoire",
-    "développement local",
-    "souveraineté territoriale"
+    "services publics",
+    "santé",
+    "éducation"
    ]
   },
   "DLR5L17N54083": {
