@@ -20,7 +20,7 @@
   {
     "code": "SOC",
     "nom": "Socialistes et apparentés",
-    "seats": 68,
+    "seats": 56,
     "couleur": "#F5B4CE"
   },
   {
@@ -62,13 +62,13 @@
   {
     "code": "GDR",
     "nom": "Gauche Démocrate et Républicaine",
-    "seats": 17,
+    "seats": 15,
     "couleur": "#830E21"
   },
   {
     "code": "NI",
     "nom": "Non inscrit",
-    "seats": 10,
+    "seats": 8,
     "couleur": "#8D949A"
   }
 ]
