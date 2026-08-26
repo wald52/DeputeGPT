@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
  "legislature": "17",
- "generatedAt": "2026-08-25T03:28:06Z",
+ "generatedAt": "2026-08-26T03:34:48Z",
  "scrutins": {
   "1": {
    "dossierId": null,
@@ -49001,7 +49001,7 @@
    "titre": "Protéger les mineurs des risques auxquels les expose l’utilisation des réseaux sociaux",
    "titreChemin": "proteger_mineurs_reseaux_sociaux_17e",
    "procedure": "Proposition de loi ordinaire",
-   "statut": "en_cours",
+   "statut": "promulgue",
    "anUrl": "https://www.assemblee-nationale.fr/dyn/17/dossiers/proteger_mineurs_reseaux_sociaux_17e",
    "texteRefs": [
     "AVCEANR5L17B2107",

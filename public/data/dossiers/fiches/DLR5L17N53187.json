@@ -2,39 +2,74 @@
  "schemaVersion": 1,
  "analysisVersion": 2,
  "dossierId": "DLR5L17N53187",
- "generatedAt": "2026-07-12T16:48:24Z",
+ "generatedAt": "2026-08-26T03:35:07Z",
  "model": {
   "provider": "nvidia-nim",
   "id": "minimaxai/minimax-m3",
   "baseUrl": "https://integrate.api.nvidia.com/v1"
  },
  "titre": "Protéger les mineurs des risques auxquels les expose l’utilisation des réseaux sociaux",
- "statut": "en_cours",
+ "statut": "promulgue",
  "sources": {
   "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/proteger_mineurs_reseaux_sociaux_17e",
-  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17b2610_proposition-loi",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/textes/l17t0339_texte-adopte-provisoire",
   "legifrance": null
  },
- "objectifAffiche": "Proposition de loi ordinaire visant à protéger les mineurs des risques auxquels les expose l'utilisation des réseaux sociaux. Le texte a été déposé le 1er avril 2026 et modifié par le Sénat.",
- "mecanismesCles": [],
- "verdictIncitations": "indetermine",
- "justificationVerdict": "Le texte fourni ne contient ni exposé des motifs ni articles. Seules des informations de procédure (numéro, date de dépôt, commission saisie) sont présentes. Sans le contenu normatif du texte, il est impossible d'identifier les mécanismes concrets créés par la loi et donc de déterminer si les incitations qu'elle produit sont alignées avec son objectif affiché de protection des mineurs sur les réseaux sociaux.",
+ "objectifAffiche": "Protéger les mineurs des risques liés à l'utilisation des réseaux sociaux, via une proposition de loi ordinaire examinée en CMP et adoptée le 21 juillet 2026.",
+ "mecanismesCles": [
+  {
+   "resume": "Interdiction d'accès aux services de réseaux sociaux en ligne pour les mineurs de quinze ans, avec exceptions pour les encyclopédies en ligne, répertoires éducatifs/scientifiques et plateformes de logiciels libres éducatifs.",
+   "articleRef": "art. 1er",
+   "citation": "« L'accès à un service de réseaux sociaux en ligne fourni par une plateforme en ligne est interdit aux mineurs de quinze ans. »"
+  },
+  {
+   "resume": "Entrée en vigueur de l'interdiction au 1er septembre 2026, avec délai de quatre mois pour les comptes créés avant cette date ; extension à la Nouvelle-Calédonie, la Polynésie française et Wallis-et-Futuna.",
+   "articleRef": "art. 1er (II)",
+   "citation": "« Le présent article entre en vigueur le 1er septembre 2026. Pour les comptes d'accès aux services de réseaux sociaux en ligne créés avant cette date, le I s'applique à l'expiration d'un délai de quatre mois à compter de celle-ci. »"
+  },
+  {
+   "resume": "Extension de l'article 223-14 du code pénal (et de l'article 711-1) aux outre-mer, en lien avec le dispositif de protection.",
+   "articleRef": "art. 2",
+   "citation": "« Au 6° du II de l'article 131-35-1, après la référence : « 223-13, », est insérée la référence : « 223-14, » »"
+  },
+  {
+   "resume": "Ajout dans le projet d'école/établissement d'actions de sensibilisation aux effets nocifs des écrans et au caractère addictif des réseaux sociaux.",
+   "articleRef": "art. 6 (I, 1° A)",
+   "citation": "« Le projet d'école ou d'établissement comporte une partie portant sur [...] la sensibilisation aux effets nocifs d'une exposition non raisonnée aux écrans et au caractère addictif des réseaux sociaux »"
+  },
+  {
+   "resume": "Modification de l'article L. 511-5 du code de l'éducation : extension de l'interdiction d'usage du téléphone portable aux lycées (outre écoles et collèges), avec modalités et exceptions fixées par le règlement intérieur.",
+   "articleRef": "art. 6 (I, 1°)",
+   "citation": "« les mots : « et les collèges » sont remplacés par les mots : « , les collèges et les lycées » »"
+  },
+  {
+   "resume": "Suppression de nombreux articles initialement prévus (art. 1er bis, 3, 3 bis A, 3 bis BA, 3 bis B, 3 bis, 4, 4 bis, 5, 7), réduisant la portée initiale du texte.",
+   "articleRef": "art. 1er bis, 3, 3 bis A, 3 bis BA, 3 bis B, 3 bis, 4, 4 bis, 5, 7",
+   "citation": "(Supprimé)"
+  }
+ ],
+ "verdictIncitations": "incitations_mitigees",
+ "justificationVerdict": "L'article 1er crée bien une interdiction d'accès aux réseaux sociaux pour les moins de quinze ans, mécanisme central aligné avec l'objectif affiché. Toutefois, de nombreux articles ont été supprimés en CMP (« Supprimé » pour les art. 1er bis, 3, 3 bis A, 3 bis BA, 3 bis B, 3 bis, 4, 4 bis, 5 et 7), ce qui réduit fortement le dispositif initial. L'article 6 ajoute une sensibilisation scolaire et étend l'interdiction du téléphone aux lycées, mais ne concerne pas directement les réseaux sociaux en ligne. Le texte ne précise pas les sanctions ni les modalités de contrôle de l'âge, ce qui limite l'effectivité de l'interdiction principale.",
  "pointsDeVigilance": [
-  "Le texte officiel est tronqué et ne contient que les métadonnées de procédure (titre, numéro, date, commission), sans aucun article ni exposé des motifs.",
-  "L'intitulé mentionne une modification par le Sénat, mais le contenu de cette modification n'est pas accessible dans le document fourni.",
-  "Impossible d'évaluer la portée réelle (obligations, sanctions, dérogations) sans le dispositif législatif."
+  "Absence dans le texte fourni de mécanisme de vérification d'âge ou de sanctions explicites associées à l'interdiction de l'art. 1er.",
+  "Suppression massive d'articles en CMP, suggérant un texte final bien moins ambitieux que la version initiale.",
+  "Le seuil fixé à quinze ans (et non treize ou seize) est un compromis politique qui peut limiter la portée protectrice.",
+  "Les exceptions (encyclopédies, logiciels libres éducatifs) pourraient créer des contournements si la définition de 'réseau social' n'est pas strictement encadrée.",
+  "L'extension aux outre-mer est prévue mais les modalités d'application concrètes ne sont pas détaillées dans le texte tronqué."
  ],
  "themes": [
   "protection des mineurs",
   "réseaux sociaux",
-  "numérique"
+  "numérique",
+  "éducation",
+  "santé publique"
  ],
  "scrutinsCles": [
-  "5189",
   "5190",
   "5191",
-  "5192"
+  "5192",
+  "8431"
  ],
  "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
- "sourceTextHash": "sha256:78cc7a791a4b731ed90f4b4a2ab6d9994f728d63c7007624640ed93a28c666c1"
+ "sourceTextHash": "sha256:66833228f5bb5419eaf418ae657e61ceb82cd67bc6bd2762ade7ae499f0ba214"
 }

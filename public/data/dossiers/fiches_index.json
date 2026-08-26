@@ -1,6 +1,6 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-25T03:28:06Z",
+ "generatedAt": "2026-08-26T03:35:07Z",
  "totalFiches": 227,
  "fiches": {
   "DLR5L16N46127": {
@@ -2421,13 +2421,15 @@
   },
   "DLR5L17N53187": {
    "titre": "Protéger les mineurs des risques auxquels les expose l’utilisation des réseaux sociaux",
-   "verdictIncitations": "indetermine",
-   "statut": "en_cours",
-   "generatedAt": "2026-07-12T16:48:24Z",
+   "verdictIncitations": "incitations_mitigees",
+   "statut": "promulgue",
+   "generatedAt": "2026-08-26T03:35:07Z",
    "themes": [
     "protection des mineurs",
     "réseaux sociaux",
-    "numérique"
+    "numérique",
+    "éducation",
+    "santé publique"
    ]
   },
   "DLR5L17N53192": {
