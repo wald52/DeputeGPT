@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-08-26T05:02:49Z",
+  "generatedAt": "2026-08-27T15:30:40Z",
   "documentType": "scrutin",
   "stats": {
     "totalDocuments": 8434,
@@ -46,8 +46,8 @@
       },
       "artifact": {
         "path": "semantic_index.json",
-        "bytes": 38028970,
-        "sha256": "318cddfe65222fb43776459e8f6ff0feddb7214e43647a6377cd9747f600aab0",
+        "bytes": 38028961,
+        "sha256": "87ee3de707152dfc4292644a60343700caaa17a388879501b54e131d01636e9a",
         "quantization": "int8",
         "vectorDimension": 384,
         "valueScale": 127
@@ -77,8 +77,8 @@
       },
       "artifact": {
         "path": "semantic_multivector_index.json",
-        "bytes": 103072836,
-        "sha256": "38a2f2969d87dee6425c4dd58922e625de9b1abd6567b537a263e134ff21e993",
+        "bytes": 103072847,
+        "sha256": "642bb79ae2f0736f48793481c76740fc2f7e7874084680895ff0a8bc52ee46e0",
         "quantization": "int8",
         "vectorDimension": 384,
         "valueScale": 127,
@@ -113,8 +113,8 @@
       },
       "artifact": {
         "path": "semantic_index_remote.json",
-        "bytes": 11451219,
-        "sha256": "b23acf122847fdd61c23d0a4f71fc7029f6a42372ecff173fe8d3cb495ba3e88",
+        "bytes": 11451221,
+        "sha256": "74735ecbee5eacb9404e5163145e6a9a897696b5a2bc391a418e3eb53d61d84f",
         "quantization": "int8",
         "vectorDimension": 512,
         "valueScale": 127,
@@ -125,21 +125,21 @@
   "artifacts": {
     "lexicalIndex": {
       "path": "lexical_index.json",
-      "bytes": 9403968,
-      "sha256": "0a060060afedb8accfbe8a9a596aad0e0c82b21bdbf1d9c18f2257c9affbad2c"
+      "bytes": 9403878,
+      "sha256": "3b96a493ace8ba6c942ccf417e682996b8ca964bfb86abef0e4fb89af7a041d0"
     },
     "semanticIndex": {
       "path": "semantic_index.json",
-      "bytes": 38028970,
-      "sha256": "318cddfe65222fb43776459e8f6ff0feddb7214e43647a6377cd9747f600aab0",
+      "bytes": 38028961,
+      "sha256": "87ee3de707152dfc4292644a60343700caaa17a388879501b54e131d01636e9a",
       "quantization": "int8",
       "vectorDimension": 384,
       "valueScale": 127
     },
     "semanticMultivectorIndex": {
       "path": "semantic_multivector_index.json",
-      "bytes": 103072836,
-      "sha256": "38a2f2969d87dee6425c4dd58922e625de9b1abd6567b537a263e134ff21e993",
+      "bytes": 103072847,
+      "sha256": "642bb79ae2f0736f48793481c76740fc2f7e7874084680895ff0a8bc52ee46e0",
       "quantization": "int8",
       "vectorDimension": 384,
       "valueScale": 127,
@@ -147,8 +147,8 @@
     },
     "semanticRemoteIndex": {
       "path": "semantic_index_remote.json",
-      "bytes": 11451219,
-      "sha256": "b23acf122847fdd61c23d0a4f71fc7029f6a42372ecff173fe8d3cb495ba3e88",
+      "bytes": 11451221,
+      "sha256": "74735ecbee5eacb9404e5163145e6a9a897696b5a2bc391a418e3eb53d61d84f",
       "quantization": "int8",
       "vectorDimension": 512,
       "valueScale": 127,
