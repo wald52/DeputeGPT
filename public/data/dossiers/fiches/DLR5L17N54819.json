@@ -1,0 +1,42 @@
+{
+ "schemaVersion": 1,
+ "analysisVersion": 2,
+ "dossierId": "DLR5L17N54819",
+ "generatedAt": "2026-08-27T13:02:25Z",
+ "model": {
+  "provider": "nvidia-nim",
+  "id": "minimaxai/minimax-m3",
+  "baseUrl": "https://integrate.api.nvidia.com/v1"
+ },
+ "titre": "Proposition de loi simplifiant l'ouverture des débits de boissons en zone rurale",
+ "statut": "en_cours",
+ "sources": {
+  "dossierAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N54819",
+  "texteAn": "https://www.assemblee-nationale.fr/dyn/17/dossiers/DLR5L17N54819",
+  "legifrance": null
+ },
+ "objectifAffiche": "La proposition de loi vise à simplifier l'ouverture des débits de boissons en zone rurale, comme l'indique son titre. L'exposé des motifs n'est pas fourni dans le texte transmis, l'objectif détaillé ne peut donc pas être précisé.",
+ "mecanismesCles": [],
+ "verdictIncitations": "indetermine",
+ "justificationVerdict": "Le texte fourni ne contient ni exposé des motifs, ni articles de la proposition de loi. Seules les métadonnées procédurales (dépôt au Sénat le 25 août 2026, n° 937, renvoi à la commission des affaires sociales) sont disponibles. Sans accès au contenu normatif (articles, dispositions modifiant le Code de la santé publique ou le Code du tourisme, par exemple), il est impossible d'identifier les mécanismes concrets créés par le texte et donc de déterminer si les incitations qu'ils produisent sont alignées avec l'objectif affiché de simplification de l'ouverture des débits de boissons en zone rurale.",
+ "pointsDeVigilance": [
+  "Absence totale de l'exposé des motifs dans le texte transmis",
+  "Absence du dispositif législatif (articles) : aucun mécanisme analysable",
+  "Le texte est tronqué à 15000 caractères mais semble ne contenir que des informations de navigation et de procédure",
+  "Le renvoi à la commission des affaires sociales (et non à une commission des affaires économiques) peut soulever des questions sur l'angle retenu (santé publique vs activité économique)"
+ ],
+ "themes": [
+  "débits de boissons",
+  "zone rurale",
+  "simplification administrative",
+  "santé publique"
+ ],
+ "scrutinsCles": [
+  "928",
+  "929",
+  "930",
+  "931"
+ ],
+ "disclaimer": "Analyse générée automatiquement par IA à partir du texte officiel. À vérifier sur les sources citées.",
+ "sourceTextHash": "sha256:188fc6749bf0ff98521d5aedbe87adc5d993fe22f121cf2e473aa96712185f05"
+}

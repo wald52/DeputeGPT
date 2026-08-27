@@ -1,7 +1,7 @@
 {
  "schemaVersion": 1,
- "generatedAt": "2026-08-26T03:35:07Z",
- "totalFiches": 227,
+ "generatedAt": "2026-08-27T13:02:25Z",
+ "totalFiches": 228,
  "fiches": {
   "DLR5L16N46127": {
    "titre": "Proposition de loi portant réparation des personnes condamnées pour homosexualité entre 1945 et 1982",
@@ -2892,6 +2892,18 @@
     "débits de boissons",
     "zone rurale",
     "simplification administrative"
+   ]
+  },
+  "DLR5L17N54819": {
+   "titre": "Proposition de loi simplifiant l'ouverture des débits de boissons en zone rurale",
+   "verdictIncitations": "indetermine",
+   "statut": "en_cours",
+   "generatedAt": "2026-08-27T13:02:25Z",
+   "themes": [
+    "débits de boissons",
+    "zone rurale",
+    "simplification administrative",
+    "santé publique"
    ]
   }
  }
