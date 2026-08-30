@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-08-29T11:19:57Z",
+  "generatedAt": "2026-08-30T10:12:40Z",
   "documentType": "scrutin",
   "stats": {
     "totalDocuments": 8434,
@@ -46,8 +46,8 @@
       },
       "artifact": {
         "path": "semantic_index.json",
-        "bytes": 38028970,
-        "sha256": "926c9b97a3667adcebda4d7a830e77b7a7514db8c9eacef488d71d7210ceb549",
+        "bytes": 38028971,
+        "sha256": "40d2726f749ee568e903d3c7f98b2ecf21352398e84c7747ab9eb2c22a27cbd9",
         "quantization": "int8",
         "vectorDimension": 384,
         "valueScale": 127
@@ -77,8 +77,8 @@
       },
       "artifact": {
         "path": "semantic_multivector_index.json",
-        "bytes": 103072836,
-        "sha256": "2093800b5bec8c619dc9523dc1c6d046ff6789866ff081ba6e08cfa0b1603a66",
+        "bytes": 103072835,
+        "sha256": "fcff76aecc4969fce9b7a0da32ad58cf5d4bb8f1b780462b3d1a13260e930d78",
         "quantization": "int8",
         "vectorDimension": 384,
         "valueScale": 127,
@@ -126,20 +126,20 @@
     "lexicalIndex": {
       "path": "lexical_index.json",
       "bytes": 9403968,
-      "sha256": "1f85f788a48ef86a9ed1d594e3b8313ebf4c9145258a8d468c13787ea88745a9"
+      "sha256": "2897862db2f9da81dbbccec566fb16d874cbf1f6366cb00bdaa82e658fe2a59e"
     },
     "semanticIndex": {
       "path": "semantic_index.json",
-      "bytes": 38028970,
-      "sha256": "926c9b97a3667adcebda4d7a830e77b7a7514db8c9eacef488d71d7210ceb549",
+      "bytes": 38028971,
+      "sha256": "40d2726f749ee568e903d3c7f98b2ecf21352398e84c7747ab9eb2c22a27cbd9",
       "quantization": "int8",
       "vectorDimension": 384,
       "valueScale": 127
     },
     "semanticMultivectorIndex": {
       "path": "semantic_multivector_index.json",
-      "bytes": 103072836,
-      "sha256": "2093800b5bec8c619dc9523dc1c6d046ff6789866ff081ba6e08cfa0b1603a66",
+      "bytes": 103072835,
+      "sha256": "fcff76aecc4969fce9b7a0da32ad58cf5d4bb8f1b780462b3d1a13260e930d78",
       "quantization": "int8",
       "vectorDimension": 384,
       "valueScale": 127,
